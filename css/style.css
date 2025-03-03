@@ -426,6 +426,16 @@ button {
     opacity: 1;
 }
 
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+    #cart-sidebar {
+        width: 90%; /* Full width on mobile */
+        right: 5%; /* Center the dropdown */
+        left: 5%; /* Center the dropdown */
+        top: 60px; /* Adjust position for mobile */
+    }
+}
+
 /* Cart Items */
 .cart-items {
     padding: 15px;
@@ -463,12 +473,14 @@ button {
     font-size: 12px;
     color: #666;
 }
+
 .empty-cart-message {
     text-align: center;
     font-size: 14px;
     color: #666;
     padding: 20px;
 }
+
 /* Clear Cart Button */
 #clear-cart {
     width: 100%;
@@ -487,7 +499,7 @@ button {
     background: #cc0000;
 }
 
-
+/* Checkout Button */
 #checkout-button {
     width: 100%;
     padding: 10px;
@@ -502,7 +514,7 @@ button {
 }
 
 #checkout-button:hover {
-    background: #cc0000;
+    background: #018a3a; /* Adjusted hover color for better contrast */
 }
 
 /* banner section start */
