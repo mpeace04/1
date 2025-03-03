@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <!-- SweetAlert CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .checkout-container {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            transition: background 0.3s ease;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item:hover {
+            background: #f5f5f5;
+        }
+
+        .cart-item h4 {
+            margin: 0;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .cart-item p {
+            margin: 0;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .total {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #000;
+            outline: none;
+        }
+
+        #place-order {
+            width: 100%;
+            padding: 15px;
+            background: #000;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s ease;
+        }
+
+        #place-order:hover {
+            background: #333;
+        }
+
+        #return-home {
+            width: 100%;
+            padding: 15px;
+            background: #fff;
+            color: #000;
+            border: 2px solid #000;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        #return-home:hover {
+            background: #000;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="checkout-container">
+        <h1>Checkout</h1>
+        <div id="checkout-items"></div>
+        <div class="total">Total: R<span id="total-price">0.00</span></div>
+
+        <!-- User Details Form -->
+        <form id="checkout-form">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Delivery Address</label>
+                <textarea id="address" name="address" placeholder="Enter your delivery address" rows="4" required></textarea>
+            </div>
+            <button type="submit" id="place-order">Place Order</button>
+        </form>
+
+        <!-- Return to Home Button -->
+        <button id="return-home">Return to Home</button>
+    </div>
+
+    <!-- SweetAlert JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+// Retrieve cart data from localStorage
+const cart = JSON.parse(localStorage.getItem("cart")) || [];
+const checkoutItemsContainer = document.getElementById("checkout-items");
+const totalPriceElement = document.getElementById("total-price");
+
+// Calculate total price
+let totalPrice = 0;
+cart.forEach((item) => {
+    totalPrice += item.price;
+});
+
+// Display cart items on the checkout page
+cart.forEach((item) => {
+    const cartItem = document.createElement("div");
+    cartItem.classList.add("cart-item");
+    cartItem.innerHTML = `
+        <div>
+            <h4>${item.name}</h4>
+            <p>${item.length}" | ${item.color}</p>
+        </div>
+        <p>R${item.price.toFixed(2)}</p>
+    `;
+    checkoutItemsContainer.appendChild(cartItem);
+});
+
+// Display total price
+totalPriceElement.textContent = totalPrice.toFixed(2);
+
+// Handle Place Order Button
+document.getElementById("checkout-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    // Validate form fields
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const address = document.getElementById("address").value.trim();
+
+    if (!name || !email || !phone || !address) {
+        Swal.fire({
+            title: "Incomplete Details",
+            text: "Please fill in all the required fields.",
+            icon: "error",
+            confirmButtonColor: "#000",
+        });
+        return;
+    }
+
+    // Confirm order
+    Swal.fire({
+        title: "Confirm Order",
+        text: "Are you sure you want to place this order?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: "#000",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, place order",
+        cancelButtonText: "Cancel",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: "Order Placed!",
+                text: "Thank you for your order. We will contact you shortly.",
+                icon: "success",
+                confirmButtonColor: "#000",
+            }).then(() => {
+                localStorage.removeItem("cart"); // Clear cart data only after successful order
+                window.location.href = "index.html"; // Redirect to home page
+            });
+        }
+    });
+});
+
+// Return to Home Button
+document.getElementById("return-home").addEventListener("click", function () {
+    // Simply redirect to home page without clearing cart
+    window.location.href = "index.html";
+});
+    </script>
+</body>
+</html>
