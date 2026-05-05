@@ -1417,17 +1417,16 @@
   </header>
 
   <!-- Mobile Nav Overlay -->
-  <div class="mobile-nav-overlay" id="mobileNav">
-    <a href="#about" onclick="closeNav()">About</a>
-    <a href="#course" onclick="closeNav()">Our Course</a>
-    <a href="#gallery" onclick="closeNav()">Gallery</a>
-    <a href="#testimonials" onclick="closeNav()">Testimonials</a>
-    <a href="https://forms.cloud.microsoft/pages/responsepage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAN__6pexPJUMU1aUkdGS1QySU5UVFdITlAwSkw0OEFZUS4u&route=shorturl" onclick="closeNav()">Enrol Now</a>
-  </div>
+<div class="mobile-nav-overlay" id="mobileNav">
+  <a href="#about" onclick="closeNav(event)">About</a>
+  <a href="#course" onclick="closeNav(event)">Our Course</a>
+  <a href="#gallery" onclick="closeNav(event)">Gallery</a>
+  <a href="#testimonials" onclick="closeNav(event)">Testimonials</a>
+  <!-- No 'event' for external links like Forms, just the function -->
+  <a href="https://forms.cloud.microsoft/..." onclick="closeNav()">Enrol Now</a>
+</div>
 
-  <!-- ══════════════════════════════════════
-       HERO
-  ══════════════════════════════════════ -->
+<!--hero-->
   <section class="hero" id="home">
     <div class="hero-bg">
       <!-- High-quality online sewing/fashion image -->
@@ -2035,20 +2034,26 @@
   /* ────────────────────────────────────────
      Mobile Nav
   ──────────────────────────────────────── */
-  const hamburger = document.getElementById('hamburger');
-  const mobileNav = document.getElementById('mobileNav');
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobileNav');
 
-  hamburger.addEventListener('click', () => {
-    const isOpen = mobileNav.classList.toggle('open');
-    hamburger.classList.toggle('open', isOpen);
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-  });
 
-  function closeNav() {
-    mobileNav.classList.remove('open');
-    hamburger.classList.remove('open');
-    document.body.style.overflow = '';
+hamburger.addEventListener('click', () => {
+  const isOpen = mobileNav.classList.toggle('open');
+  hamburger.classList.toggle('open', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+});
+
+window.closeNav = function(event) {
+  mobileNav.classList.remove('open');
+  hamburger.classList.remove('open');
+  document.body.style.overflow = '';
+  if (event && event.target.hash) {
+    setTimeout(() => {
+      window.location.hash = event.target.hash;
+    }, 10);
   }
+};
 
   /* ────────────────────────────────────────
      Week Accordion
