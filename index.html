@@ -58,7 +58,9 @@
     .mobile-panel.open{display:block}
     .mobile-panel nav{display:grid;gap:8px}
     .mobile-panel a{padding:13px 14px;border-radius:15px;background:var(--green-soft-2);font-weight:800;color:var(--green-dark)}
-    .hero{padding:64px 0 42px;overflow:hidden}
+    .hero{position:relative;padding:64px 0 42px;overflow:hidden;background:linear-gradient(90deg,rgba(247,252,248,.98),rgba(237,248,239,.94)),url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat}
+    .hero:after{content:"";position:absolute;inset:auto 0 0;height:72px;background:linear-gradient(transparent,var(--green-soft-2));pointer-events:none}
+    .hero .container{position:relative;z-index:1}
     .hero-grid{display:grid;grid-template-columns:1fr .95fr;gap:38px;align-items:center}
     .eyebrow{display:inline-flex;align-items:center;gap:8px;margin:0 0 14px;text-transform:uppercase;letter-spacing:.12em;font-size:.74rem;font-weight:900;color:var(--green)}
     h1,h2,h3,p{margin-top:0}
@@ -232,7 +234,7 @@
         </div>
         <div class="hero-media">
           <div class="image-card">
-            <img src="2.png" alt="Professional cleaning and pest prevention service">
+            <img src="2.png" alt="Clean home interior prepared for pest prevention service">
           </div>
           <div class="floating-card">
             <strong>Established in 2003.</strong>
@@ -402,12 +404,12 @@
           <h2>Built for homes, businesses and audited spaces.</h2>
           <p class="section-lead">Organic Pestar operates with public liability insurance, Department of Agriculture registration under Act 36 of 1947, IPM thinking and pest control certificates for qualifying services.</p>
           <div class="client-logos" aria-label="Client and brand recognition">
-            <div class="logo-card"><img src="https://logo.clearbit.com/spar.co.za" alt="SPAR logo" onerror="this.parentElement.classList.add('logo-fallback')"><span>SPAR</span></div>
-            <div class="logo-card"><img src="https://logo.clearbit.com/sasol.com" alt="Sasol logo" onerror="this.parentElement.classList.add('logo-fallback')"><span>Sasol</span></div>
-            <div class="logo-card"><img src="https://logo.clearbit.com/steers.co.za" alt="Steers logo" onerror="this.parentElement.classList.add('logo-fallback')"><span>Steers</span></div>
-            <div class="logo-card"><img src="https://logo.clearbit.com/usave.co.za" alt="Usave logo" onerror="this.parentElement.classList.add('logo-fallback')"><span>Usave</span></div>
-            <div class="logo-card"><img src="https://logo.clearbit.com/piecity.co.za" alt="Pie City logo" onerror="this.parentElement.classList.add('logo-fallback')"><span>Pie City</span></div>
-            <div class="logo-card"><img src="https://logo.clearbit.com/assurecloud.co.za" alt="AssureCloud logo" onerror="this.parentElement.classList.add('logo-fallback')"><span>AssureCloud</span></div>
+            <div class="logo-card"><img src="6.png" alt="SPAR logo" onerror="this.parentElement.classList.add('logo-fallback')"><span>SPAR</span></div>
+            <div class="logo-card"><img src="3.png" alt="Sasol logo" onerror="this.parentElement.classList.add('logo-fallback')"><span>Sasol</span></div>
+            <div class="logo-card"><img src="7.png" alt="Steers logo" onerror="this.parentElement.classList.add('logo-fallback')"><span>Steers</span></div>
+            <div class="logo-card"><img src="5.png" alt="Usave logo" onerror="this.parentElement.classList.add('logo-fallback')"><span>Usave</span></div>
+            <div class="logo-card"><img src="8.png" alt="Pie City logo" onerror="this.parentElement.classList.add('logo-fallback')"><span>Pie City</span></div>
+            <div class="logo-card"><img src="9.png" alt="AssureCloud logo" onerror="this.parentElement.classList.add('logo-fallback')"><span>AssureCloud</span></div>
           </div>
         </div>
         <div class="proof-grid">
@@ -504,7 +506,7 @@
         <div class="quote-info">
           <p class="eyebrow">Get a Quote</p>
           <h2>Send the issue. The process stays simple.</h2>
-          <p>The form is EmailJS-ready. Once the client keys are added, requests are emailed to Organic Pestar and copied to the client.</p>
+          <p>Complete the form and Organic Pestar receives the pest control request with the property details.</p>
           <div class="contact-list">
             <div class="contact-line">
               <span><i class="fa-solid fa-phone"></i></span>
@@ -539,7 +541,7 @@
           <label class="full checkbox-row"><input type="checkbox" name="consent" required> I agree to be contacted about this pest control request.</label>
           <button class="btn btn-primary full" type="submit"><i class="fa-solid fa-paper-plane"></i> Send Quote Request</button>
           <button class="btn btn-light full" type="button" id="whatsappFromForm"><i class="fa-brands fa-whatsapp"></i> Send This Request on WhatsApp</button>
-          <p class="form-note full" id="formNote"></p>
+          <p class="form-note full" id="formNote"> </p>
         </form>
       </div>
     </section>
@@ -603,6 +605,7 @@
     const toggleServices = document.getElementById('toggleServices');
     const extraServices = document.getElementById('extraServices');
     const faqQuestions = document.querySelectorAll('.faq-question');
+    const externalLinks = document.querySelectorAll('a[href^="http"]');
 
     const showAlert = (icon, title, text) => {
       if (window.Swal) {
@@ -610,6 +613,39 @@
       } else {
         alert(`${title}: ${text}`);
       }
+    };
+
+    const confirmQuoteSubmission = async () => {
+      if (!window.Swal) return confirm('Submit this quote request to Organic Pestar?');
+      const result = await Swal.fire({
+        icon:'question',
+        title:'Submit quote request?',
+        text:'Organic Pestar will use these details to respond to the pest control request.',
+        showCancelButton:true,
+        confirmButtonText:'Submit request',
+        cancelButtonText:'Review form',
+        confirmButtonColor:'#3f8f54',
+        cancelButtonColor:'#6b776d'
+      });
+      return result.isConfirmed;
+    };
+
+    const openExternalWithAlert = async url => {
+      if (!window.Swal) {
+        if (confirm('This opens an external website. Continue?')) window.open(url, '_blank', 'noopener');
+        return;
+      }
+      const result = await Swal.fire({
+        icon:'info',
+        title:'External link',
+        text:'This opens outside the Organic Pestar website.',
+        showCancelButton:true,
+        confirmButtonText:'Open link',
+        cancelButtonText:'Stay here',
+        confirmButtonColor:'#3f8f54',
+        cancelButtonColor:'#6b776d'
+      });
+      if (result.isConfirmed) window.open(url, '_blank', 'noopener');
     };
 
     const isEmailJsReady = () => {
@@ -642,6 +678,15 @@
         mobilePanel.classList.remove('open');
         menuToggle.setAttribute('aria-expanded', 'false');
         menuToggle.textContent = '☰';
+      });
+    });
+
+    externalLinks.forEach(link => {
+      link.addEventListener('click', event => {
+        const url = new URL(link.href, window.location.href);
+        if (url.hostname === window.location.hostname) return;
+        event.preventDefault();
+        openExternalWithAlert(link.href);
       });
     });
 
@@ -699,6 +744,8 @@
         showAlert('warning','Missing information',error);
         return;
       }
+      const confirmed = await confirmQuoteSubmission();
+      if (!confirmed) return;
 
       saveQuoteLocally(data);
       const button = quoteForm.querySelector('button[type="submit"]');
@@ -728,6 +775,11 @@
 
     whatsappFromForm?.addEventListener('click', () => {
       const data = getQuoteData();
+      const error = validateQuote(data);
+      if (error) {
+        showAlert('warning','Complete the quote details',error);
+        return;
+      }
       const message = [
         'Hi Organic Pestar, I need a pest control quote.',
         `Name: ${data.from_name || ''}`,
@@ -739,7 +791,7 @@
         `Location: ${data.property_location || ''}`,
         `Message: ${data.message || ''}`
       ].join('\n');
-      window.open(`https://wa.me/27837866787?text=${encodeURIComponent(message)}`,'_blank');
+      openExternalWithAlert(`https://wa.me/27837866787?text=${encodeURIComponent(message)}`);
     });
 
     window.addEventListener('scroll', () => {
