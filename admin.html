@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Organic Pestar | Admin Dashboard</title>
+  <meta name="description" content="Organic Pestar admin dashboard.">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-protected="true" data-role="admin">
+  <header class="app-header">
+    <a class="brand-lockup" href="admin.html">
+      <div class="brand-mark">OP</div>
+      <div>
+        <strong>Admin Dashboard</strong>
+        <small id="currentUserLabel">Organic Pestar</small>
+      </div>
+    </a>
+
+    <nav class="site-nav">
+      <a href="index.html">Website</a>
+      <a href="admin.html" class="active">Admin</a>
+      <a href="technician.html">Technician View</a>
+      <button class="btn btn-small btn-ghost" id="logoutBtn" type="button">Logout</button>
+    </nav>
+  </header>
+
+  <main class="app-shell">
+    <section class="dashboard-hero">
+      <div>
+        <p class="eyebrow">Full Access</p>
+        <h1>Admin job control</h1>
+        <p>Create jobs, assign technicians, view all records, update status and monitor quote requests.</p>
+      </div>
+      <div class="stat-grid">
+        <div class="stat-card"><strong id="totalJobs">0</strong><span>Total Jobs</span></div>
+        <div class="stat-card"><strong id="scheduledJobs">0</strong><span>Scheduled</span></div>
+        <div class="stat-card"><strong id="completedJobs">0</strong><span>Completed</span></div>
+      </div>
+    </section>
+
+    <section class="grid two-col">
+      <article class="panel">
+        <h2>Create / Assign Job</h2>
+
+        <form id="jobForm" class="form-grid">
+          <label>
+            Client Name
+            <input type="text" name="clientName" required placeholder="Client full name">
+          </label>
+
+          <label>
+            Contact Number
+            <input type="tel" name="contactNumber" required placeholder="Client phone number">
+          </label>
+
+          <label class="full">
+            Property Address
+            <input type="text" name="address" required placeholder="Street address / complex / unit">
+          </label>
+
+          <label>
+            Service Type
+            <select name="serviceType" required>
+              <option value="">Select service</option>
+              <option>Residential Pest Control</option>
+              <option>Commercial Pest Control</option>
+              <option>Rodent Control</option>
+              <option>Cockroach Treatment</option>
+              <option>Quarterly Maintenance</option>
+              <option>Emergency Call Out</option>
+            </select>
+          </label>
+
+          <label>
+            Job Date
+            <input type="date" name="jobDate" required>
+          </label>
+
+          <label>
+            Assign Technician
+            <select name="assignedTo" required>
+              <option value="">Select technician</option>
+              <option value="tech@organicpestar.co.za">Technician 1</option>
+              <option value="tech2@organicpestar.co.za">Technician 2</option>
+            </select>
+          </label>
+
+          <label>
+            Job Status
+            <select name="status" required>
+              <option>Scheduled</option>
+              <option>In Progress</option>
+              <option>Completed</option>
+              <option>Follow-up Needed</option>
+            </select>
+          </label>
+
+          <label class="full">
+            Admin Instructions
+            <textarea name="notes" rows="4" placeholder="Instructions for technician..."></textarea>
+          </label>
+
+          <button class="btn btn-primary full" type="submit">Save & Assign Job</button>
+          <p id="jobMessage" class="form-message full" role="alert"></p>
+        </form>
+      </article>
+
+      <article class="panel">
+        <div class="panel-heading">
+          <h2>All Jobs</h2>
+          <button class="btn btn-small btn-ghost" id="clearJobsBtn" type="button">Clear All</button>
+        </div>
+        <div id="adminJobsList" class="jobs-list"></div>
+      </article>
+    </section>
+
+    <section class="panel">
+      <div class="panel-heading">
+        <h2>Website Quote Requests</h2>
+        <button class="btn btn-small btn-ghost" id="clearQuotesBtn" type="button">Clear Quotes</button>
+      </div>
+      <div id="quotesList" class="jobs-list"></div>
+    </section>
+  </main>
+
+  <script src="assets/app.js"></script>
+  <script src="assets/form.js"></script>
+</body>
+</html>

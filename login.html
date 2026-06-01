@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Organic Pestar | Staff Login</title>
+  <meta name="description" content="Organic Pestar staff login.">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="auth-page">
+  <main class="auth-shell">
+    <section class="auth-card">
+      <a class="back-link" href="index.html">← Back to website</a>
+
+      <div class="brand-lockup auth-brand">
+        <div class="brand-mark">OP</div>
+        <div>
+          <p class="eyebrow">Staff Access</p>
+          <h1>Sign in</h1>
+        </div>
+      </div>
+
+      <p class="muted">
+        Admin can manage all jobs. Technicians can only view and update jobs assigned to them.
+      </p>
+
+      <form id="loginForm" class="form-stack" autocomplete="on">
+        <label>
+          Email address
+          <input type="email" id="email" placeholder="admin@organicpestar.co.za" required>
+        </label>
+
+        <label>
+          Password
+          <input type="password" id="password" placeholder="Enter password" required>
+        </label>
+
+        <button class="btn btn-primary" type="submit">Sign In</button>
+        <p id="loginMessage" class="form-message" role="alert"></p>
+      </form>
+
+      <div class="demo-box">
+        <strong>Demo users</strong><br>
+        Admin: admin@organicpestar.co.za / Admin123<br>
+        Technician: tech@organicpestar.co.za / Tech123
+      </div>
+    </section>
+  </main>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Organic Pestar | Technician Jobs</title>
+  <meta name="description" content="Organic Pestar technician job list.">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-protected="true" data-role="technician">
+  <header class="app-header">
+    <a class="brand-lockup" href="technician.html">
+      <div class="brand-mark">OP</div>
+      <div>
+        <strong>Technician Jobs</strong>
+        <small id="currentUserLabel">Organic Pestar</small>
+      </div>
+    </a>
+
+    <nav class="site-nav">
+      <a href="index.html">Website</a>
+      <a href="technician.html" class="active">My Jobs</a>
+      <button class="btn btn-small btn-ghost" id="logoutBtn" type="button">Logout</button>
+    </nav>
+  </header>
+
+  <main class="app-shell">
+    <section class="dashboard-hero">
+      <div>
+        <p class="eyebrow">Technician Access</p>
+        <h1>Assigned jobs only</h1>
+        <p>You can view jobs assigned to your account, update status, add notes and capture client signatures.</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>My Assigned Jobs</h2>
+      <div id="technicianJobsList" class="jobs-list"></div>
+    </section>
+  </main>
+
+  <script src="assets/app.js"></script>
+  <script src="assets/form.js"></script>
+</body>
+</html>
