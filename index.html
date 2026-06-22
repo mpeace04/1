@@ -178,6 +178,89 @@
   </style>
 </head>
 <body>
+
+  <style>
+    .service-details-section .section-top { max-width: 860px; }
+    .service-detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 28px;
+    }
+    .readmore-card {
+      background: #ffffff;
+      border: 1px solid rgba(18, 58, 38, 0.12);
+      border-radius: 22px;
+      box-shadow: 0 18px 45px rgba(18, 58, 38, 0.08);
+      overflow: hidden;
+    }
+    .readmore-card summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 22px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .readmore-card summary::-webkit-details-marker { display: none; }
+    .readmore-card summary span {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      color: #123a26;
+    }
+    .readmore-card summary i { color: #39a96b; }
+    .readmore-card summary::after {
+      content: '+';
+      display: grid;
+      place-items: center;
+      flex: 0 0 30px;
+      height: 30px;
+      border-radius: 999px;
+      background: rgba(57, 169, 107, 0.12);
+      color: #123a26;
+      font-weight: 900;
+    }
+    .readmore-card[open] summary::after { content: '−'; }
+    .readmore-content {
+      padding: 0 24px 24px;
+      color: #40564a;
+    }
+    .readmore-content p { margin: 0 0 14px; }
+    .readmore-content h4 {
+      margin: 18px 0 8px;
+      color: #123a26;
+      font-size: 0.98rem;
+    }
+    .readmore-content ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    .readmore-content li { margin: 7px 0; }
+    .readmore-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .readmore-badges span {
+      border: 1px solid rgba(57, 169, 107, 0.22);
+      background: rgba(57, 169, 107, 0.08);
+      color: #123a26;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+    @media (max-width: 860px) {
+      .service-detail-grid { grid-template-columns: 1fr; }
+      .readmore-card summary { padding: 20px; }
+      .readmore-content { padding: 0 20px 22px; }
+    }
+  </style>
+
   <a class="skip-link" href="#main">Skip to main content</a>
 
   <header class="site-header">
@@ -192,6 +275,8 @@
 
       <nav class="site-nav" aria-label="Primary navigation">
         <a href="#services">Services</a>
+        <a href="#service-details">Details</a>
+        <a href="#industries">Industries</a>
         <a href="#process">Process</a>
         <a href="#trust">Trust</a>
         <a href="#faq">FAQ</a>
@@ -206,6 +291,8 @@
   <aside class="mobile-panel" id="mobilePanel" aria-label="Mobile navigation">
     <nav>
       <a href="#services">Services</a>
+      <a href="#service-details">Details</a>
+      <a href="#industries">Industries</a>
       <a href="#process">Process</a>
       <a href="#trust">Trust</a>
       <a href="#faq">FAQ</a>
@@ -219,26 +306,26 @@
       <div class="container hero-grid">
         <div>
           <p class="eyebrow"><i class="fa-solid fa-leaf"></i> Certified Pest Control Services</p>
-          <h1>Safe pest control, made simple.</h1>
-          <p class="lead">Organic Pestar provides safety-first pest control for homes, businesses and sensitive spaces across South Africa.</p>
+          <h1>Safety-first pest control for homes, businesses and sensitive sites.</h1>
+          <p class="lead">Organic Pestar provides practical, safety-conscious pest control for residential properties, food-handling environments, schools, healthcare facilities, farms, industrial sites and commercial premises across South Africa.</p>
           <div class="hero-actions">
             <a href="#quote" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Get a Quote</a>
             <a href="tel:0800133993" class="btn btn-light"><i class="fa-solid fa-phone"></i> 0800 133 993</a>
             <a href="https://wa.me/27837866787?text=Hi%20Organic%20Pestar%2C%20I%20need%20a%20pest%20control%20quote." class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
           </div>
           <div class="trust-row" aria-label="Key trust points">
-            <span class="trust-pill"><i class="fa-solid fa-shield-heart"></i> Safety-focused</span>
+            <span class="trust-pill"><i class="fa-solid fa-shield-heart"></i> Safety before profit</span>
             <span class="trust-pill"><i class="fa-solid fa-certificate"></i> Certificates available</span>
             <span class="trust-pill"><i class="fa-solid fa-location-dot"></i> Countrywide</span>
           </div>
         </div>
         <div class="hero-media">
           <div class="image-card">
-            <img src="Picture1.png" alt="Clean home interior prepared for pest prevention service">
+            <img src="Picture1.png" alt="Clean property prepared for pest prevention service">
           </div>
           <div class="floating-card">
             <strong>Established in 2003.</strong>
-            <span>Practical pest control for homes, food sites, schools, care facilities and commercial premises.</span>
+            <span>Integrated Pest Management for homes, food sites, schools, care facilities, farms and commercial premises.</span>
           </div>
         </div>
       </div>
@@ -248,29 +335,29 @@
       <div class="container">
         <div class="section-top">
           <p class="eyebrow">Why Organic Pestar</p>
-          <h2>Clear reasons to choose Organic Pestar.</h2>
-          <p class="section-lead"></p>
+          <h2>Built around safety, prevention and compliance.</h2>
+          <p class="section-lead">The business positions its service around Integrated Pest Management, reduced chemical exposure, discreet treatment timing and practical prevention so pests are controlled without unnecessary disruption.</p>
         </div>
         <div class="quick-panel">
           <article class="quick-card">
             <span class="icon-bubble"><i class="fa-solid fa-magnifying-glass"></i></span>
             <div>
               <h3>Inspection first</h3>
-              <p>The pest issue, risk areas and treatment route are assessed before work begins.</p>
+              <p>Each site is assessed for pest type, entry points, risk areas and the correct treatment route before work begins.</p>
             </div>
           </article>
           <article class="quick-card">
             <span class="icon-bubble"><i class="fa-solid fa-child-reaching"></i></span>
             <div>
-              <h3>People-conscious</h3>
-              <p>Treatments consider children, pets, pregnant women, plants, staff and customers.</p>
+              <h3>People-conscious treatments</h3>
+              <p>Service planning considers children, pets, pregnant women, plants, staff, customers and people with respiratory sensitivities.</p>
             </div>
           </article>
           <article class="quick-card">
             <span class="icon-bubble"><i class="fa-solid fa-clipboard-check"></i></span>
             <div>
               <h3>Audit support</h3>
-              <p>Certificates support council, municipal and food industry requirements.</p>
+              <p>Pest control certificates and service documentation can support council, municipal and food-industry inspections where applicable.</p>
             </div>
           </article>
         </div>
@@ -280,9 +367,9 @@
     <section class="section alt" id="services">
       <div class="container">
         <div class="section-top">
-          <p class="eyebrow">Services</p>
-          <h2>Choose the right pest control service quickly.</h2>
-          <p class="section-lead"></p>
+          <p class="eyebrow">Core Services</p>
+          <h2>Choose the pest control service you need.</h2>
+          <p class="section-lead">From once-off treatments to quarterly maintenance and audit-focused pest management, the service can be matched to the property type and risk level.</p>
         </div>
 
         <div class="service-grid">
@@ -290,73 +377,73 @@
             <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80" alt="Residential home exterior">
             <div class="service-body">
               <h3>Residential Homes</h3>
-              <p>Comprehensive pest assessments and organic treatments designed specifically for your home.</p>
+              <p>Home pest control for cockroaches, rodents, ants, bedbugs, fleas, ticks, spiders, flies and seasonal pest activity.</p>
               <span class="tag">Homes</span>
             </div>
           </article>
-          <article class="service-card">
-            <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=80" alt="Modern commercial office">
-            <div class="service-body">
-              <h3>Commercial Sites</h3>
-              <p>Tailored pest management solutions for businesses, ensuring a safe environment for employees and customers.</p>
-              <span class="tag">Business</span>
-            </div>
-          </article>
-          <article class="service-card">
-            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=900&q=80" alt="Restaurant interior">
-            <div class="service-body">
-              <h3>Food & Hospitality</h3>
-              <p>For restaurants, kitchens, bars and food-handling premises.</p>
-              <span class="tag">Food safety</span>
-            </div>
-          </article>
-          <article class="service-card">
-            <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=80" alt="Classroom environment">
-            <div class="service-body">
-              <h3>Schools & Creches</h3>
-              <p>Discreet service timing for child-conscious learning environments.</p>
-              <span class="tag">Sensitive sites</span>
-            </div>
-          </article>
-        </div>
 
-        <div class="service-grid extra-services" id="extraServices">
-          <article class="service-card">
-            <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=900&q=80" alt="Healthcare corridor">
-            <div class="service-body">
-              <h3>Healthcare & NPOs</h3>
-              <p>Preventative pest control for sensitive care environments.</p>
-              <span class="tag">Care facilities</span>
-            </div>
-          </article>
-          <article class="service-card">
-            <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=900&q=80" alt="Warehouse storage area">
-            <div class="service-body">
-              <h3>Industrial & Storage</h3>
-              <p>Support for warehouses, plants and storage facilities.</p>
-              <span class="tag">Industrial</span>
-            </div>
-          </article>
-          <article class="service-card">
-            <img src="https://images.unsplash.com/photo-1586105251261-72a756497a11?auto=format&fit=crop&w=900&q=80" alt="Clean rental property interior">
-            <div class="service-body">
-              <h3>End-of-Lease</h3>
-              <p>Move-in and move-out pest control for rental properties.</p>
-              <span class="tag">Rentals</span>
-            </div>
-          </article>
           <article class="service-card">
             <img src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&w=900&q=80" alt="Green garden and property maintenance">
             <div class="service-body">
               <h3>Quarterly Maintenance</h3>
-              <p>Prevention-focused treatment reduces repeat pest activity.</p>
+              <p>Prevention-focused service schedules for properties that need reliable ongoing protection rather than reactive call-outs.</p>
               <span class="tag">Prevention</span>
             </div>
           </article>
-        </div>
 
-        <div class="center-action">
-          <button class="btn btn-light" type="button" id="toggleServices"><i class="fa-solid fa-plus"></i> View More Services</button>
+          <article class="service-card">
+            <img src="https://images.unsplash.com/photo-1586105251261-72a756497a11?auto=format&fit=crop&w=900&q=80" alt="Clean rental property interior">
+            <div class="service-body">
+              <h3>End-of-Lease Pest Control</h3>
+              <p>Move-in and move-out treatments for rental homes, especially where pets, fleas, ticks, cockroaches or rodents are a concern.</p>
+              <span class="tag">Rentals</span>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=80" alt="Modern commercial office">
+            <div class="service-body">
+              <h3>Commercial & Industrial</h3>
+              <p>Pest control for offices, warehouses, storerooms, factories, malls, body corporates and property-managed sites.</p>
+              <span class="tag">Business</span>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=900&q=80" alt="Restaurant interior">
+            <div class="service-body">
+              <h3>Food & Hospitality</h3>
+              <p>Discreet pest management for restaurants, hotels, bars, cafés, supermarkets, food plants, bakeries and guest houses.</p>
+              <span class="tag">Food safety</span>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=80" alt="Classroom environment">
+            <div class="service-body">
+              <h3>Schools & Creches</h3>
+              <p>Child-conscious pest control for creches, special schools, universities, colleges and education facilities.</p>
+              <span class="tag">Sensitive sites</span>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=900&q=80" alt="Healthcare corridor">
+            <div class="service-body">
+              <h3>Healthcare & NPOs</h3>
+              <p>Low-disruption pest control for old age homes, hospices, hospitals, clinics, laboratories and non-profit facilities.</p>
+              <span class="tag">Care facilities</span>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=900&q=80" alt="Agricultural farm landscape">
+            <div class="service-body">
+              <h3>Farms & Animal Facilities</h3>
+              <p>Pest control support for abattoirs, piggeries, poultry farms, dairy farms, rabbit farms, pet-food sites and meat warehouses.</p>
+              <span class="tag">Agriculture</span>
+            </div>
+          </article>
         </div>
 
         <div class="pest-strip" aria-label="Common pests handled">
@@ -366,43 +453,340 @@
           <span class="pest-chip"><i class="fa-solid fa-bug-slash"></i> Ants</span>
           <span class="pest-chip"><i class="fa-solid fa-bed"></i> Bedbugs</span>
           <span class="pest-chip"><i class="fa-solid fa-shield-dog"></i> Fleas & ticks</span>
-          <span class="pest-chip"><i class="fa-solid fa-feather"></i> Wasps & flies</span>
+          <span class="pest-chip"><i class="fa-solid fa-feather"></i> Flies & wasps</span>
+          <span class="pest-chip"><i class="fa-solid fa-dove"></i> Birds / pigeons</span>
+          <span class="pest-chip"><i class="fa-solid fa-house-chimney-crack"></i> Termites / wood borers</span>
         </div>
       </div>
     </section>
 
-    <section class="section" id="process">
+
+    <section class="section service-details-section" id="service-details">
+      <div class="container">
+        <div class="section-top">
+          <p class="eyebrow">Service Details</p>
+          <h2>More detailed pest control information by property type.</h2>
+          <p class="section-lead">Open the relevant section to see the expanded service content. The copy is written from the supplied Organic Pestar document, but refined so it reads properly on a website.</p>
+        </div>
+
+        <div class="service-detail-grid">
+          <details class="readmore-card" open>
+            <summary><span><i class="fa-solid fa-house-chimney"></i> Home / Residential Pest Control</span></summary>
+            <div class="readmore-content">
+              <p>Residential pest control is built around protecting the home, family members, pets, plants and food areas while treating visible pest activity and the hidden entry points that allow pests to return.</p>
+              <h4>What this service covers</h4>
+              <ul>
+                <li>Interior and exterior inspection to identify pest type, nesting points, entry gaps and high-pressure areas.</li>
+                <li>Treatment for cockroaches, rodents, ants, spiders, bedbugs, fleas, ticks, flies, wasps and seasonal pests.</li>
+                <li>Exterior-focused prevention around doors, garages, storerooms, refuse areas, garden edges and possible access routes.</li>
+                <li>Practical advice to reduce repeat activity after the first treatment.</li>
+              </ul>
+              <h4>Why it matters</h4>
+              <p>Rain and cold weather can push pests indoors. Once inside, pests can contaminate food areas, leave droppings, damage property and create repeat infestations if entry routes are not controlled.</p>
+              <div class="readmore-badges"><span>Homes</span><span>Families</span><span>Pets</span><span>Quarterly plans</span></div>
+            </div>
+          </details>
+
+          <details class="readmore-card">
+            <summary><span><i class="fa-solid fa-calendar-check"></i> Quarterly Maintenance & Prevention</span></summary>
+            <div class="readmore-content">
+              <p>This is for clients who do not want to wait until pests become a visible problem. A recurring plan helps control seasonal pest movement and keeps prevention active throughout the year.</p>
+              <h4>What this service covers</h4>
+              <ul>
+                <li>Scheduled pest control treatments for recurring or seasonal pest pressure.</li>
+                <li>Monitoring of treated areas, bait stations, trap stations and recurring activity points where applicable.</li>
+                <li>Focus on the four major household or site-specific pests affecting the property.</li>
+                <li>Prevention guidance to reduce dependence on emergency call-outs.</li>
+              </ul>
+              <h4>Best suited for</h4>
+              <p>Homes, estates, restaurants, storage sites, body corporates, schools, warehouses, farms and businesses that need predictable pest control rather than one-time reactive treatment.</p>
+              <div class="readmore-badges"><span>Prevention</span><span>Monitoring</span><span>Seasonal pests</span><span>Less disruption</span></div>
+            </div>
+          </details>
+
+          <details class="readmore-card">
+            <summary><span><i class="fa-solid fa-building"></i> Commercial & Industrial Sites</span></summary>
+            <div class="readmore-content">
+              <p>Commercial and industrial pest control protects staff, customers, products, stock, equipment and the business reputation. Treatment is planned around the site layout, operational hours and compliance pressure.</p>
+              <h4>What this service covers</h4>
+              <ul>
+                <li>Pest control for offices, factories, warehouses, storerooms, malls, retail spaces, industrial yards and mixed-use premises.</li>
+                <li>Rodent, cockroach, fly, ant, stored-product insect and crawling-insect management.</li>
+                <li>Inspection of waste areas, loading bays, kitchens, storage rooms, drains, fence lines and entry points.</li>
+                <li>Low-disruption scheduling, including discreet after-hours service where suitable.</li>
+              </ul>
+              <h4>Business risk addressed</h4>
+              <p>Pests can contaminate stock, damage infrastructure, harm customer trust, trigger complaints and create inspection or audit problems. A prevention-first plan reduces these risks.</p>
+              <div class="readmore-badges"><span>Offices</span><span>Warehouses</span><span>Factories</span><span>Retail</span></div>
+            </div>
+          </details>
+
+          <details class="readmore-card">
+            <summary><span><i class="fa-solid fa-utensils"></i> Restaurants, Food Sites & Hospitality</span></summary>
+            <div class="readmore-content">
+              <p>Food and hospitality environments need discreet pest control because one pest sighting can damage trust, reviews and health compliance. The service focuses on inspection, prevention, monitoring and documentation.</p>
+              <h4>What this service covers</h4>
+              <ul>
+                <li>Restaurants, cafés, bars, supermarkets, convenience stores, bakeries, hotels, motels, guest houses and kitchens.</li>
+                <li>Control of cockroaches, rats, mice, ants, flies, wasps, bedbugs and stored-product pests.</li>
+                <li>Inspection of kitchens, drains, refuse zones, food storage, laundry areas, guest rooms, bars and delivery areas.</li>
+                <li>After-hours service options to reduce disruption to guests, customers and staff.</li>
+              </ul>
+              <h4>Compliance and reputation</h4>
+              <p>The content supports food-handling businesses that need pest control certificates, audit support and safer operating conditions for staff and customers.</p>
+              <div class="readmore-badges"><span>Restaurants</span><span>Hotels</span><span>Food safety</span><span>Discreet service</span></div>
+            </div>
+          </details>
+
+          <details class="readmore-card">
+            <summary><span><i class="fa-solid fa-school"></i> Schools, Creches & Universities</span></summary>
+            <div class="readmore-content">
+              <p>Education facilities need pest control that is planned around learners, staff, classrooms, kitchens, dormitories and school schedules. The document specifically highlights child-conscious treatment timing and IPM practice.</p>
+              <h4>What this service covers</h4>
+              <ul>
+                <li>Creches, special schools, primary and secondary schools, universities, colleges and education institutions.</li>
+                <li>Detailed inspection to identify existing pest issues and weak points before treatment.</li>
+                <li>Integrated Pest Management methods that reduce unnecessary chemical intervention.</li>
+                <li>Treatment timing arranged for periods when children or students are not occupying the treated areas.</li>
+              </ul>
+              <h4>Key concern</h4>
+              <p>Pests can contaminate food areas, utensils and surfaces, while droppings and allergens can affect sensitive learners. The service therefore prioritises prevention, communication and monitoring.</p>
+              <div class="readmore-badges"><span>Creches</span><span>Schools</span><span>Universities</span><span>Child-conscious</span></div>
+            </div>
+          </details>
+
+          <details class="readmore-card">
+            <summary><span><i class="fa-solid fa-hospital"></i> Healthcare, Old Age Homes & NPOs</span></summary>
+            <div class="readmore-content">
+              <p>Healthcare and care facilities need sensitive pest control because patients, elderly residents and vulnerable groups should not be exposed to preventable hygiene risks or unnecessary disruption.</p>
+              <h4>What this service covers</h4>
+              <ul>
+                <li>Old age homes, hospices, hospitals, clinics, laboratories, non-profit centres and care environments.</li>
+                <li>Discreet treatment at suitable times, including after-hours options where necessary.</li>
+                <li>Preventative treatments for food storage, sleeping rooms, wards, service areas and refuse points.</li>
+                <li>Service records and certificates for qualifying inspection or audit requirements.</li>
+              </ul>
+              <h4>Why it matters</h4>
+              <p>Pests can contaminate food and surfaces, creating hygiene and reputational risk for facilities caring for vulnerable people. The service is positioned around minimal disruption and safe prevention.</p>
+              <div class="readmore-badges"><span>Hospices</span><span>Old age homes</span><span>Clinics</span><span>NPOs</span></div>
+            </div>
+          </details>
+
+          <details class="readmore-card">
+            <summary><span><i class="fa-solid fa-key"></i> End-of-Lease, Rentals & Body Corporates</span></summary>
+            <div class="readmore-content">
+              <p>End-of-lease pest control is useful before a new tenant moves in, after a tenant exits, or when pets have lived on the property and fleas, ticks, cockroaches or rodents are a concern.</p>
+              <h4>What this service covers</h4>
+              <ul>
+                <li>Move-in and move-out pest control for houses, flats, rental properties and townhouses.</li>
+                <li>Flea and tick treatments linked to pet occupation where required by the lease or property manager.</li>
+                <li>Rodent, cockroach, ant, spider and bedbug treatment where signs are present.</li>
+                <li>Inspection of carpets, skirting boards, pet bedding areas, refuse areas, fence lines and exterior zones.</li>
+              </ul>
+              <h4>Best suited for</h4>
+              <p>Landlords, tenants, property managers, estate agents, body corporates and managing agents who need the property handed over clean, safe and pest-free.</p>
+              <div class="readmore-badges"><span>Rentals</span><span>Tenants</span><span>Landlords</span><span>Body corporates</span></div>
+            </div>
+          </details>
+
+          <details class="readmore-card">
+            <summary><span><i class="fa-solid fa-warehouse"></i> Warehouses, Storage & Stock Environments</span></summary>
+            <div class="readmore-content">
+              <p>Storage environments attract pests because of packaging, food stock, dark spaces, loading bays and waste areas. A warehouse pest plan protects inventory, staff and audit readiness.</p>
+              <h4>What this service covers</h4>
+              <ul>
+                <li>Warehouses, storerooms, stockrooms, silos, mills, factories, transport depots and distribution areas.</li>
+                <li>Rodent, cockroach, fly and stored-product insect control.</li>
+                <li>Inspection of loading zones, pallets, stock aisles, waste points, wall gaps, roof spaces and fence lines.</li>
+                <li>Monitoring and documentation for recurring control where stock risk is high.</li>
+              </ul>
+              <h4>Business risk addressed</h4>
+              <p>Pests can damage packaging, contaminate products, affect delivery quality and create audit failures. Prevention and monitoring are therefore more important than one-time treatment alone.</p>
+              <div class="readmore-badges"><span>Warehouses</span><span>Stock</span><span>Stored-product pests</span><span>Rodents</span></div>
+            </div>
+          </details>
+
+          <details class="readmore-card">
+            <summary><span><i class="fa-solid fa-wheat-awn"></i> Farms, Abattoirs & Animal Facilities</span></summary>
+            <div class="readmore-content">
+              <p>The document includes pest control for abattoirs, piggeries, poultry farms, dairy farms, rabbit farms, meat warehouses and processing environments where pest activity can affect animal health, food safety and infrastructure.</p>
+              <h4>What this service covers</h4>
+              <ul>
+                <li>Rodent, fly, mite, beetle, cockroach and crawling-insect management.</li>
+                <li>Support for poultry houses, manure areas, feed storage, animal housing, slaughter areas and meat-storage environments.</li>
+                <li>Focus on reducing disease transmission, feed contamination and infrastructure damage.</li>
+                <li>Ongoing monitoring where pest pressure is continuous.</li>
+              </ul>
+              <h4>Best suited for</h4>
+              <p>Farm operators, abattoirs, meat processors, dairy sites, piggeries, poultry houses, rabbit farms and pet-food manufacturers.</p>
+              <div class="readmore-badges"><span>Poultry</span><span>Dairy</span><span>Abattoirs</span><span>Feed storage</span></div>
+            </div>
+          </details>
+
+          <details class="readmore-card">
+            <summary><span><i class="fa-solid fa-landmark"></i> Government, Municipal & Public Buildings</span></summary>
+            <div class="readmore-content">
+              <p>Public facilities require pest control that protects visitors, staff, public health and building reputation. Service plans should match the building’s use, traffic level and hygiene requirements.</p>
+              <h4>What this service covers</h4>
+              <ul>
+                <li>Municipal buildings, public offices, police holding cells, prisons, libraries, museums and public facilities.</li>
+                <li>Rodent, cockroach, ant, fly, bedbug and general crawling-insect control.</li>
+                <li>Inspection of kitchens, holding areas, refuse zones, offices, records rooms, public toilets and exterior access points.</li>
+                <li>Service documentation for internal records and inspection readiness where applicable.</li>
+              </ul>
+              <h4>Why it matters</h4>
+              <p>Government and public buildings are high-visibility environments. Pest activity can create public complaints, reputational harm and hygiene concerns.</p>
+              <div class="readmore-badges"><span>Municipal</span><span>Public buildings</span><span>Libraries</span><span>Prisons</span></div>
+            </div>
+          </details>
+
+          <details class="readmore-card">
+            <summary><span><i class="fa-solid fa-beer-mug-empty"></i> Breweries, Dairies & Food Manufacturing</span></summary>
+            <div class="readmore-content">
+              <p>Manufacturing and beverage sites need pest management that protects the product, production areas, packaging zones and audit standards. The document highlights breweries, distilleries, wineries, dairies and food-processing premises.</p>
+              <h4>What this service covers</h4>
+              <ul>
+                <li>Breweries, distilleries, wineries, dairies, bakeries, beverage plants and food-processing environments.</li>
+                <li>Rodent, cockroach, fly, ant and stored-product pest control.</li>
+                <li>Inspection of production lines, drains, bottling/packaging areas, raw material stores and waste zones.</li>
+                <li>Ongoing monitoring and rapid response for recurring pest pressure.</li>
+              </ul>
+              <h4>Compliance angle</h4>
+              <p>These sites often need strong records, prevention plans and audit-aligned pest control because a pest problem can affect product safety and brand trust.</p>
+              <div class="readmore-badges"><span>Breweries</span><span>Dairies</span><span>Bakeries</span><span>Manufacturing</span></div>
+            </div>
+          </details>
+
+          <details class="readmore-card">
+            <summary><span><i class="fa-solid fa-golf-ball-tee"></i> Golf Estates & Landscaped Properties</span></summary>
+            <div class="readmore-content">
+              <p>Golf estates and landscaped environments need pest control that respects gardens, soil, pollinators, beneficial organisms and the overall outdoor experience.</p>
+              <h4>What this service covers</h4>
+              <ul>
+                <li>Environment-conscious pest control for golf estates, gardens, outdoor facilities and landscaped properties.</li>
+                <li>Low-disruption treatment timing, including discreet after-hours service where appropriate.</li>
+                <li>Focus on avoiding unnecessary contamination of groundwork, gardens and beneficial natural systems.</li>
+                <li>Prevention planning around buildings, refuse zones, food-service areas and outdoor congregation points.</li>
+              </ul>
+              <h4>Best suited for</h4>
+              <p>Golf estates, lifestyle estates, clubhouses, outdoor hospitality spaces and managed landscaped properties.</p>
+              <div class="readmore-badges"><span>Golf estates</span><span>Landscaping</span><span>Outdoor areas</span><span>Environment-focused</span></div>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="industries">
+      <div class="container">
+        <div class="section-top">
+          <p class="eyebrow">Industries Served</p>
+          <h2>Pest control for high-risk and reputation-sensitive environments.</h2>
+          <p class="section-lead">Organic Pestar’s service content covers residential, commercial, institutional, food-safety, agricultural, government and specialist environments.</p>
+        </div>
+
+        <div class="proof-grid">
+          <article class="proof-card">
+            <i class="fa-solid fa-utensils"></i>
+            <h3>Restaurants, Cafés & Bars</h3>
+            <p>Discreet after-hours treatment, monitoring and prevention for food-service premises where one pest sighting can damage reputation.</p>
+          </article>
+          <article class="proof-card">
+            <i class="fa-solid fa-store"></i>
+            <h3>Supermarkets & Retail Food</h3>
+            <p>Pest control for supermarkets, convenience stores, delis, mini-cafés and retail spaces handling food inventory.</p>
+          </article>
+          <article class="proof-card">
+            <i class="fa-solid fa-hotel"></i>
+            <h3>Hotels & Guest Houses</h3>
+            <p>Bedbug, cockroach, ant and rodent management for hotels, motels, guest houses and high-traffic hospitality properties.</p>
+          </article>
+          <article class="proof-card">
+            <i class="fa-solid fa-building"></i>
+            <h3>Body Corporates & Rentals</h3>
+            <p>Planned pest control for townhouses, rental flats, office blocks, property managers and communal refuse areas.</p>
+          </article>
+          <article class="proof-card">
+            <i class="fa-solid fa-school"></i>
+            <h3>Education Facilities</h3>
+            <p>IPM-based service for creches, schools, colleges and universities with treatment timing arranged around learners and staff.</p>
+          </article>
+          <article class="proof-card">
+            <i class="fa-solid fa-hospital"></i>
+            <h3>Healthcare & Laboratories</h3>
+            <p>Pest management for clinics, hospitals, laboratories and pharmaceutical environments where hygiene and documentation matter.</p>
+          </article>
+          <article class="proof-card">
+            <i class="fa-solid fa-warehouse"></i>
+            <h3>Warehouses & Storage</h3>
+            <p>Rodent, cockroach and stored-product insect control for warehouses, storerooms, silos, milling storage and stock environments.</p>
+          </article>
+          <article class="proof-card">
+            <i class="fa-solid fa-wheat-awn"></i>
+            <h3>Food Manufacturing</h3>
+            <p>Service support for bakeries, food plants, beverage manufacturers, breweries, distilleries, meat-processing sites and pet-food facilities.</p>
+          </article>
+          <article class="proof-card">
+            <i class="fa-solid fa-landmark"></i>
+            <h3>Government & Public Sites</h3>
+            <p>Support for municipal properties, police holding cells, prisons, libraries, museums and public buildings.</p>
+          </article>
+          <article class="proof-card">
+            <i class="fa-solid fa-golf-ball-tee"></i>
+            <h3>Golf Estates</h3>
+            <p>Environment-conscious treatment planning for golf estates and landscaped properties where plant and pollinator protection matters.</p>
+          </article>
+          <article class="proof-card">
+            <i class="fa-solid fa-cow"></i>
+            <h3>Animal & Farm Sites</h3>
+            <p>Rodent, fly and insect management for poultry, dairy, rabbit, piggery and abattoir environments.</p>
+          </article>
+          <article class="proof-card">
+            <i class="fa-solid fa-boxes-stacked"></i>
+            <h3>Stored Product Insects</h3>
+            <p>Fogging and pest management support for stock-product insects, milling storage and high-risk inventory areas.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="process">
       <div class="container">
         <div class="section-top">
           <p class="eyebrow">Process</p>
-          <h2>Three simple steps.</h2>
+          <h2>Simple process. Proper control.</h2>
         </div>
         <div class="process-grid">
           <article class="step-card">
             <div class="step-number">1</div>
             <h3>Request a quote</h3>
-            <p>Submit the form, call the toll-free number or send a WhatsApp message.</p>
+            <p>Submit the form, call the toll-free number or send a WhatsApp message with the property type and pest issue.</p>
           </article>
           <article class="step-card">
             <div class="step-number">2</div>
-            <h3>Inspection & plan</h3>
-            <p>The team checks the pest type, site risk and treatment approach.</p>
+            <h3>Inspection & risk plan</h3>
+            <p>The team checks pest type, access points, food/waste risks, sensitive areas and the best treatment time.</p>
           </article>
           <article class="step-card">
             <div class="step-number">3</div>
-            <h3>Treat & prevent</h3>
-            <p>The service is completed with prevention guidance that reduces repeat infestations.</p>
+            <h3>Treatment & documentation</h3>
+            <p>The treatment is completed with service records, prevention advice and certificates where qualifying requirements apply.</p>
+          </article>
+          <article class="step-card">
+            <div class="step-number">4</div>
+            <h3>Monitoring & prevention</h3>
+            <p>Quarterly, monthly, bi-monthly or site-specific monitoring can be arranged for recurring pest control needs.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section alt" id="trust">
+    <section class="section" id="trust">
       <div class="container proof-wrap">
         <div>
           <p class="eyebrow">Trust & Compliance</p>
-          <h2>Built for homes, businesses and audited spaces.</h2>
-          <p class="section-lead">Organic Pestar operates with public liability insurance, Department of Agriculture registration under Act 36 of 1947, IPM thinking and pest control certificates for qualifying services.</p>
+          <h2>Positioned for homes, businesses and audited spaces.</h2>
+          <p class="section-lead">Organic Pestar’s content highlights public liability insurance, Department of Agriculture registration under Act 36 of 1947, an IPM approach and pest control certificates for qualifying council, municipal and food-industry requirements.</p>
           <div class="client-logos" aria-label="Client and brand recognition">
             <div class="logo-card"><img src="6.png" alt="SPAR logo" onerror="this.parentElement.classList.add('logo-fallback')"><span>SPAR</span></div>
             <div class="logo-card"><img src="3.png" alt="Sasol logo" onerror="this.parentElement.classList.add('logo-fallback')"><span>Sasol</span></div>
@@ -416,12 +800,12 @@
           <article class="proof-card">
             <i class="fa-solid fa-leaf"></i>
             <h3>IPM approach</h3>
-            <p>Inspection, identification, treatment and prevention guide every service plan.</p>
+            <p>Inspection, identification, treatment, monitoring and prevention guide each service plan.</p>
           </article>
           <article class="proof-card">
             <i class="fa-solid fa-file-shield"></i>
             <h3>Certificates</h3>
-            <p>Certificates support council, municipal and food industry inspections for qualifying services.</p>
+            <p>Certificates support council, municipal, audit and food-industry requirements for qualifying services.</p>
           </article>
           <article class="proof-card">
             <i class="fa-solid fa-building-shield"></i>
@@ -431,19 +815,29 @@
           <article class="proof-card">
             <i class="fa-solid fa-clock"></i>
             <h3>Discreet timing</h3>
-            <p>After-hours and low-disruption treatment options support sensitive operations.</p>
+            <p>After-hours, low-traffic and site-sensitive treatment options are available where operational disruption must be limited.</p>
+          </article>
+          <article class="proof-card">
+            <i class="fa-solid fa-clipboard-list"></i>
+            <h3>Food-site documentation</h3>
+            <p>Service documentation can support food safety audits, R638, HACCP, COA and IPM implementation requirements where applicable.</p>
+          </article>
+          <article class="proof-card">
+            <i class="fa-solid fa-shield-dog"></i>
+            <h3>Family-conscious</h3>
+            <p>Treatment planning accounts for children, pets, plants, pregnant women and respiratory-sensitive occupants.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section">
+    <section class="section alt">
       <div class="container">
         <div class="cta-band">
           <div>
             <p class="eyebrow">Countrywide service</p>
             <h2>Need pest control anywhere in South Africa?</h2>
-            <p>Send the property location and pest issue. Organic Pestar responds with the next step.</p>
+            <p>Send the property location, pest issue and urgency. Organic Pestar will respond with the next step.</p>
           </div>
           <div class="cta-actions">
             <a href="#quote" class="btn btn-light"><i class="fa-solid fa-paper-plane"></i> Send Request</a>
@@ -453,58 +847,71 @@
       </div>
     </section>
 
-    <section class="section alt" id="faq">
+    <section class="section" id="faq">
       <div class="container faq-grid">
         <div>
           <p class="eyebrow">FAQ</p>
-          <h2>Tap a question. Get the answer.</h2>
-          <p class="section-lead"></p>
+          <h2>Common questions.</h2>
+          <p class="section-lead">Use these answers to help visitors decide quickly and contact you with enough detail for a quote.</p>
         </div>
         <div class="faq-box" aria-label="Frequently asked questions">
           <article class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAnswer1">
+            <button class="faq-question" type="button" aria-expanded="true" aria-controls="faqAnswer1">
               <span><i class="fa-solid fa-circle-question"></i> Do you work countrywide?</span>
               <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
             </button>
             <div class="faq-answer open" id="faqAnswer1">
-              <p>Yes. Organic Pestar serves homes and businesses across South Africa.</p>
+              <p>Yes. Organic Pestar serves residential, commercial, industrial and sensitive sites across South Africa.</p>
             </div>
           </article>
 
-           <article class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAnswer5">
-              <span><i class="fa-solid fa-circle-question"></i> Do you have maintanance?</span>
-              <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
-            </button>
-            <div class="faq-answer open" id="faqAnswer5">
-              <p>Yes. We provide quarterly service treatment schedules to keep your home oest-free.</p>
-            </div>
-          </article>
           <article class="faq-item">
             <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAnswer2">
-              <span><i class="fa-solid fa-clock"></i> Do you work after hours?</span>
+              <span><i class="fa-solid fa-calendar-check"></i> Do you offer maintenance plans?</span>
               <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
             </button>
             <div class="faq-answer" id="faqAnswer2">
-              <p>Yes. After-hours and low-traffic service times are available for approved sites.</p>
+              <p>Yes. Quarterly and site-specific maintenance plans are available to reduce recurring infestations and support prevention.</p>
             </div>
           </article>
+
           <article class="faq-item">
             <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAnswer3">
-              <span><i class="fa-solid fa-certificate"></i> Do you provide certificates?</span>
+              <span><i class="fa-solid fa-clock"></i> Do you work after hours?</span>
               <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
             </button>
             <div class="faq-answer" id="faqAnswer3">
-              <p>Certificates are provided for qualifying council, municipal, audit and food industry requirements.</p>
+              <p>Yes. Discreet after-hours, night-time and low-disruption service options are available for approved sites.</p>
             </div>
           </article>
+
           <article class="faq-item">
             <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAnswer4">
-              <span><i class="fa-solid fa-bolt"></i> How do I get the fastest response?</span>
+              <span><i class="fa-solid fa-certificate"></i> Do you provide pest control certificates?</span>
               <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
             </button>
             <div class="faq-answer" id="faqAnswer4">
-              <p>Call 0800 133 993 or submit the form with the location, property type and pest issue.</p>
+              <p>Certificates are provided for qualifying council, municipal, audit and food-industry requirements.</p>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAnswer5">
+              <span><i class="fa-solid fa-house-user"></i> Do tenants need end-of-lease pest control?</span>
+              <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
+            </button>
+            <div class="faq-answer" id="faqAnswer5">
+              <p>End-of-lease treatment is commonly requested for rental properties, especially where pets, fleas, ticks, cockroaches or rodents are involved.</p>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAnswer6">
+              <span><i class="fa-solid fa-bolt"></i> How do I get the fastest response?</span>
+              <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
+            </button>
+            <div class="faq-answer" id="faqAnswer6">
+              <p>Call 0800 133 993 or WhatsApp 083 786 6787 with your location, property type, pest issue and urgency.</p>
             </div>
           </article>
         </div>
@@ -516,7 +923,7 @@
         <div class="quote-info">
           <p class="eyebrow">Get a Quote</p>
           <h2>Send the issue. The process stays simple.</h2>
-          <p></p>
+          <p>Share your location, pest issue, property type and preferred contact method. Include photos or notes on where the pests are being seen if available.</p>
           <div class="contact-list">
             <div class="contact-line">
               <span><i class="fa-solid fa-phone"></i></span>
@@ -542,12 +949,55 @@
           <label>Phone<input type="tel" name="phone" autocomplete="tel" placeholder="083 000 0000" required></label>
           <label>Email<input type="email" name="from_email" autocomplete="email" placeholder="you@example.com"></label>
           <label>Preferred contact<select name="preferred_contact"><option>Phone call</option><option>WhatsApp</option><option>Email</option></select></label>
-          <label>Property type<select name="property_type" required><option value="">Select one</option><option>Residential home</option><option>Commercial property</option><option>Restaurant / food site</option><option>School / creche</option><option>Healthcare / NPO</option><option>Warehouse / industrial</option><option>End-of-lease</option></select></label>
-          <label>Service needed<select name="service_needed" required><option value="">Select one</option><option>Inspection</option><option>Once-off treatment</option><option>Quarterly maintenance</option><option>Certificate / audit support</option><option>Emergency call-out</option></select></label>
-          <label>Pest issue<select name="pest_issue"><option>Not sure yet</option><option>Cockroaches</option><option>Rats / mice</option><option>Ants</option><option>Bedbugs</option><option>Fleas / ticks</option><option>Flies / wasps</option><option>Other</option></select></label>
-          <label>Urgency<select name="urgency" required><option value="">Select one</option><option>ASAP</option><option>This week</option><option>This month</option><option>Maintenance plan</option></select></label>
+          <label>Property type<select name="property_type" required>
+            <option value="">Select one</option>
+            <option>Residential home</option>
+            <option>End-of-lease rental</option>
+            <option>Restaurant / café / bar</option>
+            <option>Hotel / guest house / motel</option>
+            <option>Supermarket / food retail</option>
+            <option>Food plant / bakery / beverage manufacturing</option>
+            <option>School / creche / education facility</option>
+            <option>Old age home / hospice / NPO</option>
+            <option>Hospital / clinic / laboratory</option>
+            <option>Warehouse / storeroom / industrial site</option>
+            <option>Body corporate / townhouse / rental flats</option>
+            <option>Farm / abattoir / poultry / dairy / piggery</option>
+            <option>Government / municipal / public building</option>
+            <option>Other</option>
+          </select></label>
+          <label>Service needed<select name="service_needed" required>
+            <option value="">Select one</option>
+            <option>Inspection</option>
+            <option>Once-off treatment</option>
+            <option>Quarterly maintenance</option>
+            <option>Monthly / bi-monthly monitoring</option>
+            <option>Certificate / audit support</option>
+            <option>End-of-lease treatment</option>
+            <option>Emergency call-out</option>
+          </select></label>
+          <label>Pest issue<select name="pest_issue">
+            <option>Not sure yet</option>
+            <option>Cockroaches</option>
+            <option>Rats / mice</option>
+            <option>Ants</option>
+            <option>Bedbugs</option>
+            <option>Fleas / ticks</option>
+            <option>Flies / wasps</option>
+            <option>Birds / pigeons</option>
+            <option>Stored-product insects</option>
+            <option>Termites / wood borers</option>
+            <option>Other</option>
+          </select></label>
+          <label>Urgency<select name="urgency" required>
+            <option value="">Select one</option>
+            <option>ASAP</option>
+            <option>This week</option>
+            <option>This month</option>
+            <option>Maintenance plan</option>
+          </select></label>
           <label class="full">Property location in South Africa<input type="text" name="property_location" placeholder="Suburb, city, complex or full address" required></label>
-          <label class="full">Message<textarea name="message" rows="4" placeholder="Describe the pest issue and where it is happening."></textarea></label>
+          <label class="full">Message<textarea name="message" rows="4" placeholder="Describe the pest issue, where it is happening, and whether this is for a home, business, audit, school, food site or rental property."></textarea></label>
           <label class="full checkbox-row"><input type="checkbox" name="consent" required> I agree to be contacted about this pest control request.</label>
           <button class="btn btn-primary full" type="submit"><i class="fa-solid fa-paper-plane"></i> Send Quote Request</button>
           <button class="btn btn-light full" type="button" id="whatsappFromForm"><i class="fa-brands fa-whatsapp"></i> Send This Request on WhatsApp</button>
@@ -565,7 +1015,7 @@
       <div class="footer-grid">
         <div>
           <h3>Organic Pestar</h3>
-          <p>Countrywide safety-conscious pest control for homes, businesses, food-handling environments and sensitive sites.</p>
+          <p>Countrywide safety-conscious pest control for homes, businesses, food-handling environments, farms, public sites and sensitive facilities.</p>
           <div class="social-links" aria-label="Social links">
             <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
             <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
@@ -577,6 +1027,8 @@
         <div>
           <h3>Quick Links</h3>
           <a href="#services">Services</a>
+          <a href="#service-details">Service Details</a>
+          <a href="#industries">Industries</a>
           <a href="#process">Process</a>
           <a href="#trust">Trust</a>
           <a href="#faq">FAQ</a>
@@ -597,6 +1049,7 @@
       </div>
     </div>
   </footer>
+
 
   <script>
     const emailConfig = {
