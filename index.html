@@ -1,1424 +1,1695 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Organic Pestar | Countrywide Organic Pest Control</title>
-  <meta name="description" content="Organic Pestar provides safety-conscious organic pest control for homes, businesses, food-handling premises, schools, healthcare facilities and commercial sites across South Africa.">
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link rel="preconnect" href="https://cdn.jsdelivr.net">
-  <link rel="preconnect" href="https://images.unsplash.com">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <style>
-    :root{
-      --green:#3f8f54;
-      --green-dark:#173f28;
-      --green-deep:#0f2d1d;
-      --green-soft:#edf8ef;
-      --green-soft-2:#f7fcf8;
-      --mint:#dff2e2;
-      --white:#ffffff;
-      --ink:#16251b;
-      --muted:#5d6d62;
-      --line:rgba(63,143,84,.16);
-      --shadow:0 20px 50px rgba(23,63,40,.11);
-      --radius:26px;
-      --max:1160px;
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Organic Pestar | Countrywide Organic Pest Control</title>
+    <meta name="description" content="Organic Pestar provides safety‑conscious pest management across South Africa – from homes to hospitals, farms to factories.">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js">
+    </script>
+    <style>
+        :root {
+            --green: #3f8f54;
+            --green-dark: #173f28;
+            --green-deep: #0f2d1d;
+            --green-soft: #edf8ef;
+            --green-soft-2: #f7fcf8;
+            --mint: #dff2e2;
+            --white: #ffffff;
+            --ink: #16251b;
+            --muted: #5d6d62;
+            --line: rgba(63, 143, 84, .16);
+            --shadow: 0 12px 32px rgba(23, 63, 40, .08);
+            --radius: 20px;
+            --max: 1120px;
+            --hdr-logo-size: 90px;
+            --hdr-brand-size: 1.12rem;
+            --hdr-brand-sub-size: 0.84rem;
+            --hdr-pad: 10px;
+            --hdr-bg: rgba(255, 255, 255, 0.94);
+        }
+        * {
+            box-sizing: border-box
+        }
+        html {
+            scroll-behavior: smooth
+        }
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--green-soft-2);
+            color: var(--ink);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+        img {
+            display: block;
+            max-width: 100%
+        }
+        button,
+        input,
+        select,
+        textarea {
+            font: inherit
+        }
+        .container {
+            width: min(var(--max), calc(100% - 32px));
+            margin-inline: auto
+        }
+        .skip-link {
+            position: absolute;
+            left: -999px;
+            top: auto;
+            background: var(--white);
+            padding: 10px;
+            z-index: 999;
+            border-radius: 12px
+        }
+        .skip-link:focus {
+            left: 12px;
+            top: 12px
+        }
 
-      /* Header sizing tokens — JS updates these on scroll */
-      --hdr-logo-size: 68px;
-      --hdr-brand-size: 1.04rem;
-      --hdr-brand-sub-size: 0.82rem;
-      --hdr-pad: 14px;
-      --hdr-bg: rgba(255,255,255,0.92);
-    }
+        /* ─── HEADER ─────────────────────────────────────────── */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 90;
+            background: var(--hdr-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--line);
+            transition: background .32s ease, box-shadow .32s ease;
+        }
+        .site-header.scrolled {
+            box-shadow: 0 4px 20px rgba(23, 63, 40, .08);
+            border-color: rgba(63, 143, 84, .18);
+        }
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: var(--hdr-pad) 0;
+            transition: padding .38s cubic-bezier(.4, 0, .2, 1);
+        }
+        .brand-lockup {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            text-decoration: none;
+        }
+        .brand-logo {
+            width: var(--hdr-logo-size);
+            height: var(--hdr-logo-size);
+            object-fit: contain;
+            border-radius: 16px;
+            background: var(--white);
+            border: 1px solid var(--line);
+            transition: width .38s cubic-bezier(.4, 0, .2, 1), height .38s cubic-bezier(.4, 0, .2, 1), border-radius .38s ease;
+            flex-shrink: 0;
+        }
+        .site-header.scrolled .brand-logo {
+            border-radius: 12px
+        }
+        .brand-lockup strong {
+            display: block;
+            color: var(--green-dark);
+            font-size: var(--hdr-brand-size);
+            letter-spacing: -.02em;
+            transition: font-size .38s cubic-bezier(.4, 0, .2, 1);
+        }
+        .brand-lockup small {
+            display: block;
+            color: var(--muted);
+            font-size: var(--hdr-brand-sub-size);
+            margin-top: 2px;
+            transition: font-size .38s cubic-bezier(.4, 0, .2, 1), opacity .38s ease;
+        }
 
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--green-soft-2);color:var(--ink);line-height:1.55}
-    a{color:inherit;text-decoration:none}
-    img{display:block;max-width:100%}
-    button,input,select,textarea{font:inherit}
-    .container{width:min(var(--max),calc(100% - 32px));margin-inline:auto}
-    .skip-link{position:absolute;left:-999px;top:auto;background:var(--white);padding:10px;z-index:999;border-radius:12px}
-    .skip-link:focus{left:12px;top:12px}
+        .site-nav {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: .93rem
+        }
+        .site-nav a:not(.btn) {
+            color: #2e3d33;
+            font-weight: 800;
+            opacity: .82;
+            transition: opacity .2s, color .2s;
+        }
+        .site-nav a:not(.btn):hover {
+            opacity: 1;
+            color: var(--green)
+        }
 
-    /* ─── HEADER ─────────────────────────────────────────── */
-    .site-header{
-      position:sticky;top:0;z-index:90;
-      background:var(--hdr-bg);
-      backdrop-filter:blur(16px);
-      -webkit-backdrop-filter:blur(16px);
-      border-bottom:1px solid var(--line);
-      transition:
-        background .32s ease,
-        box-shadow .32s ease,
-        border-color .32s ease;
-    }
-    .site-header.scrolled{
-      box-shadow:0 4px 28px rgba(23,63,40,.10);
-      border-color:rgba(63,143,84,.22);
-    }
-    .header-inner{
-      display:flex;align-items:center;justify-content:space-between;gap:18px;
-      padding:var(--hdr-pad) 0;
-      transition:padding .38s cubic-bezier(.4,0,.2,1);
-    }
-    .brand-lockup{display:flex;align-items:center;gap:12px;min-width:max-content;text-decoration:none}
-    .brand-logo{
-      width:var(--hdr-logo-size);
-      height:var(--hdr-logo-size);
-      object-fit:contain;
-      border-radius:18px;
-      background:var(--white);
-      border:1px solid var(--line);
-      /* smooth resize transition */
-      transition:
-        width .38s cubic-bezier(.4,0,.2,1),
-        height .38s cubic-bezier(.4,0,.2,1),
-        border-radius .38s ease;
-      flex-shrink:0;
-    }
-    .site-header.scrolled .brand-logo{border-radius:14px}
-    .brand-lockup strong{
-      display:block;color:var(--green-dark);
-      font-size:var(--hdr-brand-size);
-      letter-spacing:-.02em;
-      transition:font-size .38s cubic-bezier(.4,0,.2,1);
-    }
-    .brand-lockup small{
-      display:block;color:var(--muted);
-      font-size:var(--hdr-brand-sub-size);
-      margin-top:1px;
-      transition:font-size .38s cubic-bezier(.4,0,.2,1), opacity .38s ease;
-    }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border: 1px solid transparent;
+            border-radius: 999px;
+            padding: 11px 15px;
+            font-weight: 850;
+            cursor: pointer;
+            transition: .18s ease;
+            white-space: nowrap;
+            text-decoration: none;
+            font-size: .92rem;
+        }
+        .btn-small {
+            padding: 7px 12px;
+            font-size: .82rem
+        }
+        .btn-primary {
+            background: var(--green);
+            color: var(--white);
+            box-shadow: 0 8px 18px rgba(63, 143, 84, .20);
+        }
+        .btn-primary:hover {
+            background: var(--green-dark);
+            transform: translateY(-1px);
+        }
+        .btn-light {
+            background: var(--white);
+            color: var(--green-dark);
+            border-color: var(--line);
+        }
+        .btn-light:hover {
+            border-color: var(--green);
+            transform: translateY(-1px);
+        }
+        .btn-whatsapp {
+            background: #25d366;
+            color: var(--white);
+            box-shadow: 0 8px 18px rgba(37, 211, 102, .14);
+        }
+        .btn-whatsapp:hover {
+            background: #1ebe5d;
+            transform: translateY(-1px);
+        }
 
-    .site-nav{display:flex;align-items:center;gap:18px;font-size:.94rem}
-    .site-nav a:not(.btn){color:#2e3d33;font-weight:800;opacity:.8}
-    .site-nav a:not(.btn):hover{opacity:1;color:var(--green)}
+        .menu-toggle {
+            display: none;
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 9px 12px;
+            color: var(--green-dark);
+            font-weight: 900;
+            cursor: pointer;
+            transition: .18s ease;
+        }
+        .menu-toggle:hover {
+            border-color: var(--green)
+        }
 
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border:1px solid transparent;border-radius:999px;padding:13px 18px;font-weight:850;cursor:pointer;transition:.18s ease;white-space:nowrap;text-decoration:none}
-    .btn-small{padding:9px 13px;font-size:.88rem}
-    .btn-primary{background:var(--green);color:var(--white);box-shadow:0 12px 24px rgba(63,143,84,.24)}
-    .btn-primary:hover{background:var(--green-dark);transform:translateY(-1px)}
-    .btn-light{background:var(--white);color:var(--green-dark);border-color:var(--line)}
-    .btn-light:hover{border-color:var(--green);transform:translateY(-1px)}
-    .btn-whatsapp{background:#25d366;color:var(--white);box-shadow:0 12px 24px rgba(37,211,102,.18)}
-    .btn-whatsapp:hover{background:#1ebe5d;transform:translateY(-1px)}
+        .mobile-panel {
+            display: none;
+            position: fixed;
+            left: 16px;
+            right: 16px;
+            z-index: 80;
+            background: var(--white);
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow);
+            border-radius: 20px;
+            padding: 10px;
+            transform: translateY(-10px);
+            opacity: 0;
+            transition: transform .26s cubic-bezier(.4, 0, .2, 1), opacity .26s ease;
+        }
+        .mobile-panel.pre-open {
+            display: block
+        }
+        .mobile-panel.open {
+            transform: translateY(0);
+            opacity: 1
+        }
+        .mobile-panel nav {
+            display: grid;
+            gap: 6px
+        }
+        .mobile-panel a {
+            padding: 12px 14px;
+            border-radius: 13px;
+            background: var(--green-soft-2);
+            font-weight: 800;
+            color: var(--green-dark);
+            transition: .15s ease;
+        }
+        .mobile-panel a:hover {
+            background: var(--mint);
+            color: var(--green)
+        }
 
-    .menu-toggle{display:none;background:var(--white);border:1px solid var(--line);border-radius:16px;padding:11px 13px;color:var(--green-dark);font-weight:900;cursor:pointer;transition:.18s ease}
-    .menu-toggle:hover{border-color:var(--green)}
+        /* ─── HERO ───────────────────────────────────────────── */
+        .hero {
+            position: relative;
+            padding: 40px 0 30px;
+            overflow: hidden;
+            background: linear-gradient(90deg, rgba(247, 252, 248, .98), rgba(237, 248, 239, .94)), url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat;
+        }
+        .hero:after {
+            content: "";
+            position: absolute;
+            inset: auto 0 0;
+            height: 48px;
+            background: linear-gradient(transparent, var(--green-soft-2));
+            pointer-events: none;
+        }
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr .9fr;
+            gap: 30px;
+            align-items: center;
+        }
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            margin: 0 0 8px;
+            text-transform: uppercase;
+            letter-spacing: .11em;
+            font-size: .72rem;
+            font-weight: 900;
+            color: var(--green);
+        }
+        h1,
+        h2,
+        h3,
+        p {
+            margin-top: 0;
+        }
+        h1 {
+            font-size: clamp(2.2rem, 5vw, 4.2rem);
+            line-height: 1.0;
+            letter-spacing: -.05em;
+            margin-bottom: 12px;
+            color: var(--green-dark);
+        }
+        h2 {
+            font-size: clamp(1.5rem, 3vw, 2.3rem);
+            line-height: 1.1;
+            letter-spacing: -.03em;
+            margin-bottom: 10px;
+            color: var(--green-dark);
+        }
+        h3 {
+            font-size: 1rem;
+            margin-bottom: 6px;
+            color: var(--green-dark);
+        }
+        .lead {
+            font-size: clamp(.95rem, 1.6vw, 1.1rem);
+            color: #3f5146;
+            max-width: 580px;
+            margin-bottom: 18px;
+        }
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        .trust-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .trust-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            padding: 6px 10px;
+            color: var(--green-dark);
+            font-weight: 800;
+            font-size: .85rem;
+            box-shadow: 0 4px 14px rgba(23, 63, 40, .04);
+        }
+        .hero-media {
+            position: relative;
+        }
+        .image-card {
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            padding: 8px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+        .image-card img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 18px;
+        }
+        .floating-card {
+            position: absolute;
+            left: -14px;
+            bottom: 20px;
+            width: min(230px, 78%);
+            background: rgba(255, 255, 255, .96);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            padding: 12px;
+        }
+        .floating-card strong {
+            display: block;
+            color: var(--green-dark);
+            margin-bottom: 3px;
+            font-size: .9rem;
+        }
+        .floating-card span {
+            display: block;
+            color: var(--muted);
+            font-size: .82rem;
+        }
 
-    .mobile-panel{
-      display:none;position:fixed;left:16px;right:16px;top:0;z-index:80;
-      background:var(--white);border:1px solid var(--line);
-      box-shadow:var(--shadow);border-radius:22px;padding:12px;
-      transform:translateY(-10px);opacity:0;
-      transition:transform .26s cubic-bezier(.4,0,.2,1), opacity .26s ease;
-    }
-    .mobile-panel.pre-open{display:block}
-    .mobile-panel.open{transform:translateY(0);opacity:1}
-    .mobile-panel nav{display:grid;gap:8px}
-    .mobile-panel a{padding:13px 14px;border-radius:15px;background:var(--green-soft-2);font-weight:800;color:var(--green-dark);transition:.15s ease}
-    .mobile-panel a:hover{background:var(--mint);color:var(--green)}
+        /* ─── SECTIONS ───────────────────────────────────────── */
+        .section {
+            padding: 40px 0;
+        }
+        .section.alt {
+            background: linear-gradient(180deg, var(--white), var(--green-soft-2));
+        }
+        .section-top {
+            max-width: 680px;
+            margin-bottom: 18px;
+        }
+        .section-lead {
+            color: var(--muted);
+            font-size: .96rem;
+            max-width: 620px;
+        }
 
-    /* ─── HERO ───────────────────────────────────────────── */
-    .hero{position:relative;padding:64px 0 42px;overflow:hidden;background:linear-gradient(90deg,rgba(247,252,248,.98),rgba(237,248,239,.94)),url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat}
-    .hero:after{content:"";position:absolute;inset:auto 0 0;height:72px;background:linear-gradient(transparent,var(--green-soft-2));pointer-events:none}
-    .hero .container{position:relative;z-index:1}
-    .hero-grid{display:grid;grid-template-columns:1fr .95fr;gap:38px;align-items:center}
-    .eyebrow{display:inline-flex;align-items:center;gap:8px;margin:0 0 14px;text-transform:uppercase;letter-spacing:.12em;font-size:.74rem;font-weight:900;color:var(--green)}
-    h1,h2,h3,p{margin-top:0}
-    h1{font-size:clamp(2.45rem,6vw,5rem);line-height:.99;letter-spacing:-.064em;margin-bottom:18px;color:var(--green-dark)}
-    h2{font-size:clamp(1.7rem,3.6vw,2.85rem);line-height:1.07;letter-spacing:-.045em;margin-bottom:13px;color:var(--green-dark)}
-    h3{font-size:1.08rem;margin-bottom:8px;color:var(--green-dark)}
-    .lead{font-size:clamp(1.03rem,2vw,1.22rem);color:#3f5146;max-width:650px;margin-bottom:24px}
-    .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:22px}
-    .trust-row{display:flex;flex-wrap:wrap;gap:10px}
-    .trust-pill{display:inline-flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--line);border-radius:999px;padding:9px 12px;color:var(--green-dark);font-weight:800;box-shadow:0 8px 22px rgba(23,63,40,.05)}
-    .hero-media{position:relative}
-    .image-card{background:var(--white);border:1px solid var(--line);border-radius:34px;padding:12px;box-shadow:var(--shadow);overflow:hidden}
-    .image-card img{width:100%;height:430px;object-fit:cover;border-radius:24px}
-    .floating-card{position:absolute;left:-20px;bottom:28px;width:min(270px,86%);background:rgba(255,255,255,.95);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:16px}
-    .floating-card strong{display:block;color:var(--green-dark);margin-bottom:4px}
-    .floating-card span{display:block;color:var(--muted);font-size:.9rem}
+        .quick-panel {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .quick-card,
+        .service-card,
+        .step-card,
+        .proof-card,
+        .quote-info,
+        .quote-form,
+        .faq-box {
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            box-shadow: 0 8px 24px rgba(23, 63, 40, .05);
+        }
+        .quick-card {
+            padding: 16px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        .icon-bubble {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            background: var(--green-soft);
+            color: var(--green);
+            flex: 0 0 auto;
+        }
+        .quick-card p,
+        .service-card p,
+        .step-card p,
+        .proof-card p,
+        .quote-info p,
+        .faq-box p {
+            color: var(--muted);
+            margin-bottom: 0;
+            font-size: .9rem;
+        }
 
-    /* ─── SECTIONS ───────────────────────────────────────── */
-    .section{padding:68px 0}
-    .section.alt{background:linear-gradient(180deg,var(--white),var(--green-soft-2))}
-    .section-top{max-width:760px;margin-bottom:24px}
-    .section-lead{color:var(--muted);font-size:1.04rem;max-width:740px}
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        .service-card {
+            overflow: hidden;
+            transition: .18s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 36px rgba(23, 63, 40, .10);
+        }
+        .service-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            transition: .3s ease;
+        }
+        .service-card:hover img {
+            transform: scale(1.03);
+        }
+        .service-body {
+            padding: 12px;
+        }
+        .service-body h3 {
+            font-size: .94rem;
+            margin-bottom: 4px;
+        }
+        .service-body p {
+            font-size: .84rem;
+        }
+        .service-body .tag {
+            display: inline-flex;
+            align-items: center;
+            border-radius: 999px;
+            background: var(--green-soft);
+            color: var(--green-dark);
+            font-size: .7rem;
+            font-weight: 850;
+            padding: 4px 8px;
+            margin-top: 8px;
+        }
 
-    .quick-panel{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:26px}
-    .quick-card,.service-card,.step-card,.proof-card,.quote-info,.quote-form,.faq-box{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 14px 36px rgba(23,63,40,.07)}
-    .quick-card{padding:20px;display:flex;gap:14px;align-items:flex-start}
-    .icon-bubble{width:44px;height:44px;border-radius:16px;display:grid;place-items:center;background:var(--green-soft);color:var(--green);flex:0 0 auto}
-    .quick-card p,.service-card p,.step-card p,.proof-card p,.quote-info p,.faq-box p{color:var(--muted);margin-bottom:0}
+        .pest-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+        }
+        .pest-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            padding: 7px 10px;
+            font-weight: 850;
+            font-size: .84rem;
+            color: var(--green-dark);
+        }
 
-    .service-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-    .service-card{overflow:hidden;transition:.18s ease}
-    .service-card:hover{transform:translateY(-2px);box-shadow:0 22px 48px rgba(23,63,40,.13)}
-    .service-card img{width:100%;height:160px;object-fit:cover;transition:.3s ease}
-    .service-card:hover img{transform:scale(1.03)}
-    .service-body{padding:17px}
-    .service-body .tag{display:inline-flex;align-items:center;border-radius:999px;background:var(--green-soft);color:var(--green-dark);font-size:.78rem;font-weight:850;padding:7px 10px;margin-top:13px}
+        /* ─── COMMUNITY COMMITMENT ──────────────────────────── */
+        .community-section {
+            background: linear-gradient(135deg, #f0faf2 0%, #e3f4e8 100%);
+            border-top: 1px solid rgba(63,143,84,.12);
+            border-bottom: 1px solid rgba(63,143,84,.12);
+            padding: 48px 0;
+        }
+        .community-card {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 24px;
+            align-items: center;
+            background: var(--white);
+            border-radius: 28px;
+            padding: 32px;
+            box-shadow: 0 16px 40px rgba(23,63,40,.07);
+            border: 1px solid var(--line);
+        }
+        .community-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(196,69,69,.08);
+            color: #c44545;
+            border-radius: 24px;
+            display: grid;
+            place-items: center;
+            font-size: 2.1rem;
+        }
+        .community-text h2 {
+            color: var(--green-dark);
+            margin-bottom: 6px;
+        }
+        .community-text .lead {
+            margin-bottom: 12px;
+            color: #3f5146;
+        }
+        .community-highlights {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 16px 0 12px;
+        }
+        .community-highlights span {
+            background: var(--green-soft);
+            color: var(--green-dark);
+            border-radius: 999px;
+            padding: 6px 14px;
+            font-weight: 800;
+            font-size: .85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .community-text .btn {
+            margin-top: 6px;
+        }
 
-    .center-action{display:flex;justify-content:center;margin-top:22px}
-    .pest-strip{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
-    .pest-chip{display:inline-flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--line);border-radius:999px;padding:10px 13px;font-weight:850;color:var(--green-dark)}
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        .step-card {
+            padding: 16px;
+        }
+        .step-number {
+            width: 30px;
+            height: 30px;
+            border-radius: 10px;
+            background: var(--green-soft);
+            color: var(--green);
+            display: grid;
+            place-items: center;
+            font-weight: 950;
+            margin-bottom: 10px;
+        }
 
-    .process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .step-card{padding:22px}
-    .step-number{width:38px;height:38px;border-radius:14px;background:var(--green-soft);color:var(--green);display:grid;place-items:center;font-weight:950;margin-bottom:14px}
+        .proof-wrap {
+            display: grid;
+            grid-template-columns: .95fr 1.05fr;
+            gap: 20px;
+            align-items: center;
+        }
+        .proof-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        .proof-card {
+            padding: 14px;
+            transition: .18s ease;
+        }
+        .proof-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(23, 63, 40, .08);
+        }
+        .proof-card i {
+            font-size: 1.1rem;
+            color: var(--green);
+            margin-bottom: 8px;
+        }
+        .proof-card h3 {
+            font-size: .92rem;
+        }
+        .proof-card p {
+            font-size: .84rem;
+        }
 
-    .proof-wrap{display:grid;grid-template-columns:.95fr 1.05fr;gap:24px;align-items:center}
-    .proof-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-    .proof-card{padding:18px;transition:.18s ease}
-    .proof-card:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(23,63,40,.11)}
-    .proof-card i{font-size:1.25rem;color:var(--green);margin-bottom:12px}
+        .client-logos {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+            margin-top: 14px;
+        }
+        .logo-card {
+            min-height: 60px;
+            display: grid;
+            place-items: center;
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 8px;
+            text-align: center;
+            font-weight: 900;
+            color: var(--green-dark);
+            transition: .18s ease;
+        }
+        .logo-card:hover {
+            border-color: var(--green);
+            transform: translateY(-1px);
+        }
+        .logo-card img {
+            max-width: 100px;
+            max-height: 36px;
+            object-fit: contain;
+        }
+        .logo-card span {
+            display: none;
+        }
+        .logo-card.logo-fallback img {
+            display: none;
+        }
+        .logo-card.logo-fallback span {
+            display: block;
+            font-size: .8rem;
+        }
 
-    .client-logos{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:20px}
-    .logo-card{min-height:76px;display:grid;place-items:center;background:var(--white);border:1px solid var(--line);border-radius:18px;padding:12px;text-align:center;font-weight:900;color:var(--green-dark);transition:.18s ease}
-    .logo-card:hover{border-color:var(--green);transform:translateY(-1px)}
-    .logo-card img{max-width:120px;max-height:46px;object-fit:contain}
-    .logo-card span{display:none}
-    .logo-card.logo-fallback img{display:none}
-    .logo-card.logo-fallback span{display:block}
+        .cta-band {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            background: linear-gradient(135deg, var(--green), #7cc28a);
+            border-radius: 24px;
+            color: var(--white);
+            padding: 22px;
+            box-shadow: var(--shadow);
+        }
+        .cta-band h2 {
+            color: var(--white);
+            margin-bottom: 2px;
+            font-size: 1.35rem;
+        }
+        .cta-band p {
+            color: rgba(255, 255, 255, .86);
+            margin-bottom: 0;
+            font-size: .9rem;
+        }
+        .cta-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: flex-end;
+        }
+        .cta-band .btn-light {
+            background: rgba(255, 255, 255, .14);
+            color: var(--white);
+            border-color: rgba(255, 255, 255, .30);
+        }
+        .cta-band .btn-light:hover {
+            background: rgba(255, 255, 255, .24);
+            border-color: rgba(255, 255, 255, .5);
+        }
 
-    .cta-band{display:flex;align-items:center;justify-content:space-between;gap:20px;background:linear-gradient(135deg,var(--green),#7cc28a);border-radius:30px;color:var(--white);padding:30px;box-shadow:var(--shadow)}
-    .cta-band h2{color:var(--white);margin-bottom:6px}
-    .cta-band p{color:rgba(255,255,255,.86);margin-bottom:0}
-    .cta-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
-    .cta-band .btn-light{background:rgba(255,255,255,.18);color:var(--white);border-color:rgba(255,255,255,.35)}
-    .cta-band .btn-light:hover{background:rgba(255,255,255,.28);border-color:rgba(255,255,255,.6)}
+        .faq-grid {
+            display: grid;
+            grid-template-columns: .82fr 1.18fr;
+            gap: 20px;
+            align-items: start;
+        }
+        .faq-box {
+            padding: 4px;
+        }
+        .faq-item {
+            border-bottom: 1px solid var(--line);
+        }
+        .faq-item:last-child {
+            border-bottom: 0;
+        }
+        .faq-question {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            background: var(--white);
+            border: 0;
+            padding: 12px;
+            text-align: left;
+            cursor: pointer;
+            color: var(--green-dark);
+            font-weight: 900;
+            font-size: .9rem;
+            border-radius: 16px;
+            transition: .15s ease;
+        }
+        .faq-question:hover {
+            background: var(--green-soft-2);
+        }
+        .faq-question span:first-child {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .faq-question span:first-child i {
+            color: var(--green);
+        }
+        .faq-icon {
+            width: 26px;
+            height: 26px;
+            border-radius: 999px;
+            background: var(--green-soft);
+            color: var(--green);
+            display: grid;
+            place-items: center;
+            flex: 0 0 auto;
+            transition: .22s ease;
+            font-size: .8rem;
+        }
+        .faq-question[aria-expanded="true"] .faq-icon {
+            background: var(--green);
+            color: var(--white);
+            transform: rotate(45deg);
+        }
+        .faq-answer {
+            display: none;
+            padding: 0 12px 12px 40px;
+            color: var(--muted);
+            font-size: .88rem;
+        }
+        .faq-answer.open {
+            display: block;
+        }
+        .faq-answer p {
+            margin: 0;
+        }
 
-    .faq-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:26px;align-items:start}
-    .faq-box{padding:8px}
-    .faq-item{border-bottom:1px solid var(--line)}
-    .faq-item:last-child{border-bottom:0}
-    .faq-question{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;background:var(--white);border:0;padding:18px;text-align:left;cursor:pointer;color:var(--green-dark);font-weight:900;border-radius:20px;transition:.15s ease}
-    .faq-question:hover{background:var(--green-soft-2)}
-    .faq-question span:first-child{display:flex;align-items:center;gap:10px}
-    .faq-question span:first-child i{color:var(--green)}
-    .faq-icon{width:34px;height:34px;border-radius:999px;background:var(--green-soft);color:var(--green);display:grid;place-items:center;flex:0 0 auto;transition:.22s ease}
-    .faq-question[aria-expanded="true"] .faq-icon{background:var(--green);color:var(--white);transform:rotate(45deg)}
-    .faq-answer{display:none;padding:0 18px 18px 52px;color:var(--muted)}
-    .faq-answer.open{display:block}
-    .faq-answer p{margin:0}
+        .quote-section {
+            padding: 40px 0;
+            background: linear-gradient(180deg, var(--green-soft-2), var(--mint));
+        }
+        .quote-shell {
+            display: grid;
+            grid-template-columns: .86fr 1.14fr;
+            gap: 20px;
+            align-items: start;
+        }
+        .quote-info,
+        .quote-form {
+            padding: 18px;
+        }
+        .contact-list {
+            display: grid;
+            gap: 8px;
+            margin-top: 16px;
+        }
+        .contact-line {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            background: var(--green-soft-2);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 10px;
+            transition: .15s ease;
+        }
+        .contact-line:hover {
+            border-color: var(--green);
+        }
+        .contact-line span {
+            width: 30px;
+            height: 30px;
+            display: grid;
+            place-items: center;
+            border-radius: 10px;
+            background: var(--mint);
+            color: var(--green);
+            flex: 0 0 auto;
+        }
+        .contact-line a {
+            font-weight: 900;
+            color: var(--green-dark);
+            font-size: .9rem;
+        }
+        .quote-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        label {
+            display: grid;
+            gap: 4px;
+            font-weight: 850;
+            color: var(--green-dark);
+            font-size: .87rem;
+        }
+        input,
+        select,
+        textarea {
+            width: 100%;
+            border: 1px solid var(--line);
+            border-radius: 11px;
+            padding: 10px 12px;
+            background: #fbfefb;
+            color: var(--ink);
+            outline: none;
+            transition: .18s ease;
+            font-size: .9rem;
+        }
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--green);
+            box-shadow: 0 0 0 3px rgba(63, 143, 84, .10);
+        }
+        .full {
+            grid-column: 1/-1;
+        }
+        .checkbox-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            color: var(--muted);
+            font-weight: 700;
+            font-size: .85rem;
+        }
+        .checkbox-row input {
+            width: auto;
+            margin-top: 3px;
+        }
+        .form-note {
+            font-size: .82rem;
+            color: var(--muted);
+            margin: 0;
+        }
 
-    .quote-section{padding:72px 0;background:linear-gradient(180deg,var(--green-soft-2),var(--mint))}
-    .quote-shell{display:grid;grid-template-columns:.86fr 1.14fr;gap:24px;align-items:start}
-    .quote-info,.quote-form{padding:24px}
-    .contact-list{display:grid;gap:10px;margin-top:22px}
-    .contact-line{display:flex;gap:13px;align-items:flex-start;background:var(--green-soft-2);border:1px solid var(--line);border-radius:18px;padding:14px;transition:.15s ease}
-    .contact-line:hover{border-color:var(--green)}
-    .contact-line span{width:38px;height:38px;display:grid;place-items:center;border-radius:14px;background:var(--mint);color:var(--green);flex:0 0 auto}
-    .contact-line a{font-weight:900;color:var(--green-dark)}
-    .quote-form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    label{display:grid;gap:7px;font-weight:850;color:var(--green-dark);font-size:.94rem}
-    input,select,textarea{width:100%;border:1px solid var(--line);border-radius:14px;padding:13px 14px;background:#fbfefb;color:var(--ink);outline:none;transition:.18s ease}
-    input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0 0 4px rgba(63,143,84,.12)}
-    .full{grid-column:1/-1}
-    .checkbox-row{display:flex;align-items:flex-start;gap:10px;color:var(--muted);font-weight:700}
-    .checkbox-row input{width:auto;margin-top:4px}
-    .form-note{font-size:.88rem;color:var(--muted);margin:0}
+        /* ─── FOOTER ───────────────────────────────────────────── */
+        .site-footer {
+            background: var(--green-soft);
+            color: var(--green-dark);
+            padding: 30px 0 16px;
+            border-top: 1px solid var(--line);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.35fr 1fr 1fr;
+            gap: 20px;
+        }
+        .footer-grid h3 {
+            color: var(--green-dark);
+            margin-bottom: 8px;
+            font-size: .98rem;
+        }
+        .footer-grid p {
+            color: var(--muted);
+            font-size: .86rem;
+        }
+        .footer-grid a {
+            display: block;
+            color: var(--muted);
+            margin: 5px 0;
+            font-weight: 700;
+            font-size: .86rem;
+            transition: .15s ease;
+        }
+        .footer-grid a:hover {
+            color: var(--green);
+        }
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            gap: 14px;
+            border-top: 1px solid var(--line);
+            padding-top: 12px;
+            margin-top: 18px;
+            font-size: .82rem;
+            color: var(--muted);
+        }
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-top: 10px;
+        }
+        .social-links a {
+            width: 30px;
+            height: 30px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: rgba(63, 143, 84, .12);
+            color: var(--green-dark);
+            margin: 0;
+            transition: .18s ease;
+            font-size: .85rem;
+        }
+        .social-links a:hover {
+            background: var(--green);
+            color: var(--white);
+            transform: translateY(-1px);
+        }
 
-    /* ─── FOOTER — light green ───────────────────────────── */
-    .site-footer{
-      background:var(--green-soft);
-      color:var(--green-dark);
-      padding:46px 0 24px;
-      border-top:1px solid var(--line);
-    }
-    .footer-grid{display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:26px}
-    .footer-grid h3{color:var(--green-dark);margin-bottom:12px}
-    .footer-grid p{color:var(--muted)}
-    .footer-grid a{
-      display:block;
-      color:var(--muted);
-      margin:8px 0;
-      font-weight:700;
-      transition:.15s ease;
-    }
-    .footer-grid a:hover{color:var(--green)}
-    .footer-bottom{
-      display:flex;justify-content:space-between;gap:18px;
-      border-top:1px solid var(--line);
-      padding-top:18px;margin-top:28px;font-size:.9rem;
-      color:var(--muted);
-    }
-    .social-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
-    .social-links a{
-      width:38px;height:38px;display:grid;place-items:center;
-      border-radius:50%;background:rgba(63,143,84,.12);
-      color:var(--green-dark);margin:0;
-      transition:.18s ease;
-    }
-    .social-links a:hover{background:var(--green);color:var(--white);transform:translateY(-1px)}
+        /* ─── FLOATING ELEMENTS ──────────────────────────────── */
+        .floating-whatsapp,
+        .back-top {
+            position: fixed;
+            right: 16px;
+            z-index: 70;
+            border: 0;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, .12);
+            cursor: pointer;
+        }
+        .floating-whatsapp {
+            bottom: 16px;
+            width: 50px;
+            height: 50px;
+            background: #25d366;
+            color: #fff;
+            font-size: 1.3rem;
+            transition: .18s ease;
+            text-decoration: none;
+        }
+        .floating-whatsapp:hover {
+            background: #1ebe5d;
+            transform: scale(1.06);
+        }
+        .back-top {
+            bottom: 76px;
+            width: 38px;
+            height: 38px;
+            background: var(--white);
+            color: var(--green-dark);
+            border: 1px solid var(--line);
+            opacity: 0;
+            pointer-events: none;
+            transition: .22s ease;
+            font-size: .85rem;
+        }
+        .back-top.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .back-top:hover {
+            border-color: var(--green);
+            transform: translateY(-1px);
+        }
 
-    /* ─── FLOATING ELEMENTS ──────────────────────────────── */
-    .floating-whatsapp,.back-top{position:fixed;right:18px;z-index:70;border:0;border-radius:50%;display:grid;place-items:center;box-shadow:0 15px 32px rgba(0,0,0,.16);cursor:pointer}
-    .floating-whatsapp{bottom:18px;width:58px;height:58px;background:#25d366;color:#fff;font-size:1.55rem;transition:.18s ease;text-decoration:none}
-    .floating-whatsapp:hover{background:#1ebe5d;transform:scale(1.08)}
-    .back-top{bottom:88px;width:46px;height:46px;background:var(--white);color:var(--green-dark);border:1px solid var(--line);opacity:0;pointer-events:none;transition:.22s ease}
-    .back-top.show{opacity:1;pointer-events:auto}
-    .back-top:hover{border-color:var(--green);transform:translateY(-1px)}
+        /* ─── CUSTOM ACCORDION ───────────────────────────────── */
+        .custom-accordion {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .accordion-item {
+            background: #fff;
+            border: 1px solid rgba(18, 58, 38, .10);
+            border-radius: 18px;
+            box-shadow: 0 8px 22px rgba(18, 58, 38, .04);
+            overflow: hidden;
+        }
+        .accordion-header {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            background: none;
+            border: none;
+            padding: 14px 18px;
+            cursor: pointer;
+            font-weight: 800;
+            color: #123a26;
+            font-size: .92rem;
+            transition: background .15s;
+        }
+        .accordion-header:hover {
+            background: var(--green-soft-2);
+        }
+        .accordion-header span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .accordion-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(57, 169, 107, .10);
+            color: #123a26;
+            display: grid;
+            place-items: center;
+            font-weight: 900;
+            transition: .22s ease;
+        }
+        .accordion-item.active .accordion-icon {
+            background: var(--green);
+            color: #fff;
+            transform: rotate(45deg);
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease;
+        }
+        .accordion-content-inner {
+            padding: 0 18px 18px;
+            color: #40564a;
+            font-size: .88rem;
+        }
+        .accordion-content-inner p {
+            margin: 0 0 10px;
+        }
+        .accordion-content-inner h4 {
+            margin: 14px 0 4px;
+            color: #123a26;
+            font-size: .9rem;
+        }
+        .accordion-content-inner ul {
+            margin: 0;
+            padding-left: 16px;
+        }
+        .accordion-content-inner li {
+            margin: 4px 0;
+        }
+        .accordion-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 10px;
+        }
+        .accordion-badges span {
+            border: 1px solid rgba(57, 169, 107, .18);
+            background: rgba(57, 169, 107, .06);
+            color: #123a26;
+            border-radius: 999px;
+            padding: 4px 8px;
+            font-size: .74rem;
+            font-weight: 700;
+        }
 
-    /* ─── SERVICE DETAILS ────────────────────────────────── */
-    .service-details-section .section-top{max-width:860px}
-    .service-detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:28px}
-    .readmore-card{background:#fff;border:1px solid rgba(18,58,38,.12);border-radius:22px;box-shadow:0 18px 45px rgba(18,58,38,.08);overflow:hidden;transition:.18s ease}
-    .readmore-card:hover{box-shadow:0 22px 54px rgba(18,58,38,.13)}
-    .readmore-card summary{list-style:none;cursor:pointer;padding:22px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;transition:.15s ease}
-    .readmore-card summary:hover{background:var(--green-soft-2)}
-    .readmore-card summary::-webkit-details-marker{display:none}
-    .readmore-card summary span{display:inline-flex;align-items:center;gap:10px;font-weight:800;color:#123a26}
-    .readmore-card summary i{color:#39a96b}
-    .readmore-card summary::after{content:'+';display:grid;place-items:center;flex:0 0 30px;height:30px;border-radius:999px;background:rgba(57,169,107,.12);color:#123a26;font-weight:900;transition:.18s ease}
-    .readmore-card[open] summary::after{content:'−';background:var(--green);color:#fff}
-    .readmore-content{padding:0 24px 24px;color:#40564a}
-    .readmore-content p{margin:0 0 14px}
-    .readmore-content h4{margin:18px 0 8px;color:#123a26;font-size:.98rem}
-    .readmore-content ul{margin:0;padding-left:18px}
-    .readmore-content li{margin:7px 0}
-    .readmore-badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-    .readmore-badges span{border:1px solid rgba(57,169,107,.22);background:rgba(57,169,107,.08);color:#123a26;border-radius:999px;padding:6px 10px;font-size:.82rem;font-weight:700}
-
-    /* ─── RESPONSIVE ─────────────────────────────────────── */
-    @media (max-width:1050px){
-      .site-nav{display:none}
-      .menu-toggle{display:inline-flex}
-      .hero-grid,.proof-wrap,.faq-grid,.quote-shell{grid-template-columns:1fr}
-      .service-grid{grid-template-columns:repeat(2,1fr)}
-      .quick-panel,.process-grid{grid-template-columns:1fr 1fr}
-      .client-logos{grid-template-columns:repeat(3,1fr)}
-      .image-card img{height:360px}
-      .cta-band{align-items:flex-start;flex-direction:column}
-      .cta-actions{justify-content:flex-start}
-    }
-    @media (max-width:720px){
-      :root{--hdr-logo-size:52px}
-      .container{width:min(var(--max),calc(100% - 24px))}
-      .hero{padding-top:44px}
-      .brand-lockup strong{font-size:.96rem}
-      .hero-actions .btn{width:100%}
-      .quick-panel,.service-grid,.service-detail-grid,.process-grid,.proof-grid,.quote-form,.footer-grid{grid-template-columns:1fr}
-      .client-logos{grid-template-columns:repeat(2,1fr)}
-      .image-card img{height:300px}
-      .floating-card{position:static;width:auto;margin-top:12px}
-      .section,.quote-section{padding:54px 0}
-      .footer-bottom{flex-direction:column}
-      .service-detail-grid{grid-template-columns:1fr}
-      .readmore-card summary{padding:20px}
-      .readmore-content{padding:0 20px 22px}
-    }
-
-    /* ─── REDUCED MOTION ─────────────────────────────────── */
-    @media (prefers-reduced-motion:reduce){
-      *{transition:none !important;animation:none !important}
-      html{scroll-behavior:auto}
-    }
-  </style>
+        /* ─── RESPONSIVE ─────────────────────────────────────── */
+        @media (max-width:1050px) {
+            .site-nav {
+                display: none;
+            }
+            .menu-toggle {
+                display: inline-flex;
+            }
+            .hero-grid,
+            .proof-wrap,
+            .faq-grid,
+            .quote-shell,
+            .custom-accordion {
+                grid-template-columns: 1fr;
+            }
+            .service-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .quick-panel,
+            .process-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .client-logos {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .community-card {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .community-icon {
+                margin: 0 auto;
+            }
+            .image-card img {
+                height: 300px;
+            }
+            .cta-band {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+            .cta-actions {
+                justify-content: flex-start;
+            }
+        }
+        @media (max-width:720px) {
+            :root {
+                --hdr-logo-size: 60px;
+            }
+            .container {
+                width: min(var(--max), calc(100% - 24px));
+            }
+            .hero {
+                padding-top: 30px;
+            }
+            .brand-lockup strong {
+                font-size: .92rem;
+            }
+            .hero-actions .btn {
+                width: 100%;
+            }
+            .quick-panel,
+            .service-grid,
+            .process-grid,
+            .proof-grid,
+            .quote-form,
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .client-logos {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .image-card img {
+                height: 240px;
+            }
+            .floating-card {
+                position: static;
+                width: auto;
+                margin-top: 8px;
+            }
+            .section,
+            .quote-section,
+            .community-section {
+                padding: 32px 0;
+            }
+            .footer-bottom {
+                flex-direction: column;
+            }
+        }
+        @media (prefers-reduced-motion:reduce) {
+            * {
+                transition: none !important;
+                animation: none !important;
+            }
+            html {
+                scroll-behavior: auto;
+            }
+        }
+    </style>
 </head>
 <body>
-
-  <a class="skip-link" href="#main">Skip to main content</a>
-
-  <header class="site-header" id="siteHeader">
-    <div class="container header-inner">
-      <a class="brand-lockup" href="#top" aria-label="Organic Pestar home">
-        <img class="brand-logo" id="headerLogo" src="2.PNG" alt="Organic Pestar logo">
-        <div>
-          <strong id="headerBrandName">Organic Pestar</strong>
-          <small id="headerBrandSub">Safety before everything</small>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="site-header" id="siteHeader">
+        <div class="container header-inner">
+            <a class="brand-lockup" href="#top" aria-label="Organic Pestar home">
+                <img class="brand-logo" id="headerLogo" src="2.PNG" alt="Organic Pestar logo">
+                <div>
+                    <strong id="headerBrandName">Organic Pestar</strong>
+                    <small id="headerBrandSub">Safety before everything</small>
+                </div>
+            </a>
+            <nav class="site-nav" aria-label="Primary navigation">
+                <a href="#services">Services</a>
+                <a href="#details">Details</a>
+                <a href="#community">Community</a>
+                <a href="#industries">Industries</a>
+                <a href="#process">Process</a>
+                <a href="#trust">Trust</a>
+                <a href="#faq">FAQ</a>
+                <a href="login.html" class="btn btn-small btn-light"><i class="fa-solid fa-user-lock"></i> Staff Login</a>
+                <a href="#quote" class="btn btn-small btn-primary">Get Quote</a>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false">☰</button>
         </div>
-      </a>
+    </header>
+    <aside class="mobile-panel" id="mobilePanel" aria-label="Mobile navigation">
+        <nav>
+            <a href="#services">Services</a>
+            <a href="#details">Details</a>
+            <a href="#community">Community</a>
+            <a href="#industries">Industries</a>
+            <a href="#process">Process</a>
+            <a href="#trust">Trust</a>
+            <a href="#faq">FAQ</a>
+            <a href="login.html">Staff Login</a>
+            <a href="#quote">Request a Quote</a>
+        </nav>
+    </aside>
 
-      <nav class="site-nav" aria-label="Primary navigation">
-        <a href="#services">Services</a>
-        <a href="#service-details">Details</a>
-        <a href="#industries">Industries</a>
-        <a href="#process">Process</a>
-        <a href="#trust">Trust</a>
-        <a href="#faq">FAQ</a>
-        <a href="login.html" class="btn btn-small btn-light"><i class="fa-solid fa-user-lock"></i> Staff Login</a>
-        <a href="#quote" class="btn btn-small btn-primary">Get Quote</a>
-      </nav>
+    <main id="main">
+        <section class="hero" id="top">
+            <div class="container hero-grid">
+                <div>
+                    <p class="eyebrow"><i class="fa-solid fa-leaf"></i> Certified Pest Control Services</p>
+                    <h1>Safe, effective protection for every space.</h1>
+                    <p class="lead">From family kitchens to factory floors, Organic Pestar delivers pest management that puts people first – across South Africa.</p>
+                    <div class="hero-actions">
+                        <a href="#quote" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Get a Quote</a>
+                        <a href="tel:0800133993" class="btn btn-light"><i class="fa-solid fa-phone"></i> 0800 133 993</a>
+                        <a href="https://wa.me/27837866787?text=Hi%20Organic%20Pestar%2C%20I%20need%20a%20pest%20control%20quote." class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+                    </div>
+                    <div class="trust-row">
+                        <span class="trust-pill"><i class="fa-solid fa-shield-heart"></i> Safety before profit</span>
+                        <span class="trust-pill"><i class="fa-solid fa-certificate"></i> Certificates available</span>
+                        <span class="trust-pill"><i class="fa-solid fa-location-dot"></i> Countrywide</span>
+                    </div>
+                </div>
+                <div class="hero-media">
+                    <div class="image-card"><img src="Picture1.png" alt="Clean property prepared for pest prevention service"></div>
+                    <div class="floating-card">
+                        <strong>Established in 2003.</strong>
+                        <span>Integrated Pest Management for homes, food sites, schools, care facilities and farms.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false">☰</button>
-    </div>
-  </header>
+        <section class="section">
+            <div class="container">
+                <div class="section-top">
+                    <p class="eyebrow">Why Organic Pestar</p>
+                    <h2>We don’t just spray. We inspect, identify, and treat only what’s needed.</h2>
+                    <p class="section-lead">Every treatment plan is built around real prevention – fewer chemicals, less disruption, and lasting results.</p>
+                </div>
+                <div class="quick-panel">
+                    <article class="quick-card">
+                        <span class="icon-bubble"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <div><h3>Inspection first</h3><p>We assess pest type, entry points, risk areas and the correct route before any work begins.</p></div>
+                    </article>
+                    <article class="quick-card">
+                        <span class="icon-bubble"><i class="fa-solid fa-child-reaching"></i></span>
+                        <div><h3>People-conscious</h3><p>Plans account for children, pets, pregnant women, staff and respiratory sensitivities.</p></div>
+                    </article>
+                    <article class="quick-card">
+                        <span class="icon-bubble"><i class="fa-solid fa-clipboard-check"></i></span>
+                        <div><h3>Audit-ready</h3><p>Pest control certificates and documentation support council, municipal and food-industry inspections.</p></div>
+                    </article>
+                </div>
+            </div>
+        </section>
 
-  <aside class="mobile-panel" id="mobilePanel" aria-label="Mobile navigation">
-    <nav>
-      <a href="#services">Services</a>
-      <a href="#service-details">Details</a>
-      <a href="#industries">Industries</a>
-      <a href="#process">Process</a>
-      <a href="#trust">Trust</a>
-      <a href="#faq">FAQ</a>
-      <a href="login.html">Staff Login</a>
-      <a href="#quote">Request a Quote</a>
-    </nav>
-  </aside>
+        <section class="section alt" id="services">
+            <div class="container">
+                <div class="section-top">
+                    <p class="eyebrow">Core Services</p>
+                    <h2>Tailored plans for every property type.</h2>
+                    <p class="section-lead">Once-off, quarterly or audit‑focused – we match the service to your risk level and schedule.</p>
+                </div>
+                <div class="service-grid">
+                    <article class="service-card"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80" alt="Residential home"><div class="service-body"><h3>Residential Homes</h3><p>Cockroaches, rodents, ants, bedbugs, fleas, ticks and seasonal pests.</p><span class="tag">Homes</span></div></article>
+                    <article class="service-card"><img src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&w=900&q=80" alt="Green garden"><div class="service-body"><h3>Quarterly Maintenance</h3><p>Prevention‑first schedules for ongoing protection without reactive call‑outs.</p><span class="tag">Prevention</span></div></article>
+                    <article class="service-card"><img src="https://images.unsplash.com/photo-1586105251261-72a756497a11?auto=format&fit=crop&w=900&q=80" alt="Clean rental"><div class="service-body"><h3>End‑of‑Lease</h3><p>Move‑in / move‑out treatments for rental homes, especially with pets.</p><span class="tag">Rentals</span></div></article>
+                    <article class="service-card"><img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=80" alt="Commercial office"><div class="service-body"><h3>Commercial & Industrial</h3><p>Offices, warehouses, factories, malls and property‑managed sites.</p><span class="tag">Business</span></div></article>
+                    <article class="service-card"><img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=900&q=80" alt="Restaurant"><div class="service-body"><h3>Food & Hospitality</h3><p>Discreet management for restaurants, hotels, bars, cafés and food plants.</p><span class="tag">Food safety</span></div></article>
+                    <article class="service-card"><img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=80" alt="Classroom"><div class="service-body"><h3>Schools & Creches</h3><p>Child‑conscious treatments for education facilities of all sizes.</p><span class="tag">Sensitive sites</span></div></article>
+                    <article class="service-card"><img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=900&q=80" alt="Healthcare"><div class="service-body"><h3>Healthcare & Hospitals</h3><p>Low‑disruption plans for clinics, labs and medical facilities.</p><span class="tag">Healthcare</span></div></article>
+                    <article class="service-card"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=900&q=80" alt="Care home"><div class="service-body"><h3>NPOs & Care Facilities</h3><p>Sensitive protection for old age homes, hospices and shelters.</p><span class="tag">Care</span></div></article>
+                    <article class="service-card"><img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=900&q=80" alt="Farm"><div class="service-body"><h3>Farms & Animal Facilities</h3><p>Abattoirs, poultry, dairy, piggeries and meat warehouses.</p><span class="tag">Agriculture</span></div></article>
+                </div>
+                <div class="pest-strip">
+                    <span class="pest-chip"><i class="fa-solid fa-bug"></i> Cockroaches</span>
+                    <span class="pest-chip"><i class="fa-solid fa-otter"></i> Rats & mice</span>
+                    <span class="pest-chip"><i class="fa-solid fa-spider"></i> Spiders</span>
+                    <span class="pest-chip"><i class="fa-solid fa-bug-slash"></i> Ants</span>
+                    <span class="pest-chip"><i class="fa-solid fa-bed"></i> Bedbugs</span>
+                    <span class="pest-chip"><i class="fa-solid fa-shield-dog"></i> Fleas & ticks</span>
+                    <span class="pest-chip"><i class="fa-solid fa-feather"></i> Flies & wasps</span>
+                    <span class="pest-chip"><i class="fa-solid fa-dove"></i> Birds / pigeons</span>
+                    <span class="pest-chip"><i class="fa-solid fa-house-chimney-crack"></i> Termites</span>
+                </div>
+            </div>
+        </section>
 
-  <main id="main">
-    <section class="hero" id="top">
-      <div class="container hero-grid">
-        <div>
-          <p class="eyebrow"><i class="fa-solid fa-leaf"></i> Certified Pest Control Services</p>
-          <h1>Safety-first pest control for homes, businesses and sensitive sites.</h1>
-          <p class="lead">Organic Pestar provides practical, safety-conscious pest control for residential properties, food-handling environments, schools, healthcare facilities, farms, industrial sites and commercial premises across South Africa.</p>
-          <div class="hero-actions">
-            <a href="#quote" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Get a Quote</a>
-            <a href="tel:0800133993" class="btn btn-light"><i class="fa-solid fa-phone"></i> 0800 133 993</a>
-            <a href="https://wa.me/27837866787?text=Hi%20Organic%20Pestar%2C%20I%20need%20a%20pest%20control%20quote." class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-          </div>
-          <div class="trust-row" aria-label="Key trust points">
-            <span class="trust-pill"><i class="fa-solid fa-shield-heart"></i> Safety before profit</span>
-            <span class="trust-pill"><i class="fa-solid fa-certificate"></i> Certificates available</span>
-            <span class="trust-pill"><i class="fa-solid fa-location-dot"></i> Countrywide</span>
-          </div>
+        <!-- COMMUNITY COMMITMENT – STANDALONE SECTION -->
+        <section class="community-section" id="community">
+            <div class="container">
+                <div class="community-card">
+                    <div class="community-icon">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                    </div>
+                    <div class="community-text">
+                        <p class="eyebrow"><i class="fa-solid fa-heart"></i> Giving back</p>
+                        <h2>Pest control that supports the communities that need it most.</h2>
+                        <p class="lead">We believe pest control should not only protect homes and businesses, but also support the communities that need it most. That’s why we donate a portion of our profits to NPO crèches, old age homes and hospices. We also offer affordable pest control support for sensitive environments such as schools, care facilities and community organisations.</p>
+                        <div class="community-highlights">
+                            <span><i class="fa-solid fa-check-circle"></i> Profits donated to NPOs</span>
+                            <span><i class="fa-solid fa-check-circle"></i> Affordable rates for care homes</span>
+                            <span><i class="fa-solid fa-check-circle"></i> Safe for children & elderly</span>
+                            <span><i class="fa-solid fa-check-circle"></i> Environmentally responsible</span>
+                        </div>
+                        <p style="color:var(--muted); font-weight:600;">Our goal is to help children, senior citizens, patients, staff and vulnerable communities through safe, discreet and environmentally responsible pest control.</p>
+                        <a href="#quote" class="btn btn-primary"><i class="fa-solid fa-hand-holding-heart"></i> NPOs & care facilities – get in touch</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="details">
+            <div class="container">
+                <div class="section-top">
+                    <p class="eyebrow">Service Details</p>
+                    <h2>Deep‑dive into what we do.</h2>
+                    <p class="section-lead">Click any category to see how we tailor the service.</p>
+                </div>
+                <div class="custom-accordion" id="serviceAccordion"></div>
+            </div>
+        </section>
+
+        <section class="section" id="industries">
+            <div class="container">
+                <div class="section-top">
+                    <p class="eyebrow">Industries Served</p>
+                    <h2>High‑risk and reputation‑sensitive environments trust us.</h2>
+                </div>
+                <div class="proof-grid">
+                    <article class="proof-card"><i class="fa-solid fa-utensils"></i><h3>Restaurants & Cafés</h3><p>Discreet after‑hours treatment to protect your reputation.</p></article>
+                    <article class="proof-card"><i class="fa-solid fa-store"></i><h3>Supermarkets & Retail</h3><p>Pest‑free shopping experience for food‑handling spaces.</p></article>
+                    <article class="proof-card"><i class="fa-solid fa-hotel"></i><h3>Hotels & Guest Houses</h3><p>Bedbug, cockroach and rodent management for hospitality.</p></article>
+                    <article class="proof-card"><i class="fa-solid fa-building"></i><h3>Body Corporates</h3><p>Communal area plans for townhouses and office blocks.</p></article>
+                    <article class="proof-card"><i class="fa-solid fa-school"></i><h3>Education</h3><p>IPM‑based service scheduled around learners and staff.</p></article>
+                    <article class="proof-card"><i class="fa-solid fa-hospital"></i><h3>Healthcare & Labs</h3><p>Documentation‑heavy treatments for clinics and hospitals.</p></article>
+                    <article class="proof-card"><i class="fa-solid fa-hands-holding-heart"></i><h3>NPOs & Old Age Homes</h3><p>Sensitive care for vulnerable residents.</p></article>
+                    <article class="proof-card"><i class="fa-solid fa-warehouse"></i><h3>Warehouses & Storage</h3><p>Rodent, stored‑product insect and crawling pest control.</p></article>
+                    <article class="proof-card"><i class="fa-solid fa-wheat-awn"></i><h3>Food Manufacturing</h3><p>Breweries, bakeries, meat processing and pet‑food facilities.</p></article>
+                    <article class="proof-card"><i class="fa-solid fa-landmark"></i><h3>Government & Public</h3><p>Municipal buildings, prisons, libraries and museums.</p></article>
+                    <article class="proof-card"><i class="fa-solid fa-golf-ball-tee"></i><h3>Golf Estates</h3><p>Environment‑conscious planning for landscaped properties.</p></article>
+                    <article class="proof-card"><i class="fa-solid fa-boxes-stacked"></i><h3>Stored Product Insects</h3><p>Fogging and monitoring for high‑risk inventory areas.</p></article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section alt" id="process">
+            <div class="container">
+                <div class="section-top"><p class="eyebrow">Process</p><h2>Simple steps. Proper control.</h2></div>
+                <div class="process-grid">
+                    <article class="step-card"><div class="step-number">1</div><h3>Request a quote</h3><p>Form, call or WhatsApp with your details.</p></article>
+                    <article class="step-card"><div class="step-number">2</div><h3>Inspection & risk plan</h3><p>We check pests, entry points, sensitive areas and timing.</p></article>
+                    <article class="step-card"><div class="step-number">3</div><h3>Treatment & documentation</h3><p>Service records, prevention advice and certificates provided.</p></article>
+                    <article class="step-card"><div class="step-number">4</div><h3>Monitoring & prevention</h3><p>Quarterly, monthly or site‑specific follow‑up plans available.</p></article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="trust">
+            <div class="container proof-wrap">
+                <div>
+                    <p class="eyebrow">Trust & Compliance</p>
+                    <h2>Backed by insurance, certified practice, and real results.</h2>
+                    <p class="section-lead">Public liability, Act 36 of 1947 registration, IPM approach and audit‑ready certificates.</p>
+                    <div class="client-logos">
+                        <div class="logo-card"><img src="6.png" alt="SPAR" onerror="this.parentElement.classList.add('logo-fallback')"><span>SPAR</span></div>
+                        <div class="logo-card"><img src="3.png" alt="Sasol" onerror="this.parentElement.classList.add('logo-fallback')"><span>Sasol</span></div>
+                        <div class="logo-card"><img src="7.png" alt="Steers" onerror="this.parentElement.classList.add('logo-fallback')"><span>Steers</span></div>
+                        <div class="logo-card"><img src="5.png" alt="Usave" onerror="this.parentElement.classList.add('logo-fallback')"><span>Usave</span></div>
+                        <div class="logo-card"><img src="8.png" alt="Pie City" onerror="this.parentElement.classList.add('logo-fallback')"><span>Pie City</span></div>
+                        <div class="logo-card"><img src="9.png" alt="AssureCloud" onerror="this.parentElement.classList.add('logo-fallback')"><span>AssureCloud</span></div>
+                    </div>
+                </div>
+                <div class="proof-grid">
+                    <article class="proof-card"><i class="fa-solid fa-leaf"></i><h3>IPM approach</h3><p>Inspection, identification, treatment, monitoring and prevention.</p></article>
+                    <article class="proof-card"><i class="fa-solid fa-file-shield"></i><h3>Certificates</h3><p>Support council, municipal and food‑industry requirements.</p></article>
+                    <article class="proof-card"><i class="fa-solid fa-building-shield"></i><h3>Insurance</h3><p>Public liability coverage for your peace of mind.</p></article>
+                    <article class="proof-card"><i class="fa-solid fa-clock"></i><h3>Discreet timing</h3><p>After‑hours and low‑traffic options available.</p></article>
+                    <article class="proof-card"><i class="fa-solid fa-clipboard-list"></i><h3>Food‑site documentation</h3><p>R638, HACCP, COA and IPM implementation support.</p></article>
+                    <article class="proof-card"><i class="fa-solid fa-shield-dog"></i><h3>Family‑conscious</h3><p>Children, pets, plants and sensitive occupants always considered.</p></article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section alt">
+            <div class="container">
+                <div class="cta-band">
+                    <div>
+                        <p class="eyebrow" style="color:rgba(255,255,255,.8)">Countrywide service</p>
+                        <h2>Ready to solve your pest problem?</h2>
+                        <p>Tell us the location, pest issue and urgency – we’ll handle the rest.</p>
+                    </div>
+                    <div class="cta-actions">
+                        <a href="#quote" class="btn btn-light"><i class="fa-solid fa-paper-plane"></i> Send Request</a>
+                        <a href="tel:0800133993" class="btn btn-light"><i class="fa-solid fa-phone"></i> Call Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="faq">
+            <div class="container faq-grid">
+                <div>
+                    <p class="eyebrow">FAQ</p>
+                    <h2>Quick answers.</h2>
+                    <p class="section-lead">Get the details you need to make a decision.</p>
+                </div>
+                <div class="faq-box">
+                    <article class="faq-item"><button class="faq-question" aria-expanded="true" aria-controls="faq1"><span><i class="fa-solid fa-circle-question"></i> Do you work countrywide?</span><span class="faq-icon"><i class="fa-solid fa-plus"></i></span></button><div class="faq-answer open" id="faq1"><p>Yes – residential, commercial, industrial and sensitive sites across South Africa.</p></div></article>
+                    <article class="faq-item"><button class="faq-question" aria-expanded="false" aria-controls="faq2"><span><i class="fa-solid fa-calendar-check"></i> Maintenance plans?</span><span class="faq-icon"><i class="fa-solid fa-plus"></i></span></button><div class="faq-answer" id="faq2"><p>Quarterly and custom schedules to prevent recurring infestations.</p></div></article>
+                    <article class="faq-item"><button class="faq-question" aria-expanded="false" aria-controls="faq3"><span><i class="fa-solid fa-clock"></i> After‑hours work?</span><span class="faq-icon"><i class="fa-solid fa-plus"></i></span></button><div class="faq-answer" id="faq3"><p>Yes – discreet night‑time and low‑disruption options for approved sites.</p></div></article>
+                    <article class="faq-item"><button class="faq-question" aria-expanded="false" aria-controls="faq4"><span><i class="fa-solid fa-certificate"></i> Certificates?</span><span class="faq-icon"><i class="fa-solid fa-plus"></i></span></button><div class="faq-answer" id="faq4"><p>Provided for qualifying council, municipal and food‑industry audits.</p></div></article>
+                </div>
+            </div>
+        </section>
+
+        <section class="quote-section" id="quote">
+            <div class="container quote-shell">
+                <div class="quote-info">
+                    <p class="eyebrow">Get a Quote</p>
+                    <h2>Let’s talk about your space.</h2>
+                    <p>Send the location, pest issue and preferred contact method. Photos help us prepare.</p>
+                    <div class="contact-list">
+                        <div class="contact-line"><span><i class="fa-solid fa-phone"></i></span><div><strong>Toll Free</strong><br><a href="tel:0800133993">0800 133 993</a></div></div>
+                        <div class="contact-line"><span><i class="fa-brands fa-whatsapp"></i></span><div><strong>Mobile / WhatsApp</strong><br><a href="https://wa.me/27837866787">083 786 6787</a></div></div>
+                        <div class="contact-line"><span><i class="fa-solid fa-envelope"></i></span><div><strong>Email</strong><br><a href="mailto:sales@organicpestar.co.za">sales@organicpestar.co.za</a></div></div>
+                        <div class="contact-line"><span><i class="fa-solid fa-location-dot"></i></span><div><strong>Office</strong><br>308 York Ave, Ferndale, Randburg 2194</div></div>
+                    </div>
+                </div>
+                <form class="quote-form" id="quoteForm" novalidate>
+                    <label>Name<input type="text" name="from_name" autocomplete="name" placeholder="Your name" required></label>
+                    <label>Phone<input type="tel" name="phone" autocomplete="tel" placeholder="083 000 0000" required></label>
+                    <label>Email<input type="email" name="from_email" autocomplete="email" placeholder="you@example.com"></label>
+                    <label>Preferred contact<select name="preferred_contact"><option>Phone call</option><option>WhatsApp</option><option>Email</option></select></label>
+                    <label>Property type<select name="property_type" required>
+                        <option value="">Select one</option><option>Residential home</option><option>End-of-lease rental</option><option>Restaurant / café / bar</option><option>Hotel / guest house / motel</option><option>Supermarket / food retail</option><option>Food plant / bakery / beverage manufacturing</option><option>School / creche / education</option><option>Old age home / hospice / NPO</option><option>Hospital / clinic / laboratory</option><option>Warehouse / industrial site</option><option>Body corporate / rental flats</option><option>Farm / abattoir / poultry / dairy</option><option>Government / municipal / public</option><option>Other</option>
+                    </select></label>
+                    <label>Service needed<select name="service_needed" required>
+                        <option value="">Select one</option><option>Inspection</option><option>Once-off treatment</option><option>Quarterly maintenance</option><option>Monthly monitoring</option><option>Certificate / audit support</option><option>End-of-lease treatment</option><option>Emergency call-out</option>
+                    </select></label>
+                    <label>Pest issue<select name="pest_issue"><option>Not sure yet</option><option>Cockroaches</option><option>Rats / mice</option><option>Ants</option><option>Bedbugs</option><option>Fleas / ticks</option><option>Flies / wasps</option><option>Birds / pigeons</option><option>Stored-product insects</option><option>Termites / wood borers</option><option>Other</option></select></label>
+                    <label>Urgency<select name="urgency" required><option value="">Select one</option><option>ASAP</option><option>This week</option><option>This month</option><option>Maintenance plan</option></select></label>
+                    <label class="full">Property location in South Africa<input type="text" name="property_location" placeholder="Suburb, city, complex or full address" required></label>
+                    <label class="full">Message<textarea name="message" rows="4" placeholder="Describe the pest issue, where it is happening, and the type of property."></textarea></label>
+                    <label class="full checkbox-row"><input type="checkbox" name="consent" required> I agree to be contacted about this pest control request.</label>
+                    <button class="btn btn-primary full" type="submit"><i class="fa-solid fa-paper-plane"></i> Send Quote Request</button>
+                    <button class="btn btn-light full" type="button" id="whatsappFromForm"><i class="fa-brands fa-whatsapp"></i> Send via WhatsApp</button>
+                    <p class="form-note full" id="formNote"> </p>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <a class="floating-whatsapp" href="https://wa.me/27837866787?text=Hi%20Organic%20Pestar%2C%20I%20need%20help%20with%20pest%20control." aria-label="Chat on WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+    <button class="back-top" id="backTop" type="button" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3>Organic Pestar</h3>
+                    <p>Countrywide safety‑conscious pest management for every kind of property.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                        <a href="mailto:sales@organicpestar.co.za" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3>Quick Links</h3>
+                    <a href="#services">Services</a><a href="#details">Details</a><a href="#community">Community</a><a href="#industries">Industries</a><a href="#process">Process</a><a href="#trust">Trust</a><a href="#faq">FAQ</a><a href="login.html">Staff Login</a><a href="#quote">Request a Quote</a>
+                </div>
+                <div>
+                    <h3>Contact</h3>
+                    <a href="tel:0800133993">0800 133 993</a>
+                    <a href="https://wa.me/27837866787">083 786 6787</a>
+                    <a href="mailto:sales@organicpestar.co.za">sales@organicpestar.co.za</a>
+                    <p>308 York Ave, Ferndale, Randburg 2194</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© <span id="year"></span> Organic Pestar. All rights reserved.</span>
+                <span>organicpestar.co.za</span>
+            </div>
         </div>
-        <div class="hero-media">
-          <div class="image-card">
-            <img src="Picture1.png" alt="Clean property prepared for pest prevention service">
-          </div>
-          <div class="floating-card">
-            <strong>Established in 2003.</strong>
-            <span>Integrated Pest Management for homes, food sites, schools, care facilities, farms and commercial premises.</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <div class="section-top">
-          <p class="eyebrow">Why Organic Pestar</p>
-          <h2>Built around safety, prevention and compliance.</h2>
-          <p class="section-lead">The business positions its service around Integrated Pest Management, reduced chemical exposure, discreet treatment timing and practical prevention so pests are controlled without unnecessary disruption.</p>
-        </div>
-        <div class="quick-panel">
-          <article class="quick-card">
-            <span class="icon-bubble"><i class="fa-solid fa-magnifying-glass"></i></span>
-            <div>
-              <h3>Inspection first</h3>
-              <p>Each site is assessed for pest type, entry points, risk areas and the correct treatment route before work begins.</p>
-            </div>
-          </article>
-          <article class="quick-card">
-            <span class="icon-bubble"><i class="fa-solid fa-child-reaching"></i></span>
-            <div>
-              <h3>People-conscious treatments</h3>
-              <p>Service planning considers children, pets, pregnant women, plants, staff, customers and people with respiratory sensitivities.</p>
-            </div>
-          </article>
-          <article class="quick-card">
-            <span class="icon-bubble"><i class="fa-solid fa-clipboard-check"></i></span>
-            <div>
-              <h3>Audit support</h3>
-              <p>Pest control certificates and service documentation can support council, municipal and food-industry inspections where applicable.</p>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section alt" id="services">
-      <div class="container">
-        <div class="section-top">
-          <p class="eyebrow">Core Services</p>
-          <h2>Choose the pest control service you need.</h2>
-          <p class="section-lead">From once-off treatments to quarterly maintenance and audit-focused pest management, the service can be matched to the property type and risk level.</p>
-        </div>
-
-        <div class="service-grid">
-          <article class="service-card">
-            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80" alt="Residential home exterior">
-            <div class="service-body">
-              <h3>Residential Homes</h3>
-              <p>Home pest control for cockroaches, rodents, ants, bedbugs, fleas, ticks, spiders, flies and seasonal pest activity.</p>
-              <span class="tag">Homes</span>
-            </div>
-          </article>
-
-          <article class="service-card">
-            <img src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&w=900&q=80" alt="Green garden and property maintenance">
-            <div class="service-body">
-              <h3>Quarterly Maintenance</h3>
-              <p>Prevention-focused service schedules for properties that need reliable ongoing protection rather than reactive call-outs.</p>
-              <span class="tag">Prevention</span>
-            </div>
-          </article>
-
-          <article class="service-card">
-            <img src="https://images.unsplash.com/photo-1586105251261-72a756497a11?auto=format&fit=crop&w=900&q=80" alt="Clean rental property interior">
-            <div class="service-body">
-              <h3>End-of-Lease Pest Control</h3>
-              <p>Move-in and move-out treatments for rental homes, especially where pets, fleas, ticks, cockroaches or rodents are a concern.</p>
-              <span class="tag">Rentals</span>
-            </div>
-          </article>
-
-          <article class="service-card">
-            <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=80" alt="Modern commercial office">
-            <div class="service-body">
-              <h3>Commercial & Industrial</h3>
-              <p>Pest control for offices, warehouses, storerooms, factories, malls, body corporates and property-managed sites.</p>
-              <span class="tag">Business</span>
-            </div>
-          </article>
-
-          <article class="service-card">
-            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=900&q=80" alt="Restaurant interior">
-            <div class="service-body">
-              <h3>Food & Hospitality</h3>
-              <p>Discreet pest management for restaurants, hotels, bars, cafés, supermarkets, food plants, bakeries and guest houses.</p>
-              <span class="tag">Food safety</span>
-            </div>
-          </article>
-
-          <article class="service-card">
-            <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=80" alt="Classroom environment">
-            <div class="service-body">
-              <h3>Schools & Creches</h3>
-              <p>Child-conscious pest control for creches, special schools, universities, colleges and education facilities.</p>
-              <span class="tag">Sensitive sites</span>
-            </div>
-          </article>
-
-          <!-- SEPARATED: Healthcare -->
-          <article class="service-card">
-            <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=900&q=80" alt="Healthcare corridor">
-            <div class="service-body">
-              <h3>Healthcare & Hospitals</h3>
-              <p>Low-disruption pest control for hospitals, clinics, laboratories and medical facilities where hygiene compliance is essential.</p>
-              <span class="tag">Healthcare</span>
-            </div>
-          </article>
-
-          <!-- SEPARATED: NPOs & Care Facilities -->
-          <article class="service-card">
-            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=900&q=80" alt="Care home environment">
-            <div class="service-body">
-              <h3>NPOs & Care Facilities</h3>
-              <p>Sensitive pest management for old age homes, hospices, shelters and non-profit facilities caring for vulnerable people.</p>
-              <span class="tag">Care facilities</span>
-            </div>
-          </article>
-
-          <article class="service-card">
-            <img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=900&q=80" alt="Agricultural farm landscape">
-            <div class="service-body">
-              <h3>Farms & Animal Facilities</h3>
-              <p>Pest control support for abattoirs, piggeries, poultry farms, dairy farms, rabbit farms, pet-food sites and meat warehouses.</p>
-              <span class="tag">Agriculture</span>
-            </div>
-          </article>
-        </div>
-
-        <div class="pest-strip" aria-label="Common pests handled">
-          <span class="pest-chip"><i class="fa-solid fa-bug"></i> Cockroaches</span>
-          <span class="pest-chip"><i class="fa-solid fa-otter"></i> Rats & mice</span>
-          <span class="pest-chip"><i class="fa-solid fa-spider"></i> Spiders</span>
-          <span class="pest-chip"><i class="fa-solid fa-bug-slash"></i> Ants</span>
-          <span class="pest-chip"><i class="fa-solid fa-bed"></i> Bedbugs</span>
-          <span class="pest-chip"><i class="fa-solid fa-shield-dog"></i> Fleas & ticks</span>
-          <span class="pest-chip"><i class="fa-solid fa-feather"></i> Flies & wasps</span>
-          <span class="pest-chip"><i class="fa-solid fa-dove"></i> Birds / pigeons</span>
-          <span class="pest-chip"><i class="fa-solid fa-house-chimney-crack"></i> Termites / wood borers</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- SERVICE DETAILS -->
-    <section class="section service-details-section" id="service-details">
-      <div class="container">
-        <div class="section-top">
-          <p class="eyebrow">Service Details</p>
-          <h2>Expanded information by property type.</h2>
-          <p class="section-lead">Open the relevant section to read the detailed service content for each property type.</p>
-        </div>
-
-        <div class="service-detail-grid">
-          <details class="readmore-card" open>
-            <summary><span><i class="fa-solid fa-house-chimney"></i> Home / Residential Pest Control</span></summary>
-            <div class="readmore-content">
-              <p>Residential pest control is built around protecting the home, family members, pets, plants and food areas while treating visible pest activity and the hidden entry points that allow pests to return.</p>
-              <h4>What this service covers</h4>
-              <ul>
-                <li>Interior and exterior inspection to identify pest type, nesting points, entry gaps and high-pressure areas.</li>
-                <li>Treatment for cockroaches, rodents, ants, spiders, bedbugs, fleas, ticks, flies, wasps and seasonal pests.</li>
-                <li>Exterior-focused prevention around doors, garages, storerooms, refuse areas, garden edges and possible access routes.</li>
-                <li>Practical advice to reduce repeat activity after the first treatment.</li>
-              </ul>
-              <h4>Why it matters</h4>
-              <p>Rain and cold weather can push pests indoors. Once inside, pests can contaminate food areas, leave droppings, damage property and create repeat infestations if entry routes are not controlled.</p>
-              <div class="readmore-badges"><span>Homes</span><span>Families</span><span>Pets</span><span>Quarterly plans</span></div>
-            </div>
-          </details>
-
-          <details class="readmore-card">
-            <summary><span><i class="fa-solid fa-calendar-check"></i> Quarterly Maintenance & Prevention</span></summary>
-            <div class="readmore-content">
-              <p>This is for clients who do not want to wait until pests become a visible problem. A recurring plan helps control seasonal pest movement and keeps prevention active throughout the year.</p>
-              <h4>What this service covers</h4>
-              <ul>
-                <li>Scheduled pest control treatments for recurring or seasonal pest pressure.</li>
-                <li>Monitoring of treated areas, bait stations, trap stations and recurring activity points where applicable.</li>
-                <li>Focus on the four major household or site-specific pests affecting the property.</li>
-                <li>Prevention guidance to reduce dependence on emergency call-outs.</li>
-              </ul>
-              <h4>Best suited for</h4>
-              <p>Homes, estates, restaurants, storage sites, body corporates, schools, warehouses, farms and businesses that need predictable pest control rather than one-time reactive treatment.</p>
-              <div class="readmore-badges"><span>Prevention</span><span>Monitoring</span><span>Seasonal pests</span><span>Less disruption</span></div>
-            </div>
-          </details>
-
-          <details class="readmore-card">
-            <summary><span><i class="fa-solid fa-building"></i> Commercial & Industrial Sites</span></summary>
-            <div class="readmore-content">
-              <p>Commercial and industrial pest control protects staff, customers, products, stock, equipment and the business reputation. Treatment is planned around the site layout, operational hours and compliance pressure.</p>
-              <h4>What this service covers</h4>
-              <ul>
-                <li>Pest control for offices, factories, warehouses, storerooms, malls, retail spaces, industrial yards and mixed-use premises.</li>
-                <li>Rodent, cockroach, fly, ant, stored-product insect and crawling-insect management.</li>
-                <li>Inspection of waste areas, loading bays, kitchens, storage rooms, drains, fence lines and entry points.</li>
-                <li>Low-disruption scheduling, including discreet after-hours service where suitable.</li>
-              </ul>
-              <h4>Business risk addressed</h4>
-              <p>Pests can contaminate stock, damage infrastructure, harm customer trust, trigger complaints and create inspection or audit problems. A prevention-first plan reduces these risks.</p>
-              <div class="readmore-badges"><span>Offices</span><span>Warehouses</span><span>Factories</span><span>Retail</span></div>
-            </div>
-          </details>
-
-          <details class="readmore-card">
-            <summary><span><i class="fa-solid fa-utensils"></i> Restaurants, Food Sites & Hospitality</span></summary>
-            <div class="readmore-content">
-              <p>Food and hospitality environments need discreet pest control because one pest sighting can damage trust, reviews and health compliance. The service focuses on inspection, prevention, monitoring and documentation.</p>
-              <h4>What this service covers</h4>
-              <ul>
-                <li>Restaurants, cafés, bars, supermarkets, convenience stores, bakeries, hotels, motels, guest houses and kitchens.</li>
-                <li>Control of cockroaches, rats, mice, ants, flies, wasps, bedbugs and stored-product pests.</li>
-                <li>Inspection of kitchens, drains, refuse zones, food storage, laundry areas, guest rooms, bars and delivery areas.</li>
-                <li>After-hours service options to reduce disruption to guests, customers and staff.</li>
-              </ul>
-              <h4>Compliance and reputation</h4>
-              <p>The content supports food-handling businesses that need pest control certificates, audit support and safer operating conditions for staff and customers.</p>
-              <div class="readmore-badges"><span>Restaurants</span><span>Hotels</span><span>Food safety</span><span>Discreet service</span></div>
-            </div>
-          </details>
-
-          <details class="readmore-card">
-            <summary><span><i class="fa-solid fa-school"></i> Schools, Creches & Universities</span></summary>
-            <div class="readmore-content">
-              <p>Education facilities need pest control that is planned around learners, staff, classrooms, kitchens, dormitories and school schedules. The document specifically highlights child-conscious treatment timing and IPM practice.</p>
-              <h4>What this service covers</h4>
-              <ul>
-                <li>Creches, special schools, primary and secondary schools, universities, colleges and education institutions.</li>
-                <li>Detailed inspection to identify existing pest issues and weak points before treatment.</li>
-                <li>Integrated Pest Management methods that reduce unnecessary chemical intervention.</li>
-                <li>Treatment timing arranged for periods when children or students are not occupying the treated areas.</li>
-              </ul>
-              <h4>Key concern</h4>
-              <p>Pests can contaminate food areas, utensils and surfaces, while droppings and allergens can affect sensitive learners. The service therefore prioritises prevention, communication and monitoring.</p>
-              <div class="readmore-badges"><span>Creches</span><span>Schools</span><span>Universities</span><span>Child-conscious</span></div>
-            </div>
-          </details>
-
-          <!-- SEPARATED: Healthcare -->
-          <details class="readmore-card">
-            <summary><span><i class="fa-solid fa-hospital"></i> Healthcare, Hospitals & Clinics</span></summary>
-            <div class="readmore-content">
-              <p>Medical facilities demand stringent pest control because any hygiene breach can directly affect patient safety, infection control and regulatory compliance. The service is built around minimal disruption and rigorous documentation.</p>
-              <h4>What this service covers</h4>
-              <ul>
-                <li>Hospitals, clinics, day surgeries, pharmacies, laboratories and pharmaceutical storage environments.</li>
-                <li>Discreet treatment at suitable times, including after-hours options where necessary.</li>
-                <li>Preventative treatments for food storage, wards, server and records rooms, refuse points and external access areas.</li>
-                <li>Service records and certificates for qualifying inspection or audit requirements.</li>
-              </ul>
-              <h4>Why it matters</h4>
-              <p>Pest activity in healthcare settings creates infection risk, regulatory exposure and reputational harm. The service focuses on safe, discreet prevention that works within strict clinical protocols.</p>
-              <div class="readmore-badges"><span>Hospitals</span><span>Clinics</span><span>Laboratories</span><span>Pharmacies</span></div>
-            </div>
-          </details>
-
-          <!-- SEPARATED: NPOs -->
-          <details class="readmore-card">
-            <summary><span><i class="fa-solid fa-hands-holding-heart"></i> NPOs, Old Age Homes & Care Facilities</span></summary>
-            <div class="readmore-content">
-              <p>Non-profit and care environments need sensitive pest control because elderly residents, vulnerable groups and at-risk individuals should not be exposed to preventable hygiene risks or unnecessary chemical disruption.</p>
-              <h4>What this service covers</h4>
-              <ul>
-                <li>Old age homes, hospices, shelters, rehabilitation centres and non-profit community facilities.</li>
-                <li>Treatment planning tailored to frail care, memory care, bedridden residents and shared living environments.</li>
-                <li>Preventative treatments for kitchens, sleeping rooms, communal areas, garden zones and refuse points.</li>
-                <li>Service documentation available for inspections and funding requirements where applicable.</li>
-              </ul>
-              <h4>Why it matters</h4>
-              <p>Residents in care facilities have limited mobility and heightened sensitivity to hygiene risks. The service prioritises minimal disruption, reduced chemical exposure and clear communication with facility managers.</p>
-              <div class="readmore-badges"><span>Old age homes</span><span>Hospices</span><span>Shelters</span><span>NPOs</span></div>
-            </div>
-          </details>
-
-          <details class="readmore-card">
-            <summary><span><i class="fa-solid fa-key"></i> End-of-Lease, Rentals & Body Corporates</span></summary>
-            <div class="readmore-content">
-              <p>End-of-lease pest control is useful before a new tenant moves in, after a tenant exits, or when pets have lived on the property and fleas, ticks, cockroaches or rodents are a concern.</p>
-              <h4>What this service covers</h4>
-              <ul>
-                <li>Move-in and move-out pest control for houses, flats, rental properties and townhouses.</li>
-                <li>Flea and tick treatments linked to pet occupation where required by the lease or property manager.</li>
-                <li>Rodent, cockroach, ant, spider and bedbug treatment where signs are present.</li>
-                <li>Inspection of carpets, skirting boards, pet bedding areas, refuse areas, fence lines and exterior zones.</li>
-              </ul>
-              <h4>Best suited for</h4>
-              <p>Landlords, tenants, property managers, estate agents, body corporates and managing agents who need the property handed over clean, safe and pest-free.</p>
-              <div class="readmore-badges"><span>Rentals</span><span>Tenants</span><span>Landlords</span><span>Body corporates</span></div>
-            </div>
-          </details>
-
-          <details class="readmore-card">
-            <summary><span><i class="fa-solid fa-warehouse"></i> Warehouses, Storage & Stock Environments</span></summary>
-            <div class="readmore-content">
-              <p>Storage environments attract pests because of packaging, food stock, dark spaces, loading bays and waste areas. A warehouse pest plan protects inventory, staff and audit readiness.</p>
-              <h4>What this service covers</h4>
-              <ul>
-                <li>Warehouses, storerooms, stockrooms, silos, mills, factories, transport depots and distribution areas.</li>
-                <li>Rodent, cockroach, fly and stored-product insect control.</li>
-                <li>Inspection of loading zones, pallets, stock aisles, waste points, wall gaps, roof spaces and fence lines.</li>
-                <li>Monitoring and documentation for recurring control where stock risk is high.</li>
-              </ul>
-              <h4>Business risk addressed</h4>
-              <p>Pests can damage packaging, contaminate products, affect delivery quality and create audit failures. Prevention and monitoring are therefore more important than one-time treatment alone.</p>
-              <div class="readmore-badges"><span>Warehouses</span><span>Stock</span><span>Stored-product pests</span><span>Rodents</span></div>
-            </div>
-          </details>
-
-          <details class="readmore-card">
-            <summary><span><i class="fa-solid fa-wheat-awn"></i> Farms, Abattoirs & Animal Facilities</span></summary>
-            <div class="readmore-content">
-              <p>The document includes pest control for abattoirs, piggeries, poultry farms, dairy farms, rabbit farms, meat warehouses and processing environments where pest activity can affect animal health, food safety and infrastructure.</p>
-              <h4>What this service covers</h4>
-              <ul>
-                <li>Rodent, fly, mite, beetle, cockroach and crawling-insect management.</li>
-                <li>Support for poultry houses, manure areas, feed storage, animal housing, slaughter areas and meat-storage environments.</li>
-                <li>Focus on reducing disease transmission, feed contamination and infrastructure damage.</li>
-                <li>Ongoing monitoring where pest pressure is continuous.</li>
-              </ul>
-              <h4>Best suited for</h4>
-              <p>Farm operators, abattoirs, meat processors, dairy sites, piggeries, poultry houses, rabbit farms and pet-food manufacturers.</p>
-              <div class="readmore-badges"><span>Poultry</span><span>Dairy</span><span>Abattoirs</span><span>Feed storage</span></div>
-            </div>
-          </details>
-
-          <details class="readmore-card">
-            <summary><span><i class="fa-solid fa-landmark"></i> Government, Municipal & Public Buildings</span></summary>
-            <div class="readmore-content">
-              <p>Public facilities require pest control that protects visitors, staff, public health and building reputation. Service plans should match the building's use, traffic level and hygiene requirements.</p>
-              <h4>What this service covers</h4>
-              <ul>
-                <li>Municipal buildings, public offices, police holding cells, prisons, libraries, museums and public facilities.</li>
-                <li>Rodent, cockroach, ant, fly, bedbug and general crawling-insect control.</li>
-                <li>Inspection of kitchens, holding areas, refuse zones, offices, records rooms, public toilets and exterior access points.</li>
-                <li>Service documentation for internal records and inspection readiness where applicable.</li>
-              </ul>
-              <h4>Why it matters</h4>
-              <p>Government and public buildings are high-visibility environments. Pest activity can create public complaints, reputational harm and hygiene concerns.</p>
-              <div class="readmore-badges"><span>Municipal</span><span>Public buildings</span><span>Libraries</span><span>Prisons</span></div>
-            </div>
-          </details>
-
-          <details class="readmore-card">
-            <summary><span><i class="fa-solid fa-beer-mug-empty"></i> Breweries, Dairies & Food Manufacturing</span></summary>
-            <div class="readmore-content">
-              <p>Manufacturing and beverage sites need pest management that protects the product, production areas, packaging zones and audit standards. The document highlights breweries, distilleries, wineries, dairies and food-processing premises.</p>
-              <h4>What this service covers</h4>
-              <ul>
-                <li>Breweries, distilleries, wineries, dairies, bakeries, beverage plants and food-processing environments.</li>
-                <li>Rodent, cockroach, fly, ant and stored-product pest control.</li>
-                <li>Inspection of production lines, drains, bottling/packaging areas, raw material stores and waste zones.</li>
-                <li>Ongoing monitoring and rapid response for recurring pest pressure.</li>
-              </ul>
-              <h4>Compliance angle</h4>
-              <p>These sites often need strong records, prevention plans and audit-aligned pest control because a pest problem can affect product safety and brand trust.</p>
-              <div class="readmore-badges"><span>Breweries</span><span>Dairies</span><span>Bakeries</span><span>Manufacturing</span></div>
-            </div>
-          </details>
-
-          <details class="readmore-card">
-            <summary><span><i class="fa-solid fa-golf-ball-tee"></i> Golf Estates & Landscaped Properties</span></summary>
-            <div class="readmore-content">
-              <p>Golf estates and landscaped environments need pest control that respects gardens, soil, pollinators, beneficial organisms and the overall outdoor experience.</p>
-              <h4>What this service covers</h4>
-              <ul>
-                <li>Environment-conscious pest control for golf estates, gardens, outdoor facilities and landscaped properties.</li>
-                <li>Low-disruption treatment timing, including discreet after-hours service where appropriate.</li>
-                <li>Focus on avoiding unnecessary contamination of groundwork, gardens and beneficial natural systems.</li>
-                <li>Prevention planning around buildings, refuse zones, food-service areas and outdoor congregation points.</li>
-              </ul>
-              <h4>Best suited for</h4>
-              <p>Golf estates, lifestyle estates, clubhouses, outdoor hospitality spaces and managed landscaped properties.</p>
-              <div class="readmore-badges"><span>Golf estates</span><span>Landscaping</span><span>Outdoor areas</span><span>Environment-focused</span></div>
-            </div>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="industries">
-      <div class="container">
-        <div class="section-top">
-          <p class="eyebrow">Industries Served</p>
-          <h2>Pest control for high-risk and reputation-sensitive environments.</h2>
-          <p class="section-lead">Organic Pestar's service content covers residential, commercial, institutional, food-safety, agricultural, government and specialist environments.</p>
-        </div>
-
-        <div class="proof-grid">
-          <article class="proof-card">
-            <i class="fa-solid fa-utensils"></i>
-            <h3>Restaurants, Cafés & Bars</h3>
-            <p>Discreet after-hours treatment, monitoring and prevention for food-service premises where one pest sighting can damage reputation.</p>
-          </article>
-          <article class="proof-card">
-            <i class="fa-solid fa-store"></i>
-            <h3>Supermarkets & Retail Food</h3>
-            <p>Pest control for supermarkets, convenience stores, delis, mini-cafés and retail spaces handling food inventory.</p>
-          </article>
-          <article class="proof-card">
-            <i class="fa-solid fa-hotel"></i>
-            <h3>Hotels & Guest Houses</h3>
-            <p>Bedbug, cockroach, ant and rodent management for hotels, motels, guest houses and high-traffic hospitality properties.</p>
-          </article>
-          <article class="proof-card">
-            <i class="fa-solid fa-building"></i>
-            <h3>Body Corporates & Rentals</h3>
-            <p>Planned pest control for townhouses, rental flats, office blocks, property managers and communal refuse areas.</p>
-          </article>
-          <article class="proof-card">
-            <i class="fa-solid fa-school"></i>
-            <h3>Education Facilities</h3>
-            <p>IPM-based service for creches, schools, colleges and universities with treatment timing arranged around learners and staff.</p>
-          </article>
-          <article class="proof-card">
-            <i class="fa-solid fa-hospital"></i>
-            <h3>Healthcare & Laboratories</h3>
-            <p>Pest management for clinics, hospitals, laboratories and pharmaceutical environments where hygiene and documentation matter.</p>
-          </article>
-          <!-- SEPARATED: NPOs -->
-          <article class="proof-card">
-            <i class="fa-solid fa-hands-holding-heart"></i>
-            <h3>NPOs & Old Age Homes</h3>
-            <p>Sensitive pest control for old age homes, hospices, shelters and community care facilities serving vulnerable people.</p>
-          </article>
-          <article class="proof-card">
-            <i class="fa-solid fa-warehouse"></i>
-            <h3>Warehouses & Storage</h3>
-            <p>Rodent, cockroach and stored-product insect control for warehouses, storerooms, silos, milling storage and stock environments.</p>
-          </article>
-          <article class="proof-card">
-            <i class="fa-solid fa-wheat-awn"></i>
-            <h3>Food Manufacturing</h3>
-            <p>Service support for bakeries, food plants, beverage manufacturers, breweries, distilleries, meat-processing sites and pet-food facilities.</p>
-          </article>
-          <article class="proof-card">
-            <i class="fa-solid fa-landmark"></i>
-            <h3>Government & Public Sites</h3>
-            <p>Support for municipal properties, police holding cells, prisons, libraries, museums and public buildings.</p>
-          </article>
-          <article class="proof-card">
-            <i class="fa-solid fa-golf-ball-tee"></i>
-            <h3>Golf Estates</h3>
-            <p>Environment-conscious treatment planning for golf estates and landscaped properties where plant and pollinator protection matters.</p>
-          </article>
-          <article class="proof-card">
-            <i class="fa-solid fa-boxes-stacked"></i>
-            <h3>Stored Product Insects</h3>
-            <p>Fogging and pest management support for stock-product insects, milling storage and high-risk inventory areas.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section alt" id="process">
-      <div class="container">
-        <div class="section-top">
-          <p class="eyebrow">Process</p>
-          <h2>Simple process. Proper control.</h2>
-        </div>
-        <div class="process-grid">
-          <article class="step-card">
-            <div class="step-number">1</div>
-            <h3>Request a quote</h3>
-            <p>Submit the form, call the toll-free number or send a WhatsApp message with the property type and pest issue.</p>
-          </article>
-          <article class="step-card">
-            <div class="step-number">2</div>
-            <h3>Inspection & risk plan</h3>
-            <p>The team checks pest type, access points, food/waste risks, sensitive areas and the best treatment time.</p>
-          </article>
-          <article class="step-card">
-            <div class="step-number">3</div>
-            <h3>Treatment & documentation</h3>
-            <p>The treatment is completed with service records, prevention advice and certificates where qualifying requirements apply.</p>
-          </article>
-          <article class="step-card">
-            <div class="step-number">4</div>
-            <h3>Monitoring & prevention</h3>
-            <p>Quarterly, monthly, bi-monthly or site-specific monitoring can be arranged for recurring pest control needs.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="trust">
-      <div class="container proof-wrap">
-        <div>
-          <p class="eyebrow">Trust & Compliance</p>
-          <h2>Positioned for homes, businesses and audited spaces.</h2>
-          <p class="section-lead">Organic Pestar's content highlights public liability insurance, Department of Agriculture registration under Act 36 of 1947, an IPM approach and pest control certificates for qualifying council, municipal and food-industry requirements.</p>
-          <div class="client-logos" aria-label="Client and brand recognition">
-            <div class="logo-card"><img src="6.png" alt="SPAR logo" onerror="this.parentElement.classList.add('logo-fallback')"><span>SPAR</span></div>
-            <div class="logo-card"><img src="3.png" alt="Sasol logo" onerror="this.parentElement.classList.add('logo-fallback')"><span>Sasol</span></div>
-            <div class="logo-card"><img src="7.png" alt="Steers logo" onerror="this.parentElement.classList.add('logo-fallback')"><span>Steers</span></div>
-            <div class="logo-card"><img src="5.png" alt="Usave logo" onerror="this.parentElement.classList.add('logo-fallback')"><span>Usave</span></div>
-            <div class="logo-card"><img src="8.png" alt="Pie City logo" onerror="this.parentElement.classList.add('logo-fallback')"><span>Pie City</span></div>
-            <div class="logo-card"><img src="9.png" alt="AssureCloud logo" onerror="this.parentElement.classList.add('logo-fallback')"><span>AssureCloud</span></div>
-          </div>
-        </div>
-        <div class="proof-grid">
-          <article class="proof-card">
-            <i class="fa-solid fa-leaf"></i>
-            <h3>IPM approach</h3>
-            <p>Inspection, identification, treatment, monitoring and prevention guide each service plan.</p>
-          </article>
-          <article class="proof-card">
-            <i class="fa-solid fa-file-shield"></i>
-            <h3>Certificates</h3>
-            <p>Certificates support council, municipal, audit and food-industry requirements for qualifying services.</p>
-          </article>
-          <article class="proof-card">
-            <i class="fa-solid fa-building-shield"></i>
-            <h3>Insurance</h3>
-            <p>Public liability insurance strengthens the service assurance profile.</p>
-          </article>
-          <article class="proof-card">
-            <i class="fa-solid fa-clock"></i>
-            <h3>Discreet timing</h3>
-            <p>After-hours, low-traffic and site-sensitive treatment options are available where operational disruption must be limited.</p>
-          </article>
-          <article class="proof-card">
-            <i class="fa-solid fa-clipboard-list"></i>
-            <h3>Food-site documentation</h3>
-            <p>Service documentation can support food safety audits, R638, HACCP, COA and IPM implementation requirements where applicable.</p>
-          </article>
-          <article class="proof-card">
-            <i class="fa-solid fa-shield-dog"></i>
-            <h3>Family-conscious</h3>
-            <p>Treatment planning accounts for children, pets, plants, pregnant women and respiratory-sensitive occupants.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section alt">
-      <div class="container">
-        <div class="cta-band">
-          <div>
-            <p class="eyebrow" style="color:rgba(255,255,255,.8)">Countrywide service</p>
-            <h2>Need pest control anywhere in South Africa?</h2>
-            <p>Send the property location, pest issue and urgency. Organic Pestar will respond with the next step.</p>
-          </div>
-          <div class="cta-actions">
-            <a href="#quote" class="btn btn-light"><i class="fa-solid fa-paper-plane"></i> Send Request</a>
-            <a href="tel:0800133993" class="btn btn-light"><i class="fa-solid fa-phone"></i> Call Now</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="faq">
-      <div class="container faq-grid">
-        <div>
-          <p class="eyebrow">FAQ</p>
-          <h2>Common questions.</h2>
-          <p class="section-lead">Use these answers to help visitors decide quickly and contact you with enough detail for a quote.</p>
-        </div>
-        <div class="faq-box" aria-label="Frequently asked questions">
-          <article class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="true" aria-controls="faqAnswer1">
-              <span><i class="fa-solid fa-circle-question"></i> Do you work countrywide?</span>
-              <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
-            </button>
-            <div class="faq-answer open" id="faqAnswer1">
-              <p>Yes. Organic Pestar serves residential, commercial, industrial and sensitive sites across South Africa.</p>
-            </div>
-          </article>
-          <article class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAnswer2">
-              <span><i class="fa-solid fa-calendar-check"></i> Do you offer maintenance plans?</span>
-              <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
-            </button>
-            <div class="faq-answer" id="faqAnswer2">
-              <p>Yes. Quarterly and site-specific maintenance plans are available to reduce recurring infestations and support prevention.</p>
-            </div>
-          </article>
-          <article class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAnswer3">
-              <span><i class="fa-solid fa-clock"></i> Do you work after hours?</span>
-              <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
-            </button>
-            <div class="faq-answer" id="faqAnswer3">
-              <p>Yes. Discreet after-hours, night-time and low-disruption service options are available for approved sites.</p>
-            </div>
-          </article>
-          <article class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAnswer4">
-              <span><i class="fa-solid fa-certificate"></i> Do you provide pest control certificates?</span>
-              <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
-            </button>
-            <div class="faq-answer" id="faqAnswer4">
-              <p>Certificates are provided for qualifying council, municipal, audit and food-industry requirements.</p>
-            </div>
-          </article>
-          <article class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAnswer5">
-              <span><i class="fa-solid fa-house-user"></i> Do tenants need end-of-lease pest control?</span>
-              <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
-            </button>
-            <div class="faq-answer" id="faqAnswer5">
-              <p>End-of-lease treatment is commonly requested for rental properties, especially where pets, fleas, ticks, cockroaches or rodents are involved.</p>
-            </div>
-          </article>
-          <article class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAnswer6">
-              <span><i class="fa-solid fa-bolt"></i> How do I get the fastest response?</span>
-              <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
-            </button>
-            <div class="faq-answer" id="faqAnswer6">
-              <p>Call 0800 133 993 or WhatsApp 083 786 6787 with your location, property type, pest issue and urgency.</p>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="quote-section" id="quote">
-      <div class="container quote-shell">
-        <div class="quote-info">
-          <p class="eyebrow">Get a Quote</p>
-          <h2>Send the issue. The process stays simple.</h2>
-          <p>Share your location, pest issue, property type and preferred contact method. Include photos or notes on where the pests are being seen if available.</p>
-          <div class="contact-list">
-            <div class="contact-line">
-              <span><i class="fa-solid fa-phone"></i></span>
-              <div><strong>Toll Free</strong><br><a href="tel:0800133993">0800 133 993</a></div>
-            </div>
-            <div class="contact-line">
-              <span><i class="fa-brands fa-whatsapp"></i></span>
-              <div><strong>Mobile / WhatsApp</strong><br><a href="https://wa.me/27837866787">083 786 6787</a></div>
-            </div>
-            <div class="contact-line">
-              <span><i class="fa-solid fa-envelope"></i></span>
-              <div><strong>Email</strong><br><a href="mailto:sales@organicpestar.co.za">sales@organicpestar.co.za</a></div>
-            </div>
-            <div class="contact-line">
-              <span><i class="fa-solid fa-location-dot"></i></span>
-              <div><strong>Office</strong><br>308 York Ave, Ferndale, Randburg 2194</div>
-            </div>
-          </div>
-        </div>
-
-        <form class="quote-form" id="quoteForm" novalidate>
-          <label>Name<input type="text" name="from_name" autocomplete="name" placeholder="Your name" required></label>
-          <label>Phone<input type="tel" name="phone" autocomplete="tel" placeholder="083 000 0000" required></label>
-          <label>Email<input type="email" name="from_email" autocomplete="email" placeholder="you@example.com"></label>
-          <label>Preferred contact<select name="preferred_contact"><option>Phone call</option><option>WhatsApp</option><option>Email</option></select></label>
-          <label>Property type<select name="property_type" required>
-            <option value="">Select one</option>
-            <option>Residential home</option>
-            <option>End-of-lease rental</option>
-            <option>Restaurant / café / bar</option>
-            <option>Hotel / guest house / motel</option>
-            <option>Supermarket / food retail</option>
-            <option>Food plant / bakery / beverage manufacturing</option>
-            <option>School / creche / education facility</option>
-            <option>Old age home / hospice / NPO</option>
-            <option>Hospital / clinic / laboratory</option>
-            <option>Warehouse / storeroom / industrial site</option>
-            <option>Body corporate / townhouse / rental flats</option>
-            <option>Farm / abattoir / poultry / dairy / piggery</option>
-            <option>Government / municipal / public building</option>
-            <option>Other</option>
-          </select></label>
-          <label>Service needed<select name="service_needed" required>
-            <option value="">Select one</option>
-            <option>Inspection</option>
-            <option>Once-off treatment</option>
-            <option>Quarterly maintenance</option>
-            <option>Monthly / bi-monthly monitoring</option>
-            <option>Certificate / audit support</option>
-            <option>End-of-lease treatment</option>
-            <option>Emergency call-out</option>
-          </select></label>
-          <label>Pest issue<select name="pest_issue">
-            <option>Not sure yet</option>
-            <option>Cockroaches</option>
-            <option>Rats / mice</option>
-            <option>Ants</option>
-            <option>Bedbugs</option>
-            <option>Fleas / ticks</option>
-            <option>Flies / wasps</option>
-            <option>Birds / pigeons</option>
-            <option>Stored-product insects</option>
-            <option>Termites / wood borers</option>
-            <option>Other</option>
-          </select></label>
-          <label>Urgency<select name="urgency" required>
-            <option value="">Select one</option>
-            <option>ASAP</option>
-            <option>This week</option>
-            <option>This month</option>
-            <option>Maintenance plan</option>
-          </select></label>
-          <label class="full">Property location in South Africa<input type="text" name="property_location" placeholder="Suburb, city, complex or full address" required></label>
-          <label class="full">Message<textarea name="message" rows="4" placeholder="Describe the pest issue, where it is happening, and whether this is for a home, business, audit, school, food site or rental property."></textarea></label>
-          <label class="full checkbox-row"><input type="checkbox" name="consent" required> I agree to be contacted about this pest control request.</label>
-          <button class="btn btn-primary full" type="submit"><i class="fa-solid fa-paper-plane"></i> Send Quote Request</button>
-          <button class="btn btn-light full" type="button" id="whatsappFromForm"><i class="fa-brands fa-whatsapp"></i> Send This Request on WhatsApp</button>
-          <p class="form-note full" id="formNote"> </p>
-        </form>
-      </div>
-    </section>
-  </main>
-
-  <a class="floating-whatsapp" href="https://wa.me/27837866787?text=Hi%20Organic%20Pestar%2C%20I%20need%20help%20with%20pest%20control." aria-label="Chat on WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-  <button class="back-top" id="backTop" type="button" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
-
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <h3>Organic Pestar</h3>
-          <p>Countrywide safety-conscious pest control for homes, businesses, food-handling environments, farms, public sites and sensitive facilities.</p>
-          <div class="social-links" aria-label="Social links">
-            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-            <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-            <a href="mailto:sales@organicpestar.co.za" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
-          </div>
-        </div>
-        <div>
-          <h3>Quick Links</h3>
-          <a href="#services">Services</a>
-          <a href="#service-details">Service Details</a>
-          <a href="#industries">Industries</a>
-          <a href="#process">Process</a>
-          <a href="#trust">Trust</a>
-          <a href="#faq">FAQ</a>
-          <a href="login.html">Staff Login</a>
-          <a href="#quote">Request a Quote</a>
-        </div>
-        <div>
-          <h3>Contact</h3>
-          <a href="tel:0800133993">0800 133 993</a>
-          <a href="https://wa.me/27837866787">083 786 6787</a>
-          <a href="mailto:sales@organicpestar.co.za">sales@organicpestar.co.za</a>
-          <p>308 York Ave, Ferndale, Randburg 2194</p>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>© <span id="year"></span> Organic Pestar. All rights reserved.</span>
-        <span>organicpestar.co.za</span>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    /* ─── CONFIG ─────────────────────────────────────────── */
-    const emailConfig = {
-      publicKey: 'YOUR_EMAILJS_PUBLIC_KEY',
-      serviceId: 'YOUR_EMAILJS_SERVICE_ID',
-      templateId: 'YOUR_EMAILJS_ADMIN_TEMPLATE_ID',
-      autoReplyTemplateId: 'YOUR_EMAILJS_CLIENT_TEMPLATE_ID'
-    };
-
-    /* ─── ELEMENTS ───────────────────────────────────────── */
-    const siteHeader   = document.getElementById('siteHeader');
-    const headerLogo   = document.getElementById('headerLogo');
-    const menuToggle   = document.getElementById('menuToggle');
-    const mobilePanel  = document.getElementById('mobilePanel');
-    const quoteForm    = document.getElementById('quoteForm');
-    const formNote     = document.getElementById('formNote');
-    const whatsappBtn  = document.getElementById('whatsappFromForm');
-    const backTop      = document.getElementById('backTop');
-    const faqQuestions = document.querySelectorAll('.faq-question');
-    const externalLinks= document.querySelectorAll('a[href^="http"]');
-
-    /* ─── HEADER SHRINK ON SCROLL ────────────────────────── */
-    const LOGO_LARGE   = 68;   // px at top
-    const LOGO_SMALL   = 42;   // px when scrolled
-    const SCROLL_START = 20;   // px before animation begins
-    const SCROLL_FULL  = 140;  // px at full shrink
-
-    function lerp(a, b, t){ return a + (b - a) * Math.max(0, Math.min(1, t)); }
-
-    let ticking = false;
-    function onScroll(){
-      if(ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        const y = window.scrollY;
-        const t = (y - SCROLL_START) / (SCROLL_FULL - SCROLL_START);
-        const size = lerp(LOGO_LARGE, LOGO_SMALL, t);
-        const pad  = lerp(14, 7, t);
-        const brandSz  = lerp(1.04, 0.92, t);
-        const subSz    = lerp(0.82, 0.72, t);
-        const subOp    = lerp(1, 0, t);
-
-        headerLogo.style.width  = size + 'px';
-        headerLogo.style.height = size + 'px';
-        siteHeader.querySelector('.header-inner').style.paddingTop    = pad + 'px';
-        siteHeader.querySelector('.header-inner').style.paddingBottom = pad + 'px';
-        siteHeader.querySelector('#headerBrandName').style.fontSize   = brandSz + 'rem';
-        siteHeader.querySelector('#headerBrandSub').style.fontSize    = subSz + 'rem';
-        siteHeader.querySelector('#headerBrandSub').style.opacity     = Math.max(0, subOp);
-
-        siteHeader.classList.toggle('scrolled', y > SCROLL_START);
-        backTop.classList.toggle('show', y > 600);
-
-        ticking = false;
-      });
-    }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll(); // run once on load
-
-    /* Position mobile panel just below header */
-    function positionMobilePanel(){
-      const hdrH = siteHeader.getBoundingClientRect().height;
-      mobilePanel.style.top = (hdrH + 8) + 'px';
-    }
-
-    /* ─── MOBILE NAV ─────────────────────────────────────── */
-    menuToggle.addEventListener('click', () => {
-      const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
-      if(!isOpen){
-        positionMobilePanel();
-        mobilePanel.classList.add('pre-open');
-        // Force reflow then animate in
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            mobilePanel.classList.add('open');
-          });
-        });
-        menuToggle.setAttribute('aria-expanded', 'true');
-        menuToggle.textContent = '×';
-      } else {
-        mobilePanel.classList.remove('open');
-        setTimeout(() => mobilePanel.classList.remove('pre-open'), 300);
-        menuToggle.setAttribute('aria-expanded', 'false');
-        menuToggle.textContent = '☰';
-      }
-    });
-
-    mobilePanel.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        mobilePanel.classList.remove('open');
-        setTimeout(() => mobilePanel.classList.remove('pre-open'), 300);
-        menuToggle.setAttribute('aria-expanded', 'false');
-        menuToggle.textContent = '☰';
-      });
-    });
-
-    /* Close mobile nav on outside click */
-    document.addEventListener('click', e => {
-      if(mobilePanel.classList.contains('open') &&
-         !mobilePanel.contains(e.target) &&
-         !menuToggle.contains(e.target)){
-        mobilePanel.classList.remove('open');
-        setTimeout(() => mobilePanel.classList.remove('pre-open'), 300);
-        menuToggle.setAttribute('aria-expanded', 'false');
-        menuToggle.textContent = '☰';
-      }
-    });
-
-    /* ─── ALERTS ─────────────────────────────────────────── */
-    const showAlert = (icon, title, text) => {
-      if(window.Swal){
-        Swal.fire({icon, title, text, confirmButtonColor:'#3f8f54'});
-      } else {
-        alert(`${title}: ${text}`);
-      }
-    };
-
-    const confirmQuoteSubmission = async () => {
-      if(!window.Swal) return confirm('Submit this quote request to Organic Pestar?');
-      const result = await Swal.fire({
-        icon:'question', title:'Submit quote request?',
-        text:'Organic Pestar will use these details to respond to the pest control request.',
-        showCancelButton:true,
-        confirmButtonText:'Submit request', cancelButtonText:'Review form',
-        confirmButtonColor:'#3f8f54', cancelButtonColor:'#6b776d'
-      });
-      return result.isConfirmed;
-    };
-
-    const openExternalWithAlert = async url => {
-      if(!window.Swal){
-        if(confirm('This opens an external website. Continue?')) window.open(url,'_blank','noopener');
-        return;
-      }
-      const result = await Swal.fire({
-        icon:'info', title:'External link',
-        text:'This opens outside the Organic Pestar website.',
-        showCancelButton:true,
-        confirmButtonText:'Open link', cancelButtonText:'Stay here',
-        confirmButtonColor:'#3f8f54', cancelButtonColor:'#6b776d'
-      });
-      if(result.isConfirmed) window.open(url,'_blank','noopener');
-    };
-
-    /* ─── EMAILJS ────────────────────────────────────────── */
-    const isEmailJsReady = () => Boolean(
-      window.emailjs &&
-      emailConfig.publicKey && !emailConfig.publicKey.includes('YOUR_') &&
-      emailConfig.serviceId  && !emailConfig.serviceId.includes('YOUR_') &&
-      emailConfig.templateId && !emailConfig.templateId.includes('YOUR_')
-    );
-
-    window.addEventListener('load', () => {
-      if(isEmailJsReady()){
-        emailjs.init({publicKey: emailConfig.publicKey});
-        if(formNote) formNote.textContent = 'EmailJS is connected. Quote requests will be emailed.';
-      }
-    });
-
-    /* ─── EXTERNAL LINKS ─────────────────────────────────── */
-    externalLinks.forEach(link => {
-      link.addEventListener('click', event => {
-        try {
-          const url = new URL(link.href, window.location.href);
-          if(url.hostname === window.location.hostname) return;
-          event.preventDefault();
-          openExternalWithAlert(link.href);
-        } catch(e){ /* invalid URL — let it pass */ }
-      });
-    });
-
-    /* ─── FAQ ────────────────────────────────────────────── */
-    faqQuestions.forEach(question => {
-      question.addEventListener('click', () => {
-        const answerId = question.getAttribute('aria-controls');
-        const answer   = document.getElementById(answerId);
-        const isOpen   = question.getAttribute('aria-expanded') === 'true';
-        // close all
-        faqQuestions.forEach(q => {
-          q.setAttribute('aria-expanded','false');
-          const a = document.getElementById(q.getAttribute('aria-controls'));
-          a?.classList.remove('open');
-        });
-        // open clicked if it was closed
-        if(!isOpen){
-          question.setAttribute('aria-expanded','true');
-          answer?.classList.add('open');
-        }
-      });
-    });
-
-    /* ─── FORM HELPERS ───────────────────────────────────── */
-    const getQuoteData = () => {
-      const fd   = new FormData(quoteForm);
-      const data = Object.fromEntries(fd.entries());
-      data.quote_id     = `OP-${Date.now().toString().slice(-6)}`;
-      data.submitted_at = new Date().toLocaleString('en-ZA');
-      data.to_email     = 'sales@organicpestar.co.za';
-      data.company      = 'Organic Pestar';
-      data.source       = window.location.href;
-      return data;
-    };
-
-    const saveQuoteLocally = data => {
-      try {
-        const saved = JSON.parse(localStorage.getItem('organicPestarQuotes') || '[]');
-        saved.push(data);
-        localStorage.setItem('organicPestarQuotes', JSON.stringify(saved));
-      } catch(e){ /* storage not available */ }
-    };
-
-    const validateQuote = data => {
-      const required = ['from_name','phone','property_type','service_needed','urgency','property_location','consent'];
-      const missing  = required.filter(k => !String(data[k]||'').trim());
-      if(missing.length) return 'Please complete your name, phone, property type, service, urgency, property location and consent.';
-      if(data.from_email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.from_email)) return 'Please enter a valid email address or leave the email field blank.';
-      if(String(data.phone||'').replace(/\D/g,'').length < 9) return 'Please enter a valid phone number.';
-      return '';
-    };
-
-    /* ─── FORM SUBMIT ────────────────────────────────────── */
-    quoteForm.addEventListener('submit', async event => {
-      event.preventDefault();
-      const data  = getQuoteData();
-      const error = validateQuote(data);
-      if(error){ showAlert('warning','Missing information',error); return; }
-
-      const confirmed = await confirmQuoteSubmission();
-      if(!confirmed) return;
-
-      saveQuoteLocally(data);
-      const btn     = quoteForm.querySelector('button[type="submit"]');
-      const origTxt = btn.innerHTML;
-      btn.disabled  = true;
-      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending…';
-
-      try {
-        if(isEmailJsReady()){
-          await emailjs.send(emailConfig.serviceId, emailConfig.templateId, data);
-          if(emailConfig.autoReplyTemplateId && !emailConfig.autoReplyTemplateId.includes('YOUR_')){
-            await emailjs.send(emailConfig.serviceId, emailConfig.autoReplyTemplateId, data);
-          }
-          quoteForm.reset();
-          showAlert('success','Quote request sent','Organic Pestar has received the request.');
-        } else {
-          quoteForm.reset();
-          showAlert('info','Request saved locally','EmailJS placeholders are still active. Replace the keys before the site goes live.');
-        }
-      } catch(err){
-        showAlert('error','Email failed','The request was saved locally, but EmailJS could not send it. Check the service ID, template ID and public key.');
-      } finally {
-        btn.disabled  = false;
-        btn.innerHTML = origTxt;
-      }
-    });
-
-    /* ─── WHATSAPP FROM FORM ─────────────────────────────── */
-    whatsappBtn.addEventListener('click', () => {
-      const data  = getQuoteData();
-      const error = validateQuote(data);
-      if(error){ showAlert('warning','Complete the quote details',error); return; }
-      const msg = [
-        'Hi Organic Pestar, I need a pest control quote.',
-        `Name: ${data.from_name||''}`,
-        `Phone: ${data.phone||''}`,
-        `Property type: ${data.property_type||''}`,
-        `Service: ${data.service_needed||''}`,
-        `Pest issue: ${data.pest_issue||''}`,
-        `Urgency: ${data.urgency||''}`,
-        `Location: ${data.property_location||''}`,
-        `Message: ${data.message||''}`
-      ].join('\n');
-      openExternalWithAlert(`https://wa.me/27837866787?text=${encodeURIComponent(msg)}`);
-    });
-
-    /* ─── BACK TO TOP ────────────────────────────────────── */
-    backTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
-
-    /* ─── YEAR ───────────────────────────────────────────── */
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+    </footer>
+
+    <script>
+        (function() {
+            const emailConfig = {
+                publicKey: 'YOUR_EMAILJS_PUBLIC_KEY',
+                serviceId: 'YOUR_EMAILJS_SERVICE_ID',
+                templateId: 'YOUR_EMAILJS_ADMIN_TEMPLATE_ID',
+                autoReplyTemplateId: 'YOUR_EMAILJS_CLIENT_TEMPLATE_ID'
+            };
+
+            const siteHeader = document.getElementById('siteHeader');
+            const headerLogo = document.getElementById('headerLogo');
+            const menuToggle = document.getElementById('menuToggle');
+            const mobilePanel = document.getElementById('mobilePanel');
+            const quoteForm = document.getElementById('quoteForm');
+            const whatsappBtn = document.getElementById('whatsappFromForm');
+            const backTop = document.getElementById('backTop');
+
+            const LOGO_LARGE = 90;
+            const LOGO_SMALL = 50;
+            const SCROLL_START = 20;
+            const SCROLL_FULL = 140;
+            function lerp(a, b, t) { return a + (b - a) * Math.max(0, Math.min(1, t)); }
+            let ticking = false;
+            function onScroll() {
+                if (ticking) return;
+                ticking = true;
+                requestAnimationFrame(() => {
+                    const y = window.scrollY;
+                    const t = (y - SCROLL_START) / (SCROLL_FULL - SCROLL_START);
+                    headerLogo.style.width = lerp(LOGO_LARGE, LOGO_SMALL, t) + 'px';
+                    headerLogo.style.height = lerp(LOGO_LARGE, LOGO_SMALL, t) + 'px';
+                    siteHeader.querySelector('.header-inner').style.paddingTop = lerp(10, 5, t) + 'px';
+                    siteHeader.querySelector('.header-inner').style.paddingBottom = lerp(10, 5, t) + 'px';
+                    document.getElementById('headerBrandName').style.fontSize = lerp(1.12, 0.88, t) + 'rem';
+                    document.getElementById('headerBrandSub').style.fontSize = lerp(0.84, 0.68, t) + 'rem';
+                    document.getElementById('headerBrandSub').style.opacity = Math.max(0, lerp(1, 0, t));
+                    siteHeader.classList.toggle('scrolled', y > SCROLL_START);
+                    backTop.classList.toggle('show', y > 600);
+                    ticking = false;
+                });
+            }
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+
+            function positionMobilePanel() {
+                mobilePanel.style.top = (siteHeader.getBoundingClientRect().height + 8) + 'px';
+            }
+            menuToggle.addEventListener('click', () => {
+                const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+                if (!isOpen) {
+                    positionMobilePanel();
+                    mobilePanel.classList.add('pre-open');
+                    requestAnimationFrame(() => requestAnimationFrame(() => mobilePanel.classList.add('open')));
+                    menuToggle.setAttribute('aria-expanded', 'true');
+                    menuToggle.textContent = '×';
+                } else {
+                    mobilePanel.classList.remove('open');
+                    setTimeout(() => mobilePanel.classList.remove('pre-open'), 300);
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                    menuToggle.textContent = '☰';
+                }
+            });
+            document.querySelectorAll('#mobilePanel a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobilePanel.classList.remove('open');
+                    setTimeout(() => mobilePanel.classList.remove('pre-open'), 300);
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                    menuToggle.textContent = '☰';
+                });
+            });
+
+            const accordionData = [
+                { icon: 'fa-house-chimney', title: 'Home / Residential Pest Control', content: `<p>We protect your home, family and pets by treating visible pests and hidden entry points.</p><h4>Includes</h4><ul><li>Interior & exterior inspection</li><li>Cockroaches, rodents, ants, bedbugs, fleas, ticks, spiders, wasps</li><li>Prevention around doors, garages, refuse areas</li><li>Practical advice to reduce repeat activity</li></ul><div class="accordion-badges"><span>Homes</span><span>Families</span><span>Pets</span></div>` },
+                { icon: 'fa-calendar-check', title: 'Quarterly Maintenance', content: `<p>A recurring plan keeps protection active all year without waiting for pests to appear.</p><h4>Includes</h4><ul><li>Scheduled treatments for seasonal pressure</li><li>Monitoring of bait stations</li><li>Focus on your property’s main pests</li><li>Prevention guidance</li></ul><div class="accordion-badges"><span>Prevention</span><span>Monitoring</span></div>` },
+                { icon: 'fa-building', title: 'Commercial & Industrial', content: `<p>Protect staff, stock and reputation with treatments that fit your layout and hours.</p><h4>Coverage</h4><ul><li>Offices, factories, warehouses, malls</li><li>Rodents, cockroaches, stored‑product insects</li><li>After‑hours service available</li></ul><div class="accordion-badges"><span>Offices</span><span>Warehouses</span></div>` },
+                { icon: 'fa-utensils', title: 'Restaurants & Hospitality', content: `<p>Discreet pest management that keeps your reputation spotless.</p><h4>Includes</h4><ul><li>Restaurants, cafés, bars, hotels</li><li>Cockroaches, rodents, flies, bedbugs</li><li>Kitchens, drains, refuse zones</li></ul><div class="accordion-badges"><span>Restaurants</span><span>Food safety</span></div>` },
+                { icon: 'fa-school', title: 'Schools & Creches', content: `<p>Child‑conscious timing and IPM methods to keep learners safe.</p><h4>Includes</h4><ul><li>Creches, schools, universities</li><li>Inspection before treatment</li><li>Treatments when children are absent</li></ul><div class="accordion-badges"><span>Creches</span><span>Schools</span></div>` },
+                { icon: 'fa-hospital', title: 'Healthcare & Hospitals', content: `<p>Strict hygiene pest control for medical environments.</p><h4>Includes</h4><ul><li>Hospitals, clinics, labs</li><li>Discreet after‑hours treatment</li><li>Service records for audits</li></ul><div class="accordion-badges"><span>Hospitals</span><span>Clinics</span></div>` },
+                { icon: 'fa-hands-holding-heart', title: 'NPOs & Care Facilities', content: `<p>Sensitive protection for vulnerable residents – part of our community commitment.</p><h4>Coverage</h4><ul><li>Old age homes, hospices, shelters</li><li>Tailored for frail care</li><li>Documentation for funders</li></ul><div class="accordion-badges"><span>Care homes</span><span>Hospices</span></div>` },
+                { icon: 'fa-key', title: 'End‑of‑Lease & Rentals', content: `<p>Move‑in / move‑out treatments for a clean handover.</p><h4>Includes</h4><ul><li>Houses, flats, townhouses</li><li>Flea and tick treatments</li><li>Rodent, cockroach, bedbug control</li></ul><div class="accordion-badges"><span>Rentals</span><span>Tenants</span></div>` }
+            ];
+
+            const accordionContainer = document.getElementById('serviceAccordion');
+            accordionContainer.innerHTML = accordionData.map(item => `
+            <div class="accordion-item">
+              <button class="accordion-header" aria-expanded="false">
+                <span><i class="fa-solid ${item.icon}"></i> ${item.title}</span>
+                <span class="accordion-icon">+</span>
+              </button>
+              <div class="accordion-content">
+                <div class="accordion-content-inner">${item.content}</div>
+              </div>
+            </div>`).join('');
+
+            document.querySelectorAll('.accordion-item').forEach(item => {
+                const header = item.querySelector('.accordion-header');
+                const content = item.querySelector('.accordion-content');
+                const icon = item.querySelector('.accordion-icon');
+                let isOpen = false;
+                header.addEventListener('click', () => {
+                    if (isOpen) {
+                        gsap.to(content, { maxHeight: 0, duration: 0.35, ease: "power2.inOut" });
+                        icon.textContent = '+';
+                        item.classList.remove('active');
+                        header.setAttribute('aria-expanded', 'false');
+                    } else {
+                        document.querySelectorAll('.accordion-item.active').forEach(other => {
+                            if (other !== item) {
+                                const oContent = other.querySelector('.accordion-content');
+                                const oIcon = other.querySelector('.accordion-icon');
+                                gsap.to(oContent, { maxHeight: 0, duration: 0.3, ease: "power2.inOut" });
+                                oIcon.textContent = '+';
+                                other.classList.remove('active');
+                                other.querySelector('.accordion-header').setAttribute('aria-expanded', 'false');
+                            }
+                        });
+                        gsap.set(content, { maxHeight: 0 });
+                        gsap.to(content, { maxHeight: content.scrollHeight, duration: 0.4, ease: "power2.inOut" });
+                        icon.textContent = '−';
+                        item.classList.add('active');
+                        header.setAttribute('aria-expanded', 'true');
+                    }
+                    isOpen = !isOpen;
+                });
+            });
+
+            gsap.registerPlugin(ScrollTrigger);
+            document.querySelectorAll('.section, .community-section, .quote-section').forEach(sec => {
+                gsap.from(sec, { scrollTrigger: sec, opacity: 0, y: 40, duration: 0.7, ease: "power2.out" });
+            });
+            gsap.to('.floating-card', { y: -5, repeat: -1, yoyo: true, duration: 2, ease: "sine.inOut" });
+
+            const showAlert = (icon, title, text) => {
+                if (window.Swal) Swal.fire({ icon, title, text, confirmButtonColor: '#3f8f54' });
+                else alert(`${title}: ${text}`);
+            };
+            const getQuoteData = () => {
+                const fd = new FormData(quoteForm);
+                const data = Object.fromEntries(fd.entries());
+                data.quote_id = `OP-${Date.now().toString().slice(-6)}`;
+                data.submitted_at = new Date().toLocaleString('en-ZA');
+                return data;
+            };
+            quoteForm.addEventListener('submit', async e => {
+                e.preventDefault();
+                const data = getQuoteData();
+                if (!data.from_name || !data.phone || !data.property_type || !data.service_needed || !data.urgency || !data.property_location || !data.consent) {
+                    showAlert('warning', 'Missing fields', 'Complete all required fields.');
+                    return;
+                }
+                const confirmed = window.Swal ? (await Swal.fire({ icon: 'question', title: 'Submit quote?', showCancelButton: true, confirmButtonText: 'Submit', confirmButtonColor: '#3f8f54' })).isConfirmed : confirm('Submit request?');
+                if (!confirmed) return;
+                const btn = quoteForm.querySelector('button[type="submit"]');
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending…';
+                try {
+                    if (window.emailjs && emailConfig.publicKey && !emailConfig.publicKey.includes('YOUR_')) {
+                        await emailjs.send(emailConfig.serviceId, emailConfig.templateId, data);
+                        quoteForm.reset();
+                        showAlert('success', 'Sent!', 'We’ll be in touch.');
+                    } else {
+                        quoteForm.reset();
+                        showAlert('info', 'Saved locally', 'EmailJS keys needed for live sending.');
+                    }
+                } catch (err) {
+                    showAlert('error', 'Failed', 'Please try again.');
+                } finally {
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Quote Request';
+                }
+            });
+            whatsappBtn.addEventListener('click', () => {
+                const data = getQuoteData();
+                const msg = `Hi Organic Pestar, I need a pest control quote.\nName: ${data.from_name}\nPhone: ${data.phone}\nProperty: ${data.property_type}\nService: ${data.service_needed}\nPest: ${data.pest_issue}\nUrgency: ${data.urgency}\nLocation: ${data.property_location}\nMessage: ${data.message}`;
+                window.open(`https://wa.me/27837866787?text=${encodeURIComponent(msg)}`, '_blank');
+            });
+
+            backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+            document.querySelectorAll('.faq-question').forEach(q => {
+                q.addEventListener('click', () => {
+                    const answerId = q.getAttribute('aria-controls');
+                    document.querySelectorAll('.faq-question').forEach(b => b.setAttribute('aria-expanded', 'false'));
+                    document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('open'));
+                    q.setAttribute('aria-expanded', 'true');
+                    document.getElementById(answerId)?.classList.add('open');
+                });
+            });
+            document.getElementById('year').textContent = new Date().getFullYear();
+        })();
+    </script>
 </body>
 </html>
