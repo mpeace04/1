@@ -38,7 +38,7 @@
             --radius-lg: 24px;
             --radius-xl: 28px;
             --max: 1100px;
-            --hdr-logo-size: 90px;
+            --hdr-logo-size: 112px;
             --hdr-brand-size: 1.08rem;
             --hdr-brand-sub-size: 0.8rem;
             --hdr-pad: 10px;
@@ -1970,6 +1970,181 @@
             }
         }
 
+
+        /* ─── FINAL UI / UX DEBUG OVERRIDES ───────────────────────── */
+        .site-header {
+            min-height: 0;
+        }
+
+        .brand-logo {
+            width: 112px;
+            height: 112px;
+            padding: 4px;
+            box-shadow: 0 8px 24px rgba(23, 63, 40, .06);
+        }
+
+        .hero {
+            padding: 62px 0 58px;
+        }
+
+        .hero h1 {
+            max-width: 620px;
+        }
+
+        .hero .lead {
+            max-width: 460px;
+            margin-bottom: 18px;
+        }
+
+        .hero-media {
+            min-width: 0;
+        }
+
+        .hero .image-card {
+            box-shadow: 0 18px 42px rgba(23, 63, 40, .11);
+        }
+
+        .floating-badge {
+            left: 12px;
+            bottom: 18px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .popup-overlay.active {
+            overflow-y: auto;
+            overscroll-behavior: contain;
+        }
+
+        .popup-card,
+        .popup-card.npo-popup-card,
+        .service-info-card {
+            max-height: min(88vh, calc(100dvh - 48px));
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .npo-modal-intro.compact-npo-intro {
+            display: none;
+        }
+
+        .npo-popup-body {
+            padding-top: 18px;
+        }
+
+        .npo-form textarea {
+            min-height: 74px;
+        }
+
+        .service-info-button em {
+            transition: color .24s ease, transform .24s ease;
+        }
+
+        .service-info-button:hover em {
+            transform: translateX(2px);
+        }
+
+        @media (max-width:1050px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            .hero-media {
+                display: flex !important;
+                justify-content: flex-start;
+                margin-top: 2px;
+            }
+            .hero .image-card {
+                max-width: 520px;
+                width: 100%;
+            }
+            .hero .image-card img {
+                height: clamp(220px, 42vw, 330px);
+            }
+        }
+
+        @media (max-width:720px) {
+            :root {
+                --hdr-logo-size: 82px;
+            }
+            .header-inner {
+                gap: 10px;
+            }
+            .brand-logo {
+                width: 82px;
+                height: 82px;
+                border-radius: 18px;
+            }
+            .brand-lockup {
+                gap: 9px;
+            }
+            .brand-lockup small {
+                max-width: 150px;
+                white-space: normal;
+                line-height: 1.15;
+            }
+            .hero {
+                padding: 28px 0 30px;
+                background: linear-gradient(180deg, rgba(247,252,248,.98), rgba(255,255,255,.94));
+            }
+            .hero h1 {
+                font-size: clamp(1.95rem, 9vw, 2.75rem);
+                line-height: 1.02;
+                margin-bottom: 10px;
+            }
+            .hero .lead {
+                font-size: .95rem;
+                line-height: 1.45;
+                margin-bottom: 16px;
+            }
+            .hero-actions {
+                margin-bottom: 12px;
+            }
+            .hero-media {
+                display: flex !important;
+                margin-top: 18px;
+            }
+            .hero .image-card {
+                max-width: 100%;
+                border-radius: 22px;
+            }
+            .hero .image-card img {
+                height: 230px;
+                border-radius: 17px;
+            }
+            .floating-badge {
+                left: 14px;
+                right: auto;
+                bottom: 14px;
+                font-size: .78rem;
+                padding: 8px 12px;
+            }
+            .trust-row {
+                gap: 6px;
+            }
+            .trust-pill {
+                font-size: .76rem;
+                padding: 5px 10px;
+            }
+            .popup-overlay {
+                align-items: flex-start;
+                padding: 10px;
+            }
+            .popup-card,
+            .popup-card.npo-popup-card,
+            .service-info-card {
+                max-height: calc(100dvh - 20px);
+                width: 100%;
+            }
+            .service-info-grid {
+                gap: 10px;
+            }
+            .service-info-button {
+                min-height: auto;
+                padding: 15px;
+            }
+        }
+
         @media (prefers-reduced-motion:reduce) {
             * {
                 transition: none !important;
@@ -2064,14 +2239,14 @@
                 <div class="npo-modal-intro compact-npo-intro">
                     <p class="eyebrow"><i class="fa-solid fa-heart"></i> NPO support request</p>
                     <h4>Care facility pest control request.</h4>
-                    <p>Use this for crèches, old age homes, hospices, shelters, feeding schemes and other care-led organisations.</p>
+                    <p>For crèches, old age homes, hospices, shelters and feeding schemes.</p>
                 </div>
                 <form class="quote-form npo-form" id="npoSupportForm" novalidate>
-                    <label>Organisation / facility name <input type="text" name="organisation_name" autocomplete="organization" placeholder="Name of NPO, home, crèche or shelter" required></label>
+                    <label>Facility name <input type="text" name="organisation_name" autocomplete="organization" placeholder="NPO, crèche, home or shelter" required></label>
                     <label>Contact person <input type="text" name="from_name" autocomplete="name" placeholder="Your full name" required></label>
                     <label>Phone / WhatsApp <input type="tel" name="phone" autocomplete="tel" placeholder="083 000 0000" required></label>
                     <label>Email <input type="email" name="from_email" autocomplete="email" placeholder="you@example.com"></label>
-                    <label>Type of organisation <select name="organisation_type" required>
+                    <label>Facility type <select name="organisation_type" required>
                         <option value="">Select one</option>
                         <option>Registered NPO / NGO</option>
                         <option>Crèche / early childhood centre</option>
@@ -2084,11 +2259,11 @@
                     </select></label>
                     <label>Support needed <select name="support_needed" required>
                         <option value="">Select one</option>
-                        <option>Discounted pest control service</option>
-                        <option>Sponsored once-off treatment</option>
-                        <option>Recurring maintenance support</option>
-                        <option>Inspection and prevention advice</option>
-                        <option>Certificate / funder documentation support</option>
+                        <option>Discounted service</option>
+                        <option>Sponsored treatment</option>
+                        <option>Recurring support</option>
+                        <option>Inspection & prevention</option>
+                        <option>Certificate / support documents</option>
                         <option>Not sure — please advise</option>
                     </select></label>
                     <label>Main pest concern <select name="pest_issue">
@@ -2111,13 +2286,13 @@
                         <option>This month</option>
                         <option>Planning for recurring support</option>
                     </select></label>
-                    <label class="full">Facility location <input type="text" name="property_location" placeholder="Suburb, city, province, or full address" required></label>
-                    <label class="full">Who does the facility support? <textarea name="beneficiary_context" rows="3" placeholder="Example: children, elderly residents, hospice patients, shelter residents, food programme beneficiaries…"></textarea></label>
-                    <label class="full">Sensitive areas or special instructions <textarea name="sensitivities" rows="3" placeholder="Mention kitchens, sleeping areas, frail care rooms, children, pets, plants, respiratory concerns, operating hours or restricted access."></textarea></label>
-                    <label class="full">Brief support request <textarea name="message" rows="3" placeholder="Tell us what you need help with and why support is needed."></textarea></label>
+                    <label class="full">Location <input type="text" name="property_location" placeholder="Suburb, city, province, or full address" required></label>
+                    <label class="full">Who do you support? <textarea name="beneficiary_context" rows="3" placeholder="Children, elderly residents, patients, shelter residents, food beneficiaries…"></textarea></label>
+                    <label class="full">Sensitive areas <textarea name="sensitivities" rows="3" placeholder="Kitchens, sleeping areas, frail-care rooms, pets, plants, respiratory concerns or access times."></textarea></label>
+                    <label class="full">Request <textarea name="message" rows="3" placeholder="Tell us what support is needed."></textarea></label>
                     <label class="full checkbox-row"><input type="checkbox" name="consent" required> I agree to be contacted about this NPO / care facility support request.</label>
-                    <button class="btn btn-primary full" type="submit"><i class="fa-solid fa-hand-holding-heart"></i> Submit NPO Support Request</button>
-                    <button class="btn btn-whatsapp full" type="button" id="npoWhatsappBtn"><i class="fa-brands fa-whatsapp"></i> Send NPO Request via WhatsApp</button>
+                    <button class="btn btn-primary full" type="submit"><i class="fa-solid fa-hand-holding-heart"></i> Submit Support Request</button>
+                    <button class="btn btn-whatsapp full" type="button" id="npoWhatsappBtn"><i class="fa-brands fa-whatsapp"></i> Send via WhatsApp</button>
                     <p class="form-note full" id="npoFormNote"></p>
                 </form>
             </div>
@@ -2141,8 +2316,8 @@
             <div class="container hero-grid">
                 <div class="hero-content">
                     <p class="eyebrow"><i class="fa-solid fa-leaf"></i> Countrywide • Since 2003</p>
-                    <h1>Safe organic pest control for homes, businesses and care spaces.</h1>
-                    <p class="lead">Countrywide pest management that starts with inspection, protects people first and supports NPOs through a dedicated care pathway.</p>
+                    <h1>Safe organic pest control across South Africa.</h1>
+                    <p class="lead">For homes, businesses, food sites and care facilities.</p>
                     <div class="hero-actions">
                         <a href="#quote" class="btn btn-primary open-popup"><i class="fa-solid fa-paper-plane"></i> Get a Quote</a>
                         <a href="tel:0800133993" class="btn btn-light"><i class="fa-solid fa-phone"></i> 0800 133 993</a>
@@ -2209,7 +2384,7 @@
                     <div class="community-main clean-community-main">
                         <p class="eyebrow"><i class="fa-solid fa-hand-holding-heart"></i> NPO support</p>
                         <h2>Care-led pest control for NPOs and sensitive facilities.</h2>
-                        <p class="lead">A portion of every service supports NPO crèches, old age homes and hospices. The NPO route is handled separately so the request is assessed with care, discretion and occupant safety in mind.</p>
+                        <p class="lead">A portion of every service supports NPO crèches, old age homes and hospices. Requests are handled separately for discretion, occupant safety and practical support.</p>
                         <div class="community-highlights compact-highlights">
                             <span><i class="fa-solid fa-check-circle"></i> Crèches</span>
                             <span><i class="fa-solid fa-check-circle"></i> Old age homes</span>
@@ -2227,14 +2402,14 @@
 
         <section class="section" id="details">
             <div class="container">
-                <div class="section-top"><p class="eyebrow">Service Information</p><h2>Choose a service to view the details.</h2><p class="section-lead">Instead of long dropdowns that stretch the page, each service now opens in a clean pop-up with the key information from the Organic Pestar document.</p></div>
+                <div class="section-top"><p class="eyebrow">Service Information</p><h2>Choose a service to view the details.</h2><p class="section-lead">Open any service for clear information without stretching the page or creating empty layout space.</p></div>
                 <div class="service-info-grid" id="serviceAccordion"></div>
             </div>
         </section>
 
         <section class="section" id="industries">
             <div class="container">
-                <div class="section-top"><p class="eyebrow">Industries Served</p><h2>High-risk, reputation-sensitive and care-sensitive environments trust us.</h2><p class="section-lead">The positioning now separates commercial compliance work from community care work, so NPOs and care facilities feel intentionally catered for rather than grouped into a generic healthcare category.</p></div>
+                <div class="section-top"><p class="eyebrow">Industries Served</p><h2>High-risk, reputation-sensitive and care-sensitive environments trust us.</h2><p class="section-lead">Commercial compliance, healthcare, education and community care are handled with different safety, timing and reporting needs.</p></div>
                 <div class="proof-grid">
                     <article class="proof-card"><i class="fa-solid fa-utensils"></i><h3>Restaurants & Cafés</h3><p>Discreet after-hours treatment to protect your reputation.</p></article>
                     <article class="proof-card"><i class="fa-solid fa-store"></i><h3>Supermarkets & Retail</h3><p>Pest-free shopping experience for food-handling spaces.</p></article>
@@ -2419,8 +2594,11 @@
             const serviceInfoBody = document.getElementById('serviceInfoBody');
 
             /* ─── SCROLL-BASED HEADER SHRINK ─────────────── */
-            const LOGO_LARGE = 90;
-            const LOGO_SMALL = 50;
+            function logoSizes() {
+                return window.innerWidth <= 720
+                    ? { large: 82, small: 54 }
+                    : { large: 112, small: 56 };
+            }
             const SCROLL_START = 20;
             const SCROLL_FULL = 140;
 
@@ -2432,9 +2610,10 @@
                 ticking = true;
                 requestAnimationFrame(() => {
                     const y = window.scrollY;
+                    const sizes = logoSizes();
                     const t = (y - SCROLL_START) / (SCROLL_FULL - SCROLL_START);
-                    headerLogo.style.width = lerp(LOGO_LARGE, LOGO_SMALL, t) + 'px';
-                    headerLogo.style.height = lerp(LOGO_LARGE, LOGO_SMALL, t) + 'px';
+                    headerLogo.style.width = lerp(sizes.large, sizes.small, t) + 'px';
+                    headerLogo.style.height = lerp(sizes.large, sizes.small, t) + 'px';
                     siteHeader.querySelector('.header-inner').style.paddingTop = lerp(10, 5, t) + 'px';
                     siteHeader.querySelector('.header-inner').style.paddingBottom = lerp(10, 5, t) + 'px';
                     document.getElementById('headerBrandName').style.fontSize = lerp(1.08, 0.84, t) + 'rem';
@@ -2446,6 +2625,7 @@
                 });
             }
             window.addEventListener('scroll', onScroll, { passive: true });
+            window.addEventListener('resize', onScroll, { passive: true });
             onScroll();
 
             /* ─── MOBILE MENU ────────────────────────────── */
@@ -2513,6 +2693,7 @@
                 lockPageForPopup();
                 npoPopupOverlay.classList.add('active');
                 npoPopupOverlay.setAttribute('aria-hidden', 'false');
+                npoPopupOverlay.querySelector('.npo-popup-card')?.scrollTo({ top: 0, behavior: 'instant' });
                 setTimeout(() => {
                     const firstInput = npoSupportForm.querySelector('input[name="organisation_name"]');
                     if (firstInput) firstInput.focus();
@@ -2529,6 +2710,7 @@
                 lockPageForPopup();
                 serviceInfoTitle.innerHTML = `<i class="fa-solid ${item.icon}" style="color:var(--green)"></i> ${item.title}`;
                 serviceInfoBody.innerHTML = item.content;
+                serviceInfoBody.scrollTop = 0;
                 serviceInfoOverlay.classList.add('active');
                 serviceInfoOverlay.setAttribute('aria-hidden', 'false');
             }
@@ -2689,7 +2871,7 @@
                     else alert('Failed to send. Please try again.');
                 } finally {
                     btn.disabled = false;
-                    btn.innerHTML = '<i class="fa-solid fa-hand-holding-heart"></i> Submit NPO Support Request';
+                    btn.innerHTML = '<i class="fa-solid fa-hand-holding-heart"></i> Submit Support Request';
                 }
             });
 
@@ -2773,7 +2955,7 @@
                     title: 'Home / Residential Pest Control',
                     teaser: 'Safe, inspection-led protection for families, tenants and landlords.',
                     content: `
-                        <p class="service-summary">Residential pest control starts by understanding the home, the people inside it and the exact pest pressure. The document places strong emphasis on child, pet, plant and respiratory safety, so the service is framed around targeted treatment rather than unnecessary spraying.</p>
+                        <p class="service-summary">Residential pest control starts with the home, the people inside it and the exact pest pressure. Treatments are framed around child, pet, plant and respiratory safety, with targeted control rather than unnecessary spraying.</p>
                         <div class="service-detail-grid">
                             <div class="service-detail-block"><h4>What is checked</h4><ul><li>Kitchens, cupboards, food storage and refuse areas</li><li>Bathrooms, drains, damp zones and cracks</li><li>Garages, doors, roof spaces and external entry points</li><li>Pet areas, gardens and places where pests return seasonally</li></ul></div>
                             <div class="service-detail-block"><h4>Common issues</h4><ul><li>Cockroaches, ants, rats and mice</li><li>Bedbugs, fleas, ticks, spiders and wasps</li><li>Termites, wood borers and seasonal pests</li><li>Prevention advice for reducing repeat activity</li></ul></div>
@@ -2785,7 +2967,7 @@
                     title: 'Quarterly Maintenance',
                     teaser: 'Recurring prevention that responds to seasonal pest pressure.',
                     content: `
-                        <p class="service-summary">Quarterly service is positioned as prevention before infestation. The document explains that one-time treatments are reactive, while scheduled visits help manage seasonal pressure such as ants and wasps in warmer rainy months and rodents moving indoors during rain or cold weather.</p>
+                        <p class="service-summary">Quarterly service is prevention before infestation. Scheduled visits help manage seasonal pressure such as ants and wasps in warmer rainy months, and rodents moving indoors during rain or cold weather.</p>
                         <div class="service-detail-grid">
                             <div class="service-detail-block"><h4>What the plan covers</h4><ul><li>Interior and exterior inspection during the first visit</li><li>Exterior focus around pest entry routes</li><li>Monitoring or bait-station checks where required</li><li>Seasonal treatment adjustments for likely pest movement</li></ul></div>
                             <div class="service-detail-block"><h4>Why it helps</h4><ul><li>Reduces emergency call-outs</li><li>Keeps protection active between seasons</li><li>Supports families, complexes and business premises</li><li>Creates a reliable rhythm for prevention and reporting</li></ul></div>
@@ -2797,7 +2979,7 @@
                     title: 'Commercial & Industrial',
                     teaser: 'Pest control for operations, stock, staff areas and reputation-sensitive sites.',
                     content: `
-                        <p class="service-summary">Commercial and industrial pest activity can affect operations, stock, staff welfare and customer confidence. The Organic Pestar document positions business pest control around needs assessment, prevention, certificates and practical timing that avoids disrupting the working day.</p>
+                        <p class="service-summary">Commercial and industrial pest activity can affect operations, stock, staff welfare and customer confidence. Service planning focuses on assessment, prevention, certificates and practical timing that avoids disrupting the working day.</p>
                         <div class="service-detail-grid">
                             <div class="service-detail-block"><h4>Typical sites</h4><ul><li>Offices, warehouses, factories and workshops</li><li>Shopping centres, body corporates and managed properties</li><li>Storage rooms, receiving bays and waste zones</li><li>Food-handling or product-sensitive business areas</li></ul></div>
                             <div class="service-detail-block"><h4>Service focus</h4><ul><li>Inspection of risk areas and harbourage points</li><li>Rodent, cockroach, fly and crawling insect control</li><li>Discreet scheduling, including after-hours where needed</li><li>Service records for internal, municipal or audit purposes</li></ul></div>
@@ -2809,7 +2991,7 @@
                     title: 'Food, Hospitality & Retail',
                     teaser: 'Discreet food-site pest management with audit-aware documentation.',
                     content: `
-                        <p class="service-summary">The Word document gives strong weight to food safety, HACCP, IPM and brand protection. Restaurants, bars, cafés, supermarkets, bakeries and food plants need pest control that protects hygiene, avoids contamination risk and supports inspection readiness.</p>
+                        <p class="service-summary">Restaurants, bars, cafés, supermarkets, bakeries and food plants need pest control that protects hygiene, reduces contamination risk and supports food-safety inspection readiness.</p>
                         <div class="service-detail-grid">
                             <div class="service-detail-block"><h4>Priority areas</h4><ul><li>Kitchens, drains, sculleries and dry stores</li><li>Cold rooms, receiving areas and refuse zones</li><li>Dining areas, guest spaces and food display sections</li><li>Production rooms, packaging areas and storage shelves</li></ul></div>
                             <div class="service-detail-block"><h4>Compliance support</h4><ul><li>IPM and HACCP-aligned prevention</li><li>R638 / COA / food safety file support where relevant</li><li>Inspection-day readiness and service treatment reports</li><li>Discreet after-hours or low-traffic scheduling</li></ul></div>
@@ -2833,7 +3015,7 @@
                     title: 'Healthcare, Clinics & Labs',
                     teaser: 'Low-disruption pest management for medical and hygiene-critical facilities.',
                     content: `
-                        <p class="service-summary">Healthcare is separated from NPO support because clinics, hospitals, laboratories and pharmacies usually need stricter documentation, controlled access and low-disruption implementation. The document refers to IPM in healthcare as holistic, with prevention and reduced chemical intervention as important principles.</p>
+                        <p class="service-summary">Clinics, hospitals, laboratories and pharmacies need stricter documentation, controlled access and low-disruption implementation. The approach is prevention-led, with reduced unnecessary chemical intervention where practical.</p>
                         <div class="service-detail-grid">
                             <div class="service-detail-block"><h4>Typical sites</h4><ul><li>Clinics, medical suites and hospitals</li><li>Laboratories, pharmacies and medicine storage</li><li>Wards, staff kitchens, drains and waste areas</li><li>Reception, waiting areas and perimeter risks</li></ul></div>
                             <div class="service-detail-block"><h4>Service focus</h4><ul><li>Inspection-led and documented treatment</li><li>Scheduling around patients, staff and restricted spaces</li><li>Prevention through hygiene, exclusion and monitoring</li><li>Reduced unnecessary chemical use where practical</li></ul></div>
@@ -2845,7 +3027,7 @@
                     title: 'NPOs & Care Facilities',
                     teaser: 'A dedicated support pathway for crèches, old age homes, hospices and shelters.',
                     content: `
-                        <p class="service-summary">The NPO section in the supplied document says pest control is not always affordable for care-led organisations, which is why Organic Pestar donates a portion of profits to non-profit crèches, old age homes and hospices. These sites also need discreet treatment because vulnerable occupants, sleeping rooms, kitchens and food storage are high-risk areas.</p>
+                        <p class="service-summary">Pest control is not always affordable for care-led organisations, which is why Organic Pestar supports non-profit crèches, old age homes and hospices. These sites also need discreet treatment because vulnerable occupants, sleeping rooms, kitchens and food storage are high-risk areas.</p>
                         <div class="service-detail-grid">
                             <div class="service-detail-block"><h4>Who it supports</h4><ul><li>NPO crèches and early childhood centres</li><li>Old age homes and frail-care facilities</li><li>Hospices and palliative-care spaces</li><li>Shelters, safe houses and feeding schemes</li></ul></div>
                             <div class="service-detail-block"><h4>What is considered</h4><ul><li>Children, elderly residents, patients and vulnerable occupants</li><li>Kitchens, sleeping rooms, food stores and refuse points</li><li>After-hours or quiet scheduling where needed</li><li>Discounted, sponsored or recurring support options</li></ul></div>
@@ -2857,7 +3039,7 @@
                     title: 'Farms, Storage & Food Plants',
                     teaser: 'Pest control for animal facilities, grain storage and production environments.',
                     content: `
-                        <p class="service-summary">Agriculture and production sites face contamination, product damage and stored-product insect risks. The document refers to abattoirs, poultry, meat processing, milling, silos, bakeries and food plants where IPM, HACCP and prevention are critical to protecting products and the supply chain.</p>
+                        <p class="service-summary">Agriculture and production sites face contamination, product damage and stored-product insect risks. Abattoirs, poultry facilities, meat processing, milling, silos, bakeries and food plants require IPM, HACCP-aligned prevention and strong monitoring.</p>
                         <div class="service-detail-grid">
                             <div class="service-detail-block"><h4>Typical sites</h4><ul><li>Abattoirs, butcheries and meat warehouses</li><li>Poultry, dairy, piggeries and animal facilities</li><li>Silos, milling stores and grain storage</li><li>Bakeries, breweries and food manufacturing plants</li></ul></div>
                             <div class="service-detail-block"><h4>Service focus</h4><ul><li>Rodents, flies, crawling insects and stored-product insects</li><li>Contamination-risk reduction and monitoring</li><li>Documentation for audits and internal files</li><li>Prevention around waste, storage, receiving and production areas</li></ul></div>
